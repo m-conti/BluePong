@@ -1,0 +1,64 @@
+{
+  "name": "red_tetrisboilerplate",
+  "version": "0.0.1",
+  "author": "redpelicans",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"npm run api-dev\" \"npm run client-dev\" \"npm run srv-dev\" --kill-others",
+    "eslint": "eslint src",
+    "client-dist": "NODE_ENV=production webpack --progress --colors",
+    "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080",
+    "srv-dev": "babel-watch -w src/server src/server/main.js",
+    "srv-dist": "babel src --out-dir dist",
+    "api-dev": "babel-watch -w src/api src/api/main.js",
+    "api-dist": "babel src --out-dir dist",
+    "test": "mocha --require babel-core/register --reporter spec",
+    "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov -r text --require @babel/register mocha "
+  },
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.5.5",
+    "@material-ui/core": "^4.3.2",
+    "@material-ui/icons": "^4.2.1",
+    "@svgr/webpack": "4.3.2",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-__coverage__": "^11.0.0",
+    "babel-watch": "^7.0.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-equal-jsx": "^1.0.9",
+    "concurrently": "^4.1.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-react": "^7.14.3",
+    "lodash": "^4.17.15",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
+    "nyc": "^14.1.1",
+    "socket.io-client": "^2.2.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-hot-middleware": "^2.25.0"
+  },
+  "nyc": {
+    "exclude": [
+      "build"
+    ]
+  }
+}
