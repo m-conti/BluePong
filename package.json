@@ -13,7 +13,8 @@
     "api-dev": "NODE_ENV=development nodemon --watch src/api --exec babel-node src/api/main.js",
     "api-dist": "NODE_ENV=production babel src --out-dir dist",
     "test": "NODE_ENV=test mocha --require babel-core/register --reporter spec",
-    "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov -r text --require @babel/register mocha "
+    "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov -r text --require @babel/register mocha",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -68,6 +69,7 @@
     "nodemon": "^1.19.1",
     "nyc": "^14.1.1",
     "path": "^0.12.7",
+    "react-scripts": "^3.1.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-middleware": "^3.7.0",
