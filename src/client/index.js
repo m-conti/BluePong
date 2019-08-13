@@ -1,26 +1,25 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import createLogger from 'redux-logger';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import {storeStateMiddleWare} from './middleware/storeStateMiddleWare';
-import reducer from './reducers';
-import App from './containers/app';
-import {alert} from './actions/alert';
+import * as serviceWorker from './serviceWorker';
 
-const initialState = {};
+// Route
+import {BrowserRouter} from 'react-router-dom';
 
-const store = createStore(
-  reducer,
-  initialState,
-  applyMiddleware(thunk, createLogger())
+// Redux
+import {Provider} from 'react-redux';
+import store from './store/store';
+
+// App
+import App from './containers/App';
+
+const app = (
+	<BrowserRouter>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</BrowserRouter>
 );
 
-ReactDom.render((
-  <Provider store={store}>
-    <App/>
-  </Provider>
-), document.getElementById('tetris'));
+ReactDom.render(app, document.getElementById('tetris'));
 
-store.dispatch(alert('Soon, will be here a fantastic Tetris ...'));
+serviceWorker.unregister();

@@ -1,0 +1,17 @@
+
+// actions launched on client side
+export const CLIENT_SET_OPPONENTS = 'CLIENT_SET_OPPONENTS';
+export const CLIENT_UPDATE_BOARD = 'CLIENT_UPDATE_BOARD';
+export const CLIENT_UPDATE_OPPONENT_SPECTRE = 'CLIENT_UPDATE_OPPONENT_SPECTRE';
+export const CLIENT_UPDATE_SCORE = 'CLIENT_UPDATE_SCORE';
+
+
+
+// actions launched on server side
+
+// piece actions
+export const SERVER_MOVE_PIECE_LEFT = 'SERVER_MOVE_PIECE_LEFT';
+export const SERVER_MOVE_PIECE_RIGHT = 'SERVER_MOVE_PIECE_RIGHT';
+export const SERVER_MOVE_PIECE_DOWN = 'SERVER_MOVE_PIECE_DOWN';
+export const SERVER_ROTATE_PIECE = 'SERVER_ROTATE_PIECE';
+export const SERVER_DROP_PIECE = 'SERVER_DROP_PIECE';
