@@ -1,5 +1,5 @@
 {
-  "ecmaFeatures": {
+/*  "ecmaFeatures": {
     "arrowFunctions": true,
     "binaryLiterals": false,
     "blockBindings": true,
@@ -23,10 +23,15 @@
     "unicodePointEscapes": true,
     "globalReturn": false,
     "jsx": true
-  },
+  }, */
   "env": {
     "browser": true,
     "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "16.9.0"
+	}
   },
   "parser": "babel-eslint",
   "plugins": [

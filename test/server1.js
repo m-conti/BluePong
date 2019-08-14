@@ -3,7 +3,7 @@ import {startServer, configureStore} from './helpers/server'
 import rootReducer from '../src/client/reducers'
 import {ping} from '../src/client/actions/server'
 import io from 'socket.io-client'
-import params from '../params'
+import params from '../src/params'
 
 chai.should()
 
