@@ -1,3 +1,4 @@
-import params  from '../../params'
-import * as server from './index'
-server.create(params.server).then( () => console.log('not yet ready to play tetris with U ...') )
+import { location }  from '../params';
+import Server from './Server';
+
+new Server(location.server, location.client).listen(() => console.log('Hello World!'));
