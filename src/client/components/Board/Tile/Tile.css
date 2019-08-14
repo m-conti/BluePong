@@ -1,0 +1,16 @@
+.Tile {
+	border: 1px solid black;
+	height: 42px;
+	width: 42px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tealColor {
+	background-color: #39CCCC;
+}
+
+.navyColor {
+	background-color: #001F3F;
+}
