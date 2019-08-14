@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 
 // Middleware
 import thunkMiddleware from 'redux-thunk';
-//import socketMiddleware from 'redux-socket.io-middleware';
+// import socketMiddleware from 'redux-socket.io-middleware';
 
 // Reducers
 import tetrisReducer from './reducers/tetris';
@@ -22,7 +22,7 @@ export default createStore(
 	composeEnhancers(
 		applyMiddleware(
 			thunkMiddleware,
-//			socketMiddleware(socket)
+			// socketMiddleware(socket)
 		)
 	)
 );

@@ -2,8 +2,6 @@ import remote from './remote';
 import * as actions from '../../../../actions/actionTypes/tetris';
 
 
-
-
 // TO CHANGE
 export const startGame = () => dispatch => {
 	dispatch({
@@ -17,9 +15,6 @@ export const startGame = () => dispatch => {
 		]
 	});
 };
-
-
-
 
 
 export const moveLeft = () => ({

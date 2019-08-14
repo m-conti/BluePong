@@ -6,7 +6,6 @@ export const CLIENT_UPDATE_OPPONENT_SPECTRE = 'CLIENT_UPDATE_OPPONENT_SPECTRE';
 export const CLIENT_UPDATE_SCORE = 'CLIENT_UPDATE_SCORE';
 
 
-
 // actions launched on server side
 
 // piece actions

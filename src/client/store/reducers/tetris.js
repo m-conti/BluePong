@@ -9,20 +9,23 @@ const initialState = {
 };
 
 
-const setOpponents = ( state, {opponents} ) => {
-	return {...state, opponents: opponents};
-};
-const updateBoard = ( state, {board} ) => {
-	return {...state, board: board};
-};
+const setOpponents = ( state, {opponents} ) => ({
+	...state,
+	opponents: opponents
+});
+const updateBoard = ( state, {board} ) => ({
+	...state,
+	board: board
+});
 const updateOpponentSpectre = ( state, {id, spectre} ) => {
 	const newOpponents = cloneDeep(state.opponents);
 	newOpponents[state.opponents.findIndex(( elem ) => elem.id === id)].spectre = spectre;
 	return {...state, opponents: newOpponents};
 };
-const updateScore = ( state, {score} ) => {
-	return {...state, score: score};
-};
+const updateScore = ( state, {score} ) => ({
+	...state,
+	score: score
+});
 
 export default ( state = initialState, action ) => {
 
