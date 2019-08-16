@@ -33,7 +33,6 @@ export default ( state = initialState, action ) => {
 
 		case actions.CLIENT_SET_OPPONENTS:
 			return setOpponents(state, action);
-
 		case actions.CLIENT_UPDATE_BOARD:
 			return updateBoard(state, action);
 		case actions.CLIENT_UPDATE_OPPONENT_SPECTRE:
