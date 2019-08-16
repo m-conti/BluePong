@@ -1,14 +1,19 @@
 import * as actions from '../../../actions/actionTypes/rooms';
 
-const initialState = {};
-
-
-const updateRooms = (state, {rooms}) => {
+const initialState = {
+	rooms: null,
 
 };
-const addRoom = () => {
 
-};
+
+const updateRooms = (state, {rooms}) => ({
+	...state,
+	rooms: rooms,
+});
+const addRoom = (state, {room}) => ({
+	...state,
+	rooms: [...state.rooms, room],
+});
 const deleteRoom = () => {
 
 };
