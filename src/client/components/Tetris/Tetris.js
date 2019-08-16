@@ -15,11 +15,11 @@ const Tetris = ( props ) => {
 	}, []);
 
 	const board = (props.board) ? <Board board={props.board} /> : <div>Spinner</div>;
-	const score = (props.score) ? <Score score={props.score} /> : '';
+	const score = (props.score) ? <Score score={props.score} /> : null;
 
 	const opponents = (props.opponents) ? props.opponents.map(o => (
-		<Spectre board={o.spectre} key={o.id} />
-	)) : '';
+		<Spectre key={o.id} spectre={o.spectre} />
+	)) : null;
 
 	return (
 		<div className={classes.Tetris}>
@@ -35,7 +35,7 @@ Tetris.propTypes = {
 	init: propTypes.func.isRequired,
 	opponents: propTypes.arrayOf(propTypes.shape({
 		id: propTypes.string.isRequired,
-		spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired),
+		spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired).isRequired,
 	}).isRequired),
 	score: propTypes.number.isRequired,
 };

@@ -1,0 +1,15 @@
+.SpectreTile {
+	height: 15px;
+	width: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.fullSpectreTile {
+	background-color: #8D021F;
+}
+
+.emptySpectreTile {
+	background-color: #FF2800;
+}
