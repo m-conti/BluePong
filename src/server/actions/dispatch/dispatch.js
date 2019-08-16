@@ -1,7 +1,7 @@
 import dispatchDefault from './default';
-import dispatchRoom from './rooms';
+import dispatchRooms from './rooms';
 
 export default (action) => {
 	dispatchDefault(action);
-	dispatchRoom(action);
+	dispatchRooms(action);
 }

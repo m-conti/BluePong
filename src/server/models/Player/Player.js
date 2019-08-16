@@ -1,6 +1,7 @@
 class Player {
 	constructor( socket ) {
 		this.socket = socket;
+		this.isAdmin = false;
 		console.log('CONNECT');
 	}
 
