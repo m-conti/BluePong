@@ -1,47 +1,59 @@
 import * as actionTypes from '../../../actions/actionTypes/tetris';
+import * as actions from '../client/game';
 
-const moveLeft = () => {
-	console.log('going left');
+const moveLeft = ( {meta} ) => {
+	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	newBoard[0][0] = 1;
+	newBoard[1][0] = 1;
+	newBoard[0][1] = 1;
+	newBoard[1][1] = 1;
+
+	meta.player.socket.emit('action', actions.updateBoard(newBoard));
 }
-const moveRight = () => {
-	console.log('going right');
+const moveRight = ( {meta} ) => {
+	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	newBoard[0][9] = 1;
+	newBoard[1][9] = 1;
+	newBoard[0][8] = 1;
+	newBoard[1][8] = 1;
+
+	meta.player.socket.emit('action', actions.updateBoard(newBoard));
 }
-const moveDown = () => {
-	console.log('going down');
+const moveDown = ( {meta} ) => {
+	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	newBoard[18][0] = 1;
+	newBoard[19][0] = 1;
+	newBoard[18][1] = 1;
+	newBoard[19][1] = 1;
+
+	meta.player.socket.emit('action', actions.updateBoard(newBoard));
 }
-const rotate = () => {
+const rotate = ({meta}) => {
 	console.log('rotating piece');
 }
-const dropPiece = () => {
-	console.log('dropping piece');
+const dropPiece = ({meta}) => {
+	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	newBoard[8][0] = 1;
+	newBoard[9][0] = 1;
+	newBoard[8][1] = 1;
+	newBoard[9][1] = 1;
+
+	meta.player.socket.emit('action', actions.updateBoard(newBoard));
 }
 
 export default function ( action ) {
 	switch ( action.type ) {
 		case actionTypes.SERVER_MOVE_PIECE_LEFT:
-			moveLeft();
-			return;
+			return moveLeft(action);
 		case actionTypes.SERVER_MOVE_PIECE_RIGHT:
-			moveRight();
-			return;
+			return moveRight(action);
 		case actionTypes.SERVER_MOVE_PIECE_DOWN:
-			moveDown();
-			return;
+			return moveDown(action);
 		case actionTypes.SERVER_ROTATE_PIECE:
-			rotate();
-			return;
+			return rotate(action);
 		case actionTypes.SERVER_DROP_PIECE:
-			dropPiece();
-			return;
+			return dropPiece(action);
 		default:
 			return;
 	}
 }
-
-/*
- * export const SERVER_MOVE_PIECE_LEFT = 'SERVER_MOVE_PIECE_LEFT';
-export const SERVER_MOVE_PIECE_RIGHT = 'SERVER_MOVE_PIECE_RIGHT';
-export const SERVER_MOVE_PIECE_DOWN = 'SERVER_MOVE_PIECE_DOWN';
-export const SERVER_ROTATE_PIECE = 'SERVER_ROTATE_PIECE';
-export const SERVER_DROP_PIECE = 'SERVER_DROP_PIECE';
-*/
