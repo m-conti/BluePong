@@ -10,7 +10,7 @@ class Tetris {
 	}
 
 	getRoom( id ) {
-		return this.rooms.find(( room ) => room.id === id);
+		return this.rooms.find(( room ) => room._id === id);
 	}
 
 	addRoom( roomOpt, player ) {
@@ -33,7 +33,10 @@ class Tetris {
 
 	joinRoom( id, player ) {
 		const room = this.getRoom(id);
-		room.addPlayer(player);
+		if ( room ) {
+			room.addPlayer(player);
+		}
+		return room;
 	}
 }
 

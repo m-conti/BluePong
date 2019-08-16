@@ -11,9 +11,15 @@ const roomsList = (props) => {
 
 	const roomListed = props.rooms.map((elem) => (
 		<RoomListed
-			key={elem.id} {...elem}
+			key={elem._id}
+			_id={elem._id}
+			creationTime={elem.creationTime}
+			maxPlayers={elem.maxPlayers}
+			name={elem.name}
+			players={elem.players}
+			isDone={elem.isDone}
 			onDeleteRoom={props.onDeleteRoom}
-			onConnectRoom={props.onConnectRoom}
+			onJoinRoom={props.onJoinRoom}
 		/>
 	));
 
@@ -37,12 +43,13 @@ const roomsList = (props) => {
 	);
 };
 roomsList.propTypes = {
+	onDeleteRoom: propTypes.func.isRequired,
+	onJoinRoom: propTypes.func.isRequired,
 	rooms: propTypes.arrayOf(
 		propTypes.shape({
-			id: propTypes.number.isRequired,
+			_id: propTypes.number.isRequired,
 		})
 	).isRequired,
-
 };
 
 export default roomsList;

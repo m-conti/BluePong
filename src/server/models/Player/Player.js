@@ -5,6 +5,12 @@ class Player {
 		console.log('CONNECT');
 	}
 
+	serialize() {
+		return {
+			isAdmin: this.isAdmin,
+		}
+	}
+
 	join( room ) {
 		console.log('JOIN', room);
 	}

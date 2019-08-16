@@ -5,8 +5,6 @@ import classes from './CreateNewRoom.css';
 
 import { Button, Dialog, DialogActions, DialogContent, Slider, TextField } from '@material-ui/core';
 
-import {push} from 'react-router-redux/src';
-
 const CreateNewRoom = ( props ) => {
 
 
@@ -38,8 +36,6 @@ const CreateNewRoom = ( props ) => {
 		}
 	};
 
-	console.log(push('/'));
-
 	return (
 		<div className={classes.CreateNewRoom}>
 			<Button onClick={toggleModalNewRoom}>Add New Room</Button>
@@ -58,7 +54,7 @@ const CreateNewRoom = ( props ) => {
 					<Slider id="max-player" value={state.playerMax} max={4} min={1} step={1} valueLabelDisplay={'auto'} onChange={(_, value) => changeMaxPlayer(value)} />
 				</DialogContent>
 				<DialogActions>
-					<Button color={'primary'} onClick={() => props.create(state.name, state.playerMax)}>
+					<Button color={'primary'} onClick={() => props.create({name:state.name, playerMax:state.playerMax})}>
 						Create
 					</Button>
 				</DialogActions>
@@ -68,7 +64,7 @@ const CreateNewRoom = ( props ) => {
 };
 
 CreateNewRoom.propTypes = {
-	create: propTypes.func,
+	create: propTypes.func.isRequired,
 };
 
 export default CreateNewRoom;

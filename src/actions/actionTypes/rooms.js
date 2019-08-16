@@ -1,6 +1,7 @@
 
 // actions launched on client side
 export const CLIENT_UPDATE_ROOMS = 'CLIENT_UPDATE_ROOMS';
+export const CLIENT_UPDATE_ROOM = 'CLIENT_UPDATE_ROOM';
 export const CLIENT_ADD_ROOM = 'CLIENT_ADD_ROOM';
 export const CLIENT_DELETE_ROOM = 'CLIENT_DELETE_ROOM';
 

@@ -7,6 +7,7 @@ import socketMiddleware from 'redux-socket.io-middleware';
 
 // Reducers
 import tetrisReducer from './reducers/tetris';
+import roomsReducer from './reducers/rooms';
 import socketReducer, { socket } from './reducers/sockets';
 
 
@@ -15,6 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
 	tetris: tetrisReducer,
 	io: socketReducer,
+	rooms: roomsReducer,
 });
 
 

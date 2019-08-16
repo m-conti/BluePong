@@ -10,3 +10,10 @@ export {
 export {
 	ping,
 } from './server/socket';
+
+export {
+	getRooms,
+	createRoom,
+	deleteRoom,
+	joinRoom
+} from './server/rooms';

@@ -12,10 +12,13 @@ const createRoom = ( {meta, room} ) => {
 };
 const deleteRoom = ( {meta, id} ) => {
 	meta.tetris.deleteRoom(id, meta.player);
-	meta.io.emit(actionTypes.CLIENT_DELETE_ROOM, actions.deleteRoom(id));
+	meta.io.emit('action', actions.deleteRoom(id));
 };
 const joinRoom = ( {meta, id} ) => {
-	meta.tetris.joinRoom(id, meta.player);
+	const room = meta.tetris.joinRoom(id, meta.player);
+	if ( room ) {
+		meta.io.emit('action', actions.updateRoom(room));
+	}
 };
 
 
