@@ -1,7 +1,7 @@
 import socketIO from 'socket.io';
 import { remove } from 'lodash';
 
-import dispatch from '../../actions/dispatch/default';
+import dispatch from '../../actions/dispatch/dispatch';
 
 import Player from '../Player/Player';
 import Tetris from '../Tetris/Tetris';
@@ -32,6 +32,7 @@ class Sockets {
 		this.io.on('connection', (socket) => {
 			this.addPlayer(socket);
 			socket.on('action', (action) => {
+				console.log(action);
 				action.meta.player = this.getPlayer(socket);
 				action.meta.io = this.io;
 				action.meta.tetris = this.tetris;
