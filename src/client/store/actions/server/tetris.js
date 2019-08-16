@@ -23,7 +23,8 @@ export const startGame = () => dispatch => {
 	dispatch({
 		type: actions.CLIENT_SET_OPPONENTS,
 		opponents: [
-			{id: '1', spectre: Array(20).fill(0).map(() => Array(10).fill(0))}
+			{id: '1', spectre: Array(20).fill(0).map(() => Array(10).fill(0))},
+			{id: '2', spectre: Array(20).fill(0).map(() => Array(10).fill(0))}
 		]
 	});
 };

@@ -1,0 +1,11 @@
+
+.SpectreBoardRow {
+	display: flex;
+	flex-direction: row;
+}
+
+.Spectre {
+	margin: 20px;
+
+
+}
