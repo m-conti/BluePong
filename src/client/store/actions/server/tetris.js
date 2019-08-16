@@ -1,23 +1,20 @@
 import remote from './remote';
 import * as actions from '../../../../actions/actionTypes/tetris';
 
-
-
-
 // TO CHANGE
 export const startGame = () => dispatch => {
-	const init_board = Array(20).fill(0).map(() => Array(10).fill(0));
-	init_board[19][4] = 1;
-	init_board[19][5] = 1;
-	init_board[19][6] = 1;
-	init_board[19][7] = 1;
-	init_board[18][6] = 2;
-	init_board[18][7] = 2;
-	init_board[17][6] = 2;
-	init_board[17][7] = 2;
+	const initBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	initBoard[19][4] = 1;
+	initBoard[19][5] = 1;
+	initBoard[19][6] = 1;
+	initBoard[19][7] = 1;
+	initBoard[18][6] = 2;
+	initBoard[18][7] = 2;
+	initBoard[17][6] = 2;
+	initBoard[17][7] = 2;
 	dispatch({
 		type: actions.CLIENT_UPDATE_BOARD,
-		board: init_board, 
+		board: initBoard,
 
 	});
 	dispatch({
@@ -27,7 +24,6 @@ export const startGame = () => dispatch => {
 		]
 	});
 };
-
 
 export const moveLeft = () => ({
 	meta: remote,

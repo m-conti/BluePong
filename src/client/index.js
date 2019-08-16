@@ -3,10 +3,10 @@ import ReactDom from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Route
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 // Redux
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './store/store';
 
 // App
@@ -15,7 +15,7 @@ import App from './containers/App';
 const app = (
 	<BrowserRouter>
 		<Provider store={store}>
-			<App />
+			<App/>
 		</Provider>
 	</BrowserRouter>
 );

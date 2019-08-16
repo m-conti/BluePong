@@ -12,19 +12,20 @@ const initialState = {
 
 
 const sockets = ( state = initialState, action ) => {
-	if (get(action, 'meta.remote')) return state;
+	if ( get(action, 'meta.remote') ) {
+		return state;
+	}
 
 	switch ( action.type ) {
 		case actionType.PONG:
 			console.log('PONG');
-			break;
+			return state;
 		case actionType.PING:
 			console.error('ERROR : ping call on client side');
-			break;
+			return state;
 		default :
-			break;
+			return state;
 	}
-	return state;
 };
 
 export default sockets;

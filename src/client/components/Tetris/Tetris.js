@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import * as propTypes from 'prop-types';
 
 import classes from './Tetris.css';
 
-import Board from '../Board/Board';
-import Score from '../Score/Score';
-import Spectre from '../Spectre/Spectre';
+import Board from './Board/Board';
+import Score from './Score/Score';
+import Spectre from './Spectre/Spectre';
 
 
 const Tetris = ( props ) => {
@@ -13,13 +14,13 @@ const Tetris = ( props ) => {
 		props.init();
 	}, []);
 
-	const board = (props.board) ? <Board board={props.board} /> : <div>Spinner</div>; //should be props.board below
+	const board = (props.board) ? <Board board={props.board} /> : <div>Spinner</div>;
 	const score = (props.score) ? <Score score={props.score} /> : '';
-	
-	const opponents = (props.opponents) ? props.opponents.map(o => {
-		<Spectre board={o} />	
-	}) : '';
-	
+
+	const opponents = (props.opponents) ? props.opponents.map(o => (
+		<Spectre board={o.spectre} key={o.id} />
+	)) : '';
+
 	return (
 		<div className={classes.Tetris}>
 			{board}
@@ -27,6 +28,16 @@ const Tetris = ( props ) => {
 			{opponents}
 		</div>
 	);
+};
+
+Tetris.propTypes = {
+	board: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired),
+	init: propTypes.func.isRequired,
+	opponents: propTypes.arrayOf(propTypes.shape({
+		id: propTypes.string.isRequired,
+		spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired),
+	}).isRequired),
+	score: propTypes.number.isRequired,
 };
 
 export default Tetris;

@@ -1,5 +1,5 @@
-
 import React, { useEffect } from 'react';
+import * as propTypes from 'prop-types';
 
 import classes from './Board.css';
 
@@ -27,7 +27,7 @@ const Board = ( props ) => {
 
 	const tileArray = props.board.map((content, rowNumber) => {
 		const rowContent = content.map((x, column) => (
-			<Tile content={x} key={rowNumber + "." + column} />
+			<Tile content={x} key={`${rowNumber}.${column}`} />
 		));
 		return (
 			<div className={classes.BoardRow} key={rowNumber}>
@@ -43,5 +43,10 @@ const Board = ( props ) => {
 		</div>
 	);
 };
+
+Board.propTypes = {
+	board: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired),
+};
+
 
 export default Board;

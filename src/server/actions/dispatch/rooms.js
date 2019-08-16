@@ -1,13 +1,14 @@
-import * as actionTypes from '../../../actions/actionTypes/socket';
+import * as actionTypes from '../../../actions/actionTypes/room';
 
 export default function ( action ) {
 
 	switch ( action.type ) {
-		case actionTypes.PING:
-			action.player.socket.emit('action', {type: actionTypes.PONG});
+		case actionTypes.SERVER_CREATE_ROOM:
+			action.meta.tetris.addRoom(action.room, action.meta.player);
 			break;
-		case actionTypes.PONG:
-			console.error('ERROR : pong call on server side');
+		case actionTypes.SERVER_DELETE_ROOM:
+			break;
+		case actionTypes.SERVER_JOIN_ROOM:
 			break;
 		default:
 			return;
