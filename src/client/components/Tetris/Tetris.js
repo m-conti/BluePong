@@ -29,12 +29,15 @@ const Tetris = ( props ) => {
 				console.log('right');
 				return;
 			case ARROW_UP :
+				props.rotate();
 				console.log('up');
 				return;
 			case ARROW_DOWN :
+				props.moveDown();
 				console.log('down');
 				return;
 			case SPACE_KEY :
+				props.drop();
 				console.log('space');
 				return;
 			default :
@@ -60,6 +63,9 @@ Tetris.propTypes = {
 	init: propTypes.func.isRequired,
 	moveLeft: propTypes.func.isRequired,
 	moveRight: propTypes.func.isRequired,
+	moveDown: propTypes.func.isRequired,
+	rotate: propTypes.func.isRequired,
+	drop: propTypes.func.isRequired,
 	opponents: propTypes.arrayOf(propTypes.shape({
 		id: propTypes.string.isRequired,
 		spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired).isRequired,
