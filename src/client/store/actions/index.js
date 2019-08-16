@@ -4,5 +4,9 @@ export {
 	moveLeft,
 	moveDown,
 	drop,
-	rotate
+	rotate,
 } from './server/tetris';
+
+export {
+	ping,
+} from './server/socket';

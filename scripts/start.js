@@ -72,7 +72,7 @@ checkBrowsers(paths.appPath, isInteractive)
     return choosePort(HOST, DEFAULT_PORT);
   })
   .then(port => {
-    if (port == null) {
+    if (!port) {
       // We have not found a port.
       return;
     }
@@ -127,7 +127,7 @@ checkBrowsers(paths.appPath, isInteractive)
         console.log();
       }
 
-      console.log(chalk.cyan('Starting the development server...\n'));
+      console.log(chalk.cyan(`Starting the development server on http://${HOST}:${port}\n`));
       openBrowser(urls.localUrlForBrowser);
     });
 

@@ -7,7 +7,7 @@ class Server {
 		this.location = location;
 		this.app = express();
 		this.http = http.createServer(this.app);
-		this.sockets = new Sockets(this.http, origins);
+		this.sockets = new Sockets(this.http, origins.url);
 	}
 
 	listen(cb) {
