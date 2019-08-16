@@ -12,6 +12,9 @@ const mapDispatchToProps = ( dispatch ) => ({
 	init: () => dispatch(actions.startGame()),
 	moveLeft: () => dispatch(actions.moveLeft()),
 	moveRight: () => dispatch(actions.moveRight()),
+	moveDown: () => dispatch(actions.moveDown()),
+	rotate: () => dispatch(actions.rotate()),
+	drop: () => dispatch(actions.drop()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tetris);

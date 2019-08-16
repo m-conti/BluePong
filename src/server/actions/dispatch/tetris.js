@@ -6,8 +6,14 @@ const moveLeft = () => {
 const moveRight = () => {
 	console.log('going right');
 }
+const moveDown = () => {
+	console.log('going down');
+}
 const rotate = () => {
 	console.log('rotating piece');
+}
+const dropPiece = () => {
+	console.log('dropping piece');
 }
 
 export default function ( action ) {
@@ -24,7 +30,9 @@ export default function ( action ) {
 		case actionTypes.SERVER_ROTATE_PIECE:
 			rotate();
 			return;
-
+		case actionTypes.SERVER_DROP_PIECE:
+			dropPiece();
+			return;
 		default:
 			return;
 	}
