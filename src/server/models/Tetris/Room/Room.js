@@ -15,6 +15,8 @@ class Room {
 		this.players = [];
 		this.viewers = [];
 
+		this.master = null;
+
 		this.isPlaying = false;
 		this.isDone = false;
 	}
@@ -29,6 +31,9 @@ class Room {
 	addPlayer( player ) {
 		player.join(this);
 		this.players.push(player);
+		if (!this.master) {
+			this.master = player;
+		}
 	}
 
 	addViewer( viewer ) {
@@ -39,6 +44,9 @@ class Room {
 	kickPlayer( player ) {
 		player.leave(this);
 		remove(this.players, ( p ) => p === player);
+		if (this.master === player) {
+			this.master = this.players.length ? this.players[0] : null;
+		}
 	}
 
 	kickViewer( viewer ) {

@@ -9,18 +9,31 @@ class Tetris {
 		this.rooms = [];
 	}
 
+	getRoom( id ) {
+		return this.rooms.find(( room ) => room.id === id);
+	}
+
 	addRoom( roomOpt, player ) {
 		const room = new Room(generateId(this.rooms), roomOpt.name, roomOpt);
 		this.rooms.push(room);
 		room.addPlayer(player);
+		return room;
 	}
 
-	deleteRoom( id ) {
-		const room = this.rooms.find(( room ) => room.od === id);
+	deleteRoom( id, player ) {
+		const room = this.getRoom(id);
+		if ( player !== room.master && !player.isAdmin ) {
+			return;
+		}
 		if ( room ) {
 			room.closeRoom();
 			remove(this.rooms, ( room ) => room === room);
 		}
+	}
+
+	joinRoom( id, player ) {
+		const room = this.getRoom(id);
+		room.addPlayer(player);
 	}
 }
 
