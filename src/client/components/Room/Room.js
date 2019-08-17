@@ -7,8 +7,10 @@ import classes from './Room.css';
 
 const Room = ( props ) => {
 
+	const id = parseInt(props.match.params.id);
+
 	useEffect(() => {
-		props.getRoom(parseInt(props.match.params.id));
+		props.getRoom(id);
 	}, []);
 
 	const clickHandler = () => {

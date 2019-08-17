@@ -1,10 +1,13 @@
 import socketIO from 'socket.io';
 import { remove } from 'lodash';
 
+import * as actions from '../../actions/client/user';
+
 import dispatch from '../../actions/dispatch/dispatch';
 
 import Player from '../Player/Player';
 import Tetris from '../Tetris/Tetris';
+import generateId from '../../../helpers/utilities/generateId';
 
 class Sockets {
 	constructor(http, origins) {
@@ -19,7 +22,9 @@ class Sockets {
 	}
 
 	addPlayer(socket) {
-		this.players.push(new Player(socket));
+		const player = new Player(socket, generateId(this.players));
+		this.players.push(player);
+		return player;
 	}
 
 	removePlayer(socket) {
@@ -30,7 +35,10 @@ class Sockets {
 
 	listenToEvents() {
 		this.io.on('connection', (socket) => {
-			this.addPlayer(socket);
+			const player = this.addPlayer(socket);
+
+			socket.emit('action', actions.updateUser(player));
+
 			socket.on('action', (action) => {
 				console.log(action);
 				action.meta.player = this.getPlayer(socket);

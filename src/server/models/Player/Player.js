@@ -1,14 +1,15 @@
+import { omit } from 'lodash';
+
 class Player {
-	constructor( socket ) {
+	constructor( socket, id ) {
 		this.socket = socket;
 		this.isAdmin = false;
+		this._id = id;
 		console.log('CONNECT');
 	}
 
 	serialize() {
-		return {
-			isAdmin: this.isAdmin,
-		}
+		return omit(this, ['socket', 'token']);
 	}
 
 	join( room ) {
