@@ -1,40 +1,35 @@
 import * as actionTypes from '../../../actions/actionTypes/rooms';
 import * as actions from '../client/rooms';
+
 import { push } from 'connected-react-router';
 
-// /!\ serializer room and user before sending them to client
+import sockets from '../../models/Sockets/Sockets';
 
-const getRooms = ( {meta} ) => {
-	meta.player.socket.emit('action', actions.updateRooms(meta.tetris.rooms));
+const getRooms = ( {meta: {player}} ) => {
+	player.socket.emit('action', actions.updateRooms(sockets.tetris.rooms));
 };
-const getRoom = ( {meta, id} ) => {
-	const room = meta.tetris.getRoom(id);
-	if ( room ) {
-		meta.player.socket.emit('action', actions.updateRoom(room));
-	}
+const getRoom = ( {meta: {player}, id} ) => {
+	const room = sockets.tetris.getRoom(id);
+	player.socket.emit('action', actions.updateRoom(room));
 };
-const createRoom = ( {meta, room} ) => {
-	const newRoom = meta.tetris.addRoom(room, meta.player);
-	meta.io.emit('action', actions.addRoom(newRoom));
-	meta.player.socket.emit('action', push(`rooms/${newRoom._id}`));
+const createRoom = ( {meta: {player}, room} ) => {
+	const {_id} = sockets.tetris.addRoom(room, player);
+	player.socket.emit('action', push(`rooms/${_id}`));
 };
-const deleteRoom = ( {meta, id} ) => {
-	const room = meta.tetris.deleteRoom(id, meta.player);
-	if ( room ) {
-		meta.io.emit('action', actions.deleteRoom(id));
-	}
+const deleteRoom = ( {meta: {player}, id} ) => {
+	const room = sockets.tetris.getRoom(id);
+	if ( room.master !== player && !player.isAdmin )
+		throw new Error(`Player doesn't have permissions to delete this room`);
+	room.delete();
 };
-const joinRoom = ( {meta, id} ) => {
-	const room = meta.tetris.joinRoom(id, meta.player);
-	if ( room ) {
-		meta.io.emit('action', actions.updateRoom(room));
-		meta.player.socket.emit('action', push(`rooms/${room._id}`));
-	}
+const joinRoom = ( {meta: {player}, id} ) => {
+	const room = sockets.tetris.getRoom(id);
+	player.join(room);
+	player.socket.emit('action', push(`rooms/${id}`));
 };
 
 
 export default function ( action ) {
-
 	switch ( action.type ) {
 		case actionTypes.SERVER_GET_ROOMS:
 			return getRooms(action);

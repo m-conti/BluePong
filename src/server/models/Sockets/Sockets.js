@@ -10,49 +10,50 @@ import Tetris from '../Tetris/Tetris';
 import generateId from '../../../helpers/utilities/generateId';
 
 class Sockets {
-	constructor(http, origins) {
-		this.io = socketIO(http, { pingTimeout: 60000, origins: origins });
+	constructor() {
+		this.io = null;
 		this.dispatch = dispatch;
 		this.players = [];
 		this.tetris = new Tetris();
 	}
 
-	getPlayer(socket) {
-		return this.players.find((player) => player.socket === socket);
+	getPlayer( socket ) {
+		return this.players.find(( player ) => player.socket === socket);
 	}
-
-	addPlayer(socket) {
+	addPlayer( socket ) {
 		const player = new Player(socket, generateId(this.players));
 		this.players.push(player);
 		return player;
 	}
-
-	removePlayer(socket) {
-		const player = this.getPlayer(socket);
-		player.disconnect();
-		remove(this.players, (p) => p === player);
+	removePlayer( player ) {
+		remove(this.players, ( p ) => p === player);
 	}
 
-	listenToEvents() {
-		this.io.on('connection', (socket) => {
+	listenToEvents( http, origins ) {
+		this.io = socketIO(http, {pingTimeout: 10000, origins: origins});
+
+		this.io.on('connection', ( socket ) => {
 			const player = this.addPlayer(socket);
 
 			socket.emit('action', actions.updateUser(player));
 
-			socket.on('action', (action) => {
-				console.log(action);
-				action.meta.player = this.getPlayer(socket);
-				action.meta.io = this.io;
-				action.meta.tetris = this.tetris;
-				this.dispatch(action);
+			socket.on('action', ( action ) => {
+				try {
+					action.meta.player = this.getPlayer(socket);
+					this.dispatch(action);
+				}
+				catch ( error ) {
+					console.error(error.message);
+				}
 			});
 
 			socket.on('disconnect', () => {
-				console.log('socket Disconnected');
-				this.removePlayer(socket);
+				this.getPlayer(socket).disconnect();
 			});
 		});
 	}
 }
 
-export default Sockets;
+const sockets = new Sockets();
+
+export default sockets;

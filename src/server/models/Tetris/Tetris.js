@@ -2,41 +2,31 @@ import { remove } from 'lodash';
 
 import generateId from '../../../helpers/utilities/generateId';
 import Room from './Room/Room';
+import sockets from '../Sockets/Sockets';
+import * as actions from '../../actions/client/rooms';
 
 
 class Tetris {
 	constructor() {
-		this.rooms = [];
+		this.rooms = new Proxy([], {
+			set: ( target, property, value ) => {
+				target[property] = value;
+				sockets.io.emit('action', actions.updateRooms(target));
+				return true;
+			},
+		});
 	}
 
 	getRoom( id ) {
-		return this.rooms.find(( room ) => room._id === id);
+		const room = this.rooms.find(( room ) => room._id === id);
+		if ( !room ) throw new Error(`No room found with the given id : ${id}`);
+		return room;
 	}
 
 	addRoom( roomOpt, player ) {
 		const room = new Room(generateId(this.rooms), roomOpt.name, roomOpt);
+		player.join(room);
 		this.rooms.push(room);
-		room.addPlayer(player);
-		return room;
-	}
-
-	deleteRoom( id, player ) {
-		const room = this.getRoom(id);
-
-		if ( !room || (player !== room.master && !player.isAdmin) ) return;
-
-		room.closeRoom();
-		remove(this.rooms, ( r ) => r === room);
-		console.log(this.rooms.map((r)=>r._id));
-		return room;
-	}
-
-	joinRoom( id, player ) {
-		const room = this.getRoom(id);
-
-		if ( !room ) return;
-
-		room.addPlayer(player);
 		return room;
 	}
 }

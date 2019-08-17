@@ -1,19 +1,26 @@
 
+class Location {
+	constructor({host, port}) {
+		this.host = host;
+		this.port = port;
+	}
+	get url() {
+		return `http://${this.host}:${this.port}`;
+	}
+}
+
 
 exports.location = {
-	server: {
+	server: new Location({
 		host: '0.0.0.0',
 		port: 3004,
-		get url() { return `http://${this.host}:${this.port}`; }
-	},
-	api: {
+	}),
+	api: new Location({
 		host: '0.0.0.0',
 		port: 3005,
-		get url() { return `http://${this.host}:${this.port}`; }
-	},
-	client: {
+	}),
+	client: new Location({
 		host: '0.0.0.0',
 		port: 8080,
-		get url() { return `http://${this.host}:${this.port}`; }
-	}
+	})
 };

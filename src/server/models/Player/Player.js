@@ -1,19 +1,24 @@
 import { omit } from 'lodash';
 
+import sockets from '../Sockets/Sockets';
+
 class Player {
 	constructor( socket, id ) {
 		this.socket = socket;
 		this.isAdmin = false;
 		this._id = id;
+		this.room = null;
 		console.log('CONNECT');
 	}
 
 	serialize() {
-		return omit(this, ['socket', 'token']);
+		return omit(this, ['socket', 'token', 'room']);
 	}
 
 	join( room ) {
-		console.log('JOIN', room._id);
+		if (this.room) throw new Error(`player can't join '${room.name}' cause he's already in '${this.room.name}' `);
+		room.addPlayer(this);
+		this.room = room;
 	}
 
 	leave( room ) {
@@ -22,6 +27,7 @@ class Player {
 
 	disconnect() {
 		console.log('DISCONNECT');
+		sockets.removePlayer(this);
 	}
 }
 

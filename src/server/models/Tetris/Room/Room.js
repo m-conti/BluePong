@@ -1,16 +1,18 @@
 import { remove, pick } from 'lodash';
 import { MAX_PLAYERS, MAX_VIEWERS } from '../../../../constants/tetris';
 
+import sockets from '../../Sockets/Sockets';
+
 class Room {
-	constructor( id, name, options ) {
+	constructor( id, name, {maxPlayers, maxViewers} ) {
 		this._id = id;
 		this.name = name;
 
 		this.creationTime = Date.now();
 		this.endingTime = null;
 
-		this.maxPlayers = options.maxPlayers || MAX_PLAYERS;
-		this.maxViewers = options.maxViewers || MAX_VIEWERS;
+		this.maxPlayers = maxPlayers || MAX_PLAYERS;
+		this.maxViewers = maxViewers || MAX_VIEWERS;
 
 		this.players = [];
 		this.viewers = [];
@@ -21,6 +23,11 @@ class Room {
 		this.isDone = false;
 	}
 
+	delete() {
+		console.log(`DELETE ROOM : ${this._id}`);
+		remove(sockets.tetris.rooms, ( r ) => r === this);
+	}
+
 	serialize() {
 		const obj = pick(this, ['_id', 'name', 'creationTime', 'endingTime', 'maxPlayers', 'maxViewers', 'isPlaying', 'isDone']);
 		obj.players = this.players.map(( player ) => player.serialize());
@@ -29,42 +36,19 @@ class Room {
 		return obj;
 	}
 
-	closeRoom() {
-		// remove all players and make them leave
-		this.players.forEach(( player ) => this.kickPlayer(player));
-		// remove all viewers and make them leave
-		this.viewers.forEach(( viewer ) => this.kickViewer(viewer));
+	// Play
+	canJoin() {
+		return this.players.length < this.maxPlayers;
 	}
-
-	getPlayer( player ) {
-		return this.players.find(( p ) => p === player);
-	}
-
-	addPlayer( player ) {
-		if ( this.getPlayer(player) ) return;
-		player.join(this);
+	addPlayer(player) {
+		if (!this.canJoin()) throw new Error(`'${this.name}' can't accept mor players.`);
 		this.players.push(player);
-		if ( !this.master ) {
-			this.master = player;
-		}
+		if (!this.master) this.master = player;
 	}
-
-	addViewer( viewer ) {
-		viewer.join(this);
-		this.viewers.push(viewer);
-	}
-
-	kickPlayer( player ) {
-		player.leave(this);
-		remove(this.players, ( p ) => p === player);
-		if ( this.master === player ) {
-			this.master = this.players.length ? this.players[0] : null;
-		}
-	}
-
-	kickViewer( viewer ) {
-		viewer.leave(this);
-		remove(this.viewers, ( v ) => v === viewer);
+	removePlayer(player) {
+		remove(this.players, (p) => p === player);
+		if (!this.players.length) return this.delete();
+		if (this.master === player) this.master = this.players[0];
 	}
 }
 
