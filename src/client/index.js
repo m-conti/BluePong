@@ -3,7 +3,8 @@ import ReactDom from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Route
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import history from './routes/history';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -13,11 +14,11 @@ import store from './store/store';
 import App from './containers/App';
 
 const app = (
-	<BrowserRouter>
-		<Provider store={store}>
+	<Provider store={store}>
+		<ConnectedRouter history={history}>
 			<App/>
-		</Provider>
-	</BrowserRouter>
+		</ConnectedRouter>
+	</Provider>
 );
 
 ReactDom.render(app, document.getElementById('tetris'));

@@ -6,6 +6,8 @@ import classes from './Rooms.css';
 import RoomsList from './RoomsList/RoomsList';
 import CreateNewRoom from './CreateNewRoom/CreateNewRoom';
 
+import { withRouter} from 'react-router-dom';
+
 const Rooms = ( props ) => {
 
 
@@ -20,10 +22,12 @@ const Rooms = ( props ) => {
 		<RoomsList rooms={props.rooms} onDeleteRoom={props.deleteRoom} onJoinRoom={props.joinRoom}/>
 		: null;
 
+	console.log(props.history);
+
 	return (
 		<div className={classes.Rooms}>
 			{roomList}
-			<CreateNewRoom create={props.createRoom} />
+			<CreateNewRoom create={props.createRoom}/>
 		</div>
 	);
 };
@@ -35,10 +39,8 @@ Rooms.propTypes = {
 	joinRoom: propTypes.func.isRequired,
 	rooms: propTypes.arrayOf(propTypes.shape({
 		_id: propTypes.number.isRequired,
-		players:propTypes.arrayOf(propTypes.shape({
-
-		})).isRequired
+		players: propTypes.arrayOf(propTypes.shape({})).isRequired
 	}).isRequired)
 };
 
-export default Rooms;
+export default withRouter(Rooms);

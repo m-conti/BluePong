@@ -16,7 +16,7 @@ const app = ( props ) => {
 	return (
 		<div>
 			<Switch>
-				<Route path={'/rooms'} component={Rooms}/>
+				<Route exact path={'/rooms'} component={Rooms}/>
 				<Route exact path={'/'} component={Tetris}/>
 			</Switch>
 		</div>

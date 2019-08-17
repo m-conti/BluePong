@@ -398,6 +398,7 @@ module.exports = function ( webpackEnv ) {
 										{helpers: true},
 									],
 								],
+								plugins: ["@babel/plugin-proposal-export-default-from"],
 								cacheDirectory: true,
 								cacheCompression: isEnvProduction,
 

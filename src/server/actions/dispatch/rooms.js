@@ -1,5 +1,6 @@
 import * as actionTypes from '../../../actions/actionTypes/rooms';
 import * as actions from '../client/rooms';
+import { push } from 'connected-react-router';
 
 // /!\ serializer room and user before sending them to client
 
@@ -9,15 +10,19 @@ const getRooms = ( {meta} ) => {
 const createRoom = ( {meta, room} ) => {
 	const newRoom = meta.tetris.addRoom(room, meta.player);
 	meta.io.emit('action', actions.addRoom(newRoom));
+	meta.player.socket.emit('action', push(`rooms/${room._id}`));
 };
 const deleteRoom = ( {meta, id} ) => {
-	meta.tetris.deleteRoom(id, meta.player);
-	meta.io.emit('action', actions.deleteRoom(id));
+	const room = meta.tetris.deleteRoom(id, meta.player);
+	if ( room ) {
+		meta.io.emit('action', actions.deleteRoom(id));
+	}
 };
 const joinRoom = ( {meta, id} ) => {
 	const room = meta.tetris.joinRoom(id, meta.player);
 	if ( room ) {
 		meta.io.emit('action', actions.updateRoom(room));
+		meta.player.socket.emit('action', push(`rooms/${room._id}`));
 	}
 };
 

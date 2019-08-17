@@ -41,7 +41,7 @@ class Room {
 	}
 
 	addPlayer( player ) {
-//		if ( this.getPlayer(player) ) return;
+		if ( this.getPlayer(player) ) return;
 		player.join(this);
 		this.players.push(player);
 		if ( !this.master ) {

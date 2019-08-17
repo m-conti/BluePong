@@ -4,6 +4,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 // Middleware
 import thunkMiddleware from 'redux-thunk';
 import socketMiddleware from 'redux-socket.io-middleware';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import history from '../routes/history';
 
 // Reducers
 import tetrisReducer from './reducers/tetris';
@@ -17,6 +19,7 @@ const reducers = combineReducers({
 	tetris: tetrisReducer,
 	io: socketReducer,
 	rooms: roomsReducer,
+	router: connectRouter(history),
 });
 
 
@@ -25,7 +28,8 @@ export default createStore(
 	composeEnhancers(
 		applyMiddleware(
 			thunkMiddleware,
-			socketMiddleware(socket)
+			socketMiddleware(socket),
+			routerMiddleware(history)
 		)
 	)
 );

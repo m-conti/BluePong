@@ -12,11 +12,11 @@ class Player {
 	}
 
 	join( room ) {
-		console.log('JOIN', room);
+		console.log('JOIN', room._id);
 	}
 
 	leave( room ) {
-		console.log('LEAVE', room);
+		console.log('LEAVE', room._id);
 	}
 
 	disconnect() {

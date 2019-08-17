@@ -20,11 +20,11 @@ const updateRoom = ( state, {room} ) => {
 };
 const addRoom = ( state, {room} ) => ({
 	...state,
-	rooms: [...state.rooms, room],
+	rooms: state.rooms ? [...state.rooms, room] : null,
 });
 const deleteRoom = ( state, {id} ) => ({
 	...state,
-	rooms: state.rooms.filter(( room ) => room.id !== id),
+	rooms: state.rooms ? state.rooms.filter(( room ) => room._id !== id) : null,
 });
 
 

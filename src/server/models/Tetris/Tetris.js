@@ -22,20 +22,21 @@ class Tetris {
 
 	deleteRoom( id, player ) {
 		const room = this.getRoom(id);
-		if ( player !== room.master && !player.isAdmin ) {
-			return;
-		}
-		if ( room ) {
-			room.closeRoom();
-			remove(this.rooms, ( room ) => room === room);
-		}
+
+		if ( !room || (player !== room.master && !player.isAdmin) ) return;
+
+		room.closeRoom();
+		remove(this.rooms, ( r ) => r === room);
+		console.log(this.rooms.map((r)=>r._id));
+		return room;
 	}
 
 	joinRoom( id, player ) {
 		const room = this.getRoom(id);
-		if ( room ) {
-			room.addPlayer(player);
-		}
+
+		if ( !room ) return;
+
+		room.addPlayer(player);
 		return room;
 	}
 }
