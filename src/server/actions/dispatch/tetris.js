@@ -29,7 +29,13 @@ const moveDown = ( {meta} ) => {
 	meta.player.socket.emit('action', actions.updateBoard(newBoard));
 }
 const rotate = ({meta}) => {
-	console.log('rotating piece');
+	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	newBoard[8][9] = 1;
+	newBoard[9][9] = 1;
+	newBoard[8][8] = 1;
+	newBoard[9][8] = 1;
+
+	meta.player.socket.emit('action', actions.updateBoard(newBoard));
 }
 const dropPiece = ({meta}) => {
 	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));

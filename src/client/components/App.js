@@ -4,6 +4,7 @@ import * as propTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 
 import Rooms from '../containers/Rooms/Rooms';
+import Room from '../containers/Room/Room';
 import Tetris from '../containers/Tetris/Tetris';
 
 
