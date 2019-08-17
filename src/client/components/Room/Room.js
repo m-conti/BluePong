@@ -6,6 +6,11 @@ import Button from '../UI/Button/Button';
 import classes from './Room.css';
 
 const Room = ( props ) => {
+
+	useEffect(() => {
+		props.getRoom(parseInt(props.match.params.id));
+	}, []);
+
 	const clickHandler = () => {
 	};
 

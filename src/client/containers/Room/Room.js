@@ -6,7 +6,7 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-	getRoom: () => dispatch(actions.getRoom()),
+	getRoom: (id) => dispatch(actions.getRoom(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Room);

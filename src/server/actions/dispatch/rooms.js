@@ -7,10 +7,16 @@ import { push } from 'connected-react-router';
 const getRooms = ( {meta} ) => {
 	meta.player.socket.emit('action', actions.updateRooms(meta.tetris.rooms));
 };
+const getRoom = ( {meta, id} ) => {
+	const room = meta.tetris.getRoom(id);
+	if ( room ) {
+		meta.player.socket.emit('action', actions.updateRoom(room));
+	}
+};
 const createRoom = ( {meta, room} ) => {
 	const newRoom = meta.tetris.addRoom(room, meta.player);
 	meta.io.emit('action', actions.addRoom(newRoom));
-	meta.player.socket.emit('action', push(`rooms/${room._id}`));
+	meta.player.socket.emit('action', push(`rooms/${newRoom._id}`));
 };
 const deleteRoom = ( {meta, id} ) => {
 	const room = meta.tetris.deleteRoom(id, meta.player);
@@ -32,6 +38,8 @@ export default function ( action ) {
 	switch ( action.type ) {
 		case actionTypes.SERVER_GET_ROOMS:
 			return getRooms(action);
+		case actionTypes.SERVER_GET_ROOM:
+			return getRoom(action);
 		case actionTypes.SERVER_CREATE_ROOM:
 			return createRoom(action);
 		case actionTypes.SERVER_DELETE_ROOM:

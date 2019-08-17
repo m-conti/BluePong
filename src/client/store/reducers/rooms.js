@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 import * as actions from '../../../actions/actionTypes/rooms';
 
 const initialState = {
-	rooms: null,
+	rooms: [],
 };
 
 
@@ -11,8 +11,12 @@ const updateRooms = ( state, {rooms} ) => ({
 	rooms: rooms,
 });
 const updateRoom = ( state, {room} ) => {
-	const newRooms = cloneDeep(state.rooms);
-	newRooms[state.rooms.findIndex((r) => r._id === room._id)] = room;
+	const newRooms = [...state.rooms];
+	const index = state.rooms.findIndex(( r ) => r._id === room._id);
+
+	if ( index !== -1 ) newRooms[index] = room;
+	else newRooms.push(room);
+
 	return {
 		...state,
 		rooms: newRooms,
@@ -20,11 +24,11 @@ const updateRoom = ( state, {room} ) => {
 };
 const addRoom = ( state, {room} ) => ({
 	...state,
-	rooms: state.rooms ? [...state.rooms, room] : null,
+	rooms: [...state.rooms, room],
 });
 const deleteRoom = ( state, {id} ) => ({
 	...state,
-	rooms: state.rooms ? state.rooms.filter(( room ) => room._id !== id) : null,
+	rooms: state.rooms.filter(( room ) => room._id !== id),
 });
 
 

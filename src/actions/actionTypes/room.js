@@ -1,1 +1,0 @@
-export const SERVER_GET_ROOM = 'SERVER_GET_ROOM';

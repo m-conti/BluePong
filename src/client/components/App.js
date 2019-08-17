@@ -3,8 +3,9 @@ import * as propTypes from 'prop-types';
 
 import { Switch, Route } from 'react-router-dom';
 
-import Rooms from '../containers/Rooms/Rooms';
-import Room from '../containers/Room/Room';
+// routes
+import RoomRoutes from '../routes/Rooms/Rooms';
+
 import Tetris from '../containers/Tetris/Tetris';
 
 
@@ -17,8 +18,8 @@ const app = ( props ) => {
 	return (
 		<div>
 			<Switch>
-				<Route exact path={'/rooms'} component={Rooms}/>
 				<Route exact path={'/'} component={Tetris}/>
+				<Route path={'/rooms'} component={RoomRoutes}/>
 			</Switch>
 		</div>
 	);
