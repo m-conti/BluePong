@@ -4,7 +4,7 @@ import {MAX_PLAYERS, MAX_VIEWERS} from '../../../../constants/tetris';
 import sockets from '../../Sockets/Sockets';
 import * as actions from '../../../actions/client/rooms';
 
-import Match from './Match/Match';
+import Match from '../Match/Match';
 
 class Room {
 	constructor(id, name, {maxPlayers, maxViewers}) {

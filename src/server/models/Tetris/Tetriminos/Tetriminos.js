@@ -1,6 +1,5 @@
 class Tetriminos {
 	construction() {
-		this.shape = Array(4).fill(false).map(() => Array(4).fill(false));
 		this.value = 0;
 		this.rotationIndex = 0;
 	}
@@ -9,9 +8,12 @@ class Tetriminos {
 		return Array(4).fill(false).map(() => Array(4).fill(false));
 	}
 
+	get shape() {
+		return Tetriminos.rotations[this.rotationIndex % Tetriminos.rotations.length];
+	}
+
 	rotate() {
-		this.rotationIndex = (this.rotationIndex + 1) % this.rotations.length;
-		this.shape = this.rotations[this.rotationIndex];
+		this.rotationIndex++;
 	}
 
 	get figure() {

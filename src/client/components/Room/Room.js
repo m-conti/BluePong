@@ -16,6 +16,7 @@ const Room = ( props ) => {
 	const room = props.rooms.find(( room ) => room._id === parseInt(props.match.params.id));
 
 	const clickHandler = () => {
+		console.log("props: ", props);
 	};
 
 	if ( !room ) return <Redirect to={'/rooms'}/>;
