@@ -1,7 +1,10 @@
-import {remove, omit} from 'lodash';
+import {remove, omit, isEqual} from 'lodash';
 import {MAX_PLAYERS, MAX_VIEWERS} from '../../../../constants/tetris';
 
 import sockets from '../../Sockets/Sockets';
+import * as actions from '../../../actions/client/rooms';
+
+import Match from './Match/Match';
 
 class Room {
 	constructor(id, name, {maxPlayers, maxViewers}) {
@@ -14,6 +17,8 @@ class Room {
 		this.maxPlayers = maxPlayers || MAX_PLAYERS;
 		this.maxViewers = maxViewers || MAX_VIEWERS;
 
+		this.match = new Match();
+
 		this.players = [];
 		this.viewers = [];
 
@@ -25,18 +30,19 @@ class Room {
 
 	delete() {
 		console.log(`DELETE ROOM : ${this._id}`);
-		remove(sockets.tetris.rooms, (r) => r === this);
+		this.players.forEach((player) => player.leave(this));
+		sockets.tetris.removeRoom(this._id);
 	}
 
 	serialize() {
-		const obj = omit(this, ['players', 'viewers', 'master']);
+		const obj = omit(this, ['players', 'viewers', 'master', 'match']);
 		obj.players = this.players.map((player) => player.serialize());
 		obj.viewers = this.viewers.map((viewer) => viewer.serialize());
 		obj.master = this.master ? this.master.serialize() : null;
 		return obj;
 	}
 
-	// Play
+	// Players
 	canJoin() {
 		return this.players.length < this.maxPlayers;
 	}
@@ -45,12 +51,23 @@ class Room {
 		if (!this.canJoin()) throw new Error(`'${this.name}' can't accept mor players.`);
 		this.players.push(player);
 		if (!this.master) this.master = player;
+		sockets.io.emit('action', actions.updateRoom(this));
 	}
 
 	removePlayer(player) {
 		remove(this.players, (p) => p === player);
 		if (!this.players.length) return this.delete();
 		if (this.master === player) this.master = this.players[0];
+		sockets.io.emit('action', actions.updateRoom(this));
+	}
+
+
+	// Match
+	startMatch() {
+		this.match.init(this.players);
+		this.isPlaying = true;
+		sockets.io.emit('action', actions.updateRoom(this));
+		this.match.start();
 	}
 }
 

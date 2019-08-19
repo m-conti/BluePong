@@ -16,12 +16,14 @@ class Player {
 	}
 
 	join( room ) {
-		if (this.room) throw new Error(`player can't join '${room.name}' cause he's already in '${this.room.name}' `);
+		if ( this.room ) throw new Error(`player can't join '${room.name}' cause he's already in '${this.room.name}' `);
 		room.addPlayer(this);
 		this.room = room;
 	}
 
 	leave( room ) {
+		if ( this.room !== room ) return;
+		this.room = null;
 		console.log('LEAVE', room._id);
 	}
 

@@ -14,7 +14,7 @@ const getRoom = ( {meta: {player}, id} ) => {
 };
 const createRoom = ( {meta: {player}, room} ) => {
 	const {_id} = sockets.tetris.addRoom(room, player);
-	player.socket.emit('action', push(`rooms/${_id}`));
+//	player.socket.emit('action', push(`rooms/${_id}`));
 };
 const deleteRoom = ( {meta: {player}, id} ) => {
 	const room = sockets.tetris.getRoom(id);

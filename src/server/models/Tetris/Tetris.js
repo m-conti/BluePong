@@ -8,16 +8,7 @@ import * as actions from '../../actions/client/rooms';
 
 class Tetris {
 	constructor() {
-		this.rooms = new Proxy([], {
-			set: (target, property, value, receiver) => {
-				const old = target[property];
-				target[property] = value;
-				if (typeof(value) === 'object') {
-					sockets.io.emit('action', actions.updateRooms(target));
-				}
-				return true;
-			},
-		});
+		this.rooms = []
 	}
 
 	getRoom(id) {
@@ -30,7 +21,17 @@ class Tetris {
 		const room = new Room(generateId(this.rooms), roomOpt.name, roomOpt);
 		player.join(room);
 		this.rooms.push(room);
+
+		// trigger for clients
+		sockets.io.emit('action', actions.updateRoom(room));
+
 		return room;
+	}
+	removeRoom(id) {
+		remove(this.rooms, (room) => room._id === id);
+
+		// trigger for clients
+		sockets.io.emit('action', actions.updateRooms(this.rooms));
 	}
 }
 
