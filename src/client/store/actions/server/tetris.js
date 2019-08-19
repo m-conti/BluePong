@@ -1,9 +1,10 @@
 import remote from './remote';
 import * as actions from '../../../../actions/actionTypes/tetris';
+import { BOARD } from '../../../../constants/tetris';
 
 // TO CHANGE
 export const startGame = () => dispatch => {
-	const initBoard = Array(20).fill(0).map(() => Array(10).fill(0));
+	const initBoard = BOARD();
 	initBoard[19][4] = 1;
 	initBoard[19][5] = 1;
 	initBoard[19][6] = 1;

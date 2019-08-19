@@ -29,6 +29,7 @@ class Player {
 
 	disconnect() {
 		console.log('DISCONNECT');
+		if (this.room) this.room.removePlayer(this);
 		sockets.removePlayer(this);
 	}
 }

@@ -1,4 +1,5 @@
 import Game from '../Game/Game';
+import generateTetriminos from '../Tetriminos/Tetriminos';
 
 class Match {
 	constructor() {
@@ -7,6 +8,7 @@ class Match {
 	}
 
 	init(players) {
+		this.tetriminos.push(generateTetriminos());
 		this.games = players.map((player) => new Game(player, this.tetriminos));
 	}
 
