@@ -7,7 +7,6 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-	getRooms: () => dispatch(actions.getRooms()),
 	createRoom: (room) => dispatch(actions.createRoom(room)),
 	deleteRoom: (id) => dispatch(actions.deleteRoom(id)),
 	joinRoom: (id) => dispatch(actions.joinRoom(id)),

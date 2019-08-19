@@ -13,6 +13,7 @@ const app = ( props ) => {
 
 	useEffect(() => {
 		props.ping();
+		props.getRooms();
 	}, []);
 
 	return (
@@ -26,7 +27,8 @@ const app = ( props ) => {
 };
 
 app.propTypes = {
-	ping: propTypes.func,
+	getRooms: propTypes.func.isRequired,
+	ping: propTypes.func.isRequired,
 };
 
 

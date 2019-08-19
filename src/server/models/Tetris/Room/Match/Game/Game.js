@@ -1,4 +1,4 @@
-import Tetriminos from './Tetrminos/Tetriminos';
+import Tetriminos from './Tetriminos/Tetriminos';
 
 class Game {
 	constructor(player) {

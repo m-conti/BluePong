@@ -1,5 +1,7 @@
 import React from 'react';
+
 import * as propTypes from 'prop-types';
+import roomType from '../../../propTypes/room/room';
 
 import classes from './RoomsList.css';
 
@@ -45,11 +47,7 @@ const roomsList = (props) => {
 roomsList.propTypes = {
 	onDeleteRoom: propTypes.func.isRequired,
 	onJoinRoom: propTypes.func.isRequired,
-	rooms: propTypes.arrayOf(
-		propTypes.shape({
-			_id: propTypes.number.isRequired,
-		})
-	).isRequired,
+	rooms: propTypes.arrayOf(roomType),
 };
 
 export default roomsList;

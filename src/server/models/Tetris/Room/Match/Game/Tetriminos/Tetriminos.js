@@ -5,7 +5,9 @@ class Tetriminos {
 		this.rotationIndex = 0;
 	}
 
-	static rotations = Array(4).fill(false).map(() => Array(4).fill(false));
+	static get rotations() {
+		return Array(4).fill(false).map(() => Array(4).fill(false));
+	}
 
 	rotate() {
 		this.rotationIndex = (this.rotationIndex + 1) % this.rotations.length;
@@ -13,7 +15,7 @@ class Tetriminos {
 	}
 
 	get figure() {
-		return this.shape.map((row) => row.map((elem) => elem ? this.value : 0 ))
+		return this.shape.map(( row ) => row.map(( elem ) => elem ? this.value : 0));
 	}
 }
 

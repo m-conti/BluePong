@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import * as propTypes from 'prop-types';
+import roomType from '../../propTypes/room/room';
 
 import classes from './Rooms.css';
 
@@ -10,19 +12,9 @@ import { withRouter} from 'react-router-dom';
 
 const Rooms = ( props ) => {
 
-
-	const [state, setState] = useState({});
-
-	useEffect(() => {
-		props.getRooms();
-	}, []);
-	console.log('CHANGE');
-
 	const roomList = props.rooms ?
 		<RoomsList rooms={props.rooms} onDeleteRoom={props.deleteRoom} onJoinRoom={props.joinRoom}/>
 		: null;
-
-	console.log(props.history);
 
 	return (
 		<div className={classes.Rooms}>
@@ -33,14 +25,10 @@ const Rooms = ( props ) => {
 };
 
 Rooms.propTypes = {
-	getRooms: propTypes.func.isRequired,
 	createRoom: propTypes.func.isRequired,
 	deleteRoom: propTypes.func.isRequired,
 	joinRoom: propTypes.func.isRequired,
-	rooms: propTypes.arrayOf(propTypes.shape({
-		_id: propTypes.number.isRequired,
-		players: propTypes.arrayOf(propTypes.shape({})).isRequired
-	}).isRequired)
+	rooms: propTypes.arrayOf(roomType),
 };
 
 export default withRouter(Rooms);

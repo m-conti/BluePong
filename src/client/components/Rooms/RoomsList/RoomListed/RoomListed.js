@@ -1,5 +1,7 @@
 import React from 'react';
+
 import * as propTypes from 'prop-types';
+import playerType from '../../../../propTypes/player/player';
 
 import { TableRow, TableCell, IconButton } from '@material-ui/core';
 import { Delete, CastConnected } from '@material-ui/icons';
@@ -30,9 +32,7 @@ roomListed.propTypes = {
 	name: propTypes.string,
 	onDeleteRoom: propTypes.func.isRequired,
 	onJoinRoom: propTypes.func.isRequired,
-	players: propTypes.arrayOf(propTypes.shape({
-		// DEFINE PLAYER
-	})).isRequired,
+	players: propTypes.arrayOf(playerType).isRequired,
 	isDone: propTypes.bool.isRequired,
 	_id: propTypes.number.isRequired,
 };

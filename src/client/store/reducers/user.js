@@ -1,12 +1,13 @@
 import * as actions from '../../../actions/actionTypes/user';
 
 const initialState = {
-	socketInfo: null,
+	_id: null,
+	isAdmin: false,
 };
 
 const updateUserInfos = ( state, {user} ) => ({
 	...state,
-	socketInfo: user,
+	...user,
 });
 
 

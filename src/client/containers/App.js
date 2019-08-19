@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	getRooms: () => dispatch(actions.getRooms()),
 	ping: () => dispatch(actions.ping()),
 });
 
