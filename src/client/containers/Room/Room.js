@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 const mapStateToProps = ( state ) => ({
+	rooms: state.rooms.rooms, 
 });
 
 const mapDispatchToProps = ( dispatch ) => ({

@@ -5,8 +5,6 @@ class Tetriminos {
 		this.rotationIndex = 0;
 	}
 
-	static rotations = Array(4).fill(false).map(() => Array(4).fill(false));
-
 	rotate() {
 		this.rotationIndex = (this.rotationIndex + 1) % this.rotations.length;
 		this.shape = this.rotations[this.rotationIndex];
@@ -16,6 +14,7 @@ class Tetriminos {
 		return this.shape.map((row) => row.map((elem) => elem ? this.value : 0 ))
 	}
 }
+Tetriminos.rotations = Array(4).fill(false).map(() => Array(4).fill(false));
 
 export const generateTetriminos = () => {
 

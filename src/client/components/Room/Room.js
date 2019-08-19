@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import * as propTypes from 'prop-types';
 
 import Button from '../UI/Button/Button';
@@ -14,6 +14,7 @@ const Room = ( props ) => {
 	}, []);
 
 	const clickHandler = () => {
+		console.log("props: ", props);
 	};
 
 	return (
