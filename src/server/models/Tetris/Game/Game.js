@@ -23,14 +23,12 @@ class Game {
 		const flatFigure = flatten(this.currentPiece.tetrimino.figure);
 		const lineLength = this.currentPiece.tetrimino.figure.length;
 
-		for (let i = 0; i < flatFigure.length; i++;) {
+		for (let i = 0; i < flatFigure.length; i++) {
 			if (flatFigure[i]) {
 				playableBoard[this.currentPiece.y + i / lineLength][this.currentPiece.x + i % lineLength]
 					= flatFigure[i];
 			}
-
 		}
-			//			tetrimino.figure
 		return playableBoard; // Append currentPiece to board
 	}
 
@@ -44,17 +42,15 @@ class Game {
 	}
 
 	moveLeft() {
-		// ACTION
-		if (this.currentPiece.x >= 1 && !collision(this.currentPiece, LEFT, this.board))
-		{
-			this.currentPiece.x -= 1;
+		if (!collision(this.currentPiece, 'LEFT', this.board)) {
 		}
 		this.currentPiece.tetrimino
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	moveRight() {
-		// ACTION
+		if (!collision(this.currentPiece, 'RIGHT', this.board)) {
+		}
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
@@ -75,7 +71,9 @@ class Game {
 }
 
 const collision = (piece, direction, board) => {
+	
 
+	return 0;
 }
 
 export default Game;
