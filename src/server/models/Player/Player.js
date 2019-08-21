@@ -15,6 +15,11 @@ class Player {
 		return omit(this, ['socket', 'token', 'room']);
 	}
 
+	getGame() {
+		if ( !this.room || !this.room.isPlaying ) return null;
+		return this.room.games.find((game) => game.player === this);
+	}
+
 	join( room ) {
 		if ( this.room ) throw new Error(`player can't join '${room.name}' cause he's already in '${this.room.name}' `);
 		room.addPlayer(this);
@@ -29,7 +34,7 @@ class Player {
 
 	disconnect() {
 		console.log('DISCONNECT');
-		if (this.room) this.room.removePlayer(this);
+		if ( this.room ) this.room.removePlayer(this);
 		sockets.removePlayer(this);
 	}
 }
