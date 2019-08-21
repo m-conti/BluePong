@@ -6,20 +6,25 @@ export const getRooms = () => ({
 	type: actions.SERVER_GET_ROOMS,
 });
 
-export const createRoom = (room) => ({
+export const createRoom = ( room ) => ({
 	meta: remote,
 	type: actions.SERVER_CREATE_ROOM,
 	room: room,
 });
 
-export const deleteRoom = (id) => ({
+export const deleteRoom = ( id ) => ({
 	meta: remote,
 	type: actions.SERVER_DELETE_ROOM,
 	id: id,
 });
 
-export const joinRoom = (id) => ({
+export const joinRoom = ( id ) => ({
 	meta: remote,
 	type: actions.SERVER_JOIN_ROOM,
 	id: id,
+});
+
+export const toggleReady = () => ({
+	meta: remote,
+	type: actions.SERVER_READY_TOGGLE,
 });

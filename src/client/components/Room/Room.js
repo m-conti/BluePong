@@ -5,27 +5,20 @@ import roomType from '../../propTypes/room/room';
 
 import classes from './Room.css';
 
+import { CLIENT_ROOMS } from '../../../constants/path';
 import { Redirect } from 'react-router-dom';
 
-import Button from '../UI/Button/Button';
-import PlayersList from './PlayersList/PlayersList';
+import WaitingRoom from '../../containers/WaitingRoom/WaitingRoom';
+import Tetris from '../../containers/Tetris/Tetris';
 
 
 const Room = ( props ) => {
-
 	const room = props.rooms.find(( room ) => room._id === parseInt(props.match.params.id));
+	if ( !room ) return <Redirect to={CLIENT_ROOMS}/>;
+	console.log(room);
+	const route = !room.isPlaying ? <WaitingRoom room={room}/> : <Tetris/>;
 
-	const clickHandler = () => {
-		console.log("props: ", props);
-	};
-
-	if ( !room ) return <Redirect to={'/rooms'}/>;
-
-	return (
-		<div className={classes.Room}>
-			<PlayersList playerId={props.playerId} players={room.players}/>
-		</div>
-	);
+	return route;
 };
 
 Room.propTypes = {

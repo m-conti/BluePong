@@ -1,5 +1,5 @@
 import Game from '../Game/Game';
-import generateTetriminos from '../Tetriminos/Tetriminos';
+import generateTetriminos from '../Tetriminos/generateTetriminos';
 
 class Match {
 	constructor() {

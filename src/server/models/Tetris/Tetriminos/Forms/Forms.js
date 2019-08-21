@@ -6,11 +6,12 @@ export class I extends Tetriminos {
 		super();
 		this.value = 1;
 	}
-
+	static create() {
+		return new I();
+	}
 	static get rotations() {
 		return I_rotations;
 	}
-
 	get shape() {
 		return I.rotations[this.rotationIndex % I.rotations.length];
 	}
@@ -20,6 +21,9 @@ export class O extends Tetriminos {
 	constructor() {
 		super();
 		this.value = 2;
+	}
+	static create() {
+		return new O();
 	}
 	static get rotations() {
 		return O_rotations;
@@ -34,6 +38,9 @@ export class T extends Tetriminos {
 		super();
 		this.value = 3;
 	}
+	static create() {
+		return new T();
+	}
 	static get rotations() {
 		return T_rotations;
 	}
@@ -47,6 +54,9 @@ export class J extends Tetriminos {
 		super();
 		this.value = 4;
 	}
+	static create() {
+		return new J();
+	}
 	static get rotations() {
 		return J_rotations;
 	}
@@ -59,6 +69,9 @@ export class L extends Tetriminos {
 	constructor() {
 		super();
 		this.value = 5;
+	}
+	static create() {
+		return new L();
 	}
 	static get rotations() {
 		return L_rotations;
@@ -74,6 +87,9 @@ export class S extends Tetriminos {
 		super();
 		this.value = 6;
 	}
+	static create() {
+		return new S();
+	}
 	static get rotations() {
 		return S_rotations;
 	}
@@ -86,6 +102,9 @@ export class Z extends Tetriminos {
 	constructor() {
 		super();
 		this.value = 7;
+	}
+	static create() {
+		return new Z();
 	}
 	static get rotations() {
 		return Z_rotations;

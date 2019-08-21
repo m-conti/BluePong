@@ -8,10 +8,6 @@ export {
 } from './server/tetris';
 
 export {
-	getRoom,
-} from './server/room';
-
-export {
 	ping,
 } from './server/socket';
 
@@ -19,5 +15,6 @@ export {
 	getRooms,
 	createRoom,
 	deleteRoom,
-	joinRoom
+	joinRoom,
+	toggleReady,
 } from './server/rooms';

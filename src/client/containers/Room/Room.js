@@ -8,8 +8,6 @@ const mapStateToProps = ( state ) => ({
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
-	toggleReady: () => dispatch(actions.toggleReady()),
-	startGame: () => dispatch(actions.startGame()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Room);

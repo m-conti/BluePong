@@ -1,5 +1,6 @@
+
 class Tetriminos {
-	construction() {
+	constructor() {
 		this.value = 0;
 		this.rotationIndex = 0;
 	}
@@ -20,9 +21,5 @@ class Tetriminos {
 		return this.shape.map(( row ) => row.map(( elem ) => elem ? this.value : 0));
 	}
 }
-
-export const generateTetriminos = () => {
-
-};
 
 export default Tetriminos;

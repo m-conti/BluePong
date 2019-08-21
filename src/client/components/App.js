@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import * as propTypes from 'prop-types';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // routes
+import { CLIENT_ROOMS } from '../../constants/path';
 import RoomRoutes from '../routes/Rooms/Rooms';
 
 import Tetris from '../containers/Tetris/Tetris';
@@ -19,8 +20,7 @@ const app = ( props ) => {
 	return (
 		<div>
 			<Switch>
-				<Route exact path={'/'} component={Tetris}/>
-				<Route path={'/rooms'} component={RoomRoutes}/>
+				<Route path={CLIENT_ROOMS} component={RoomRoutes}/>
 			</Switch>
 		</div>
 	);

@@ -1,6 +1,7 @@
 import * as actionTypes from '../../../actions/actionTypes/rooms';
 import * as actions from '../client/rooms';
 
+import {CLIENT_ROOMS} from '../../../constants/path';
 import { push } from 'connected-react-router';
 
 import sockets from '../../models/Sockets/Sockets';
@@ -14,7 +15,7 @@ const getRoom = ( {meta: {player}, id} ) => {
 };
 const createRoom = ( {meta: {player}, room} ) => {
 	const {_id} = sockets.tetris.addRoom(room, player);
-	player.socket.emit('action', push(`rooms/${_id}`));
+	player.socket.emit('action', push(`${CLIENT_ROOMS}/${_id}`));
 };
 const deleteRoom = ( {meta: {player}, id} ) => {
 	const room = sockets.tetris.getRoom(id);
@@ -25,8 +26,12 @@ const deleteRoom = ( {meta: {player}, id} ) => {
 const joinRoom = ( {meta: {player}, id} ) => {
 	const room = sockets.tetris.getRoom(id);
 	player.join(room);
-	player.socket.emit('action', push(`rooms/${id}`));
+	player.socket.emit('action', push(`${CLIENT_ROOMS}/${id}`));
 };
+const readyToggle = ( {meta: {player}} ) => {
+	if ( !player.room ) return;
+	player.room.togglePlayerReady(player);
+}
 
 
 export default function ( action ) {
@@ -41,6 +46,8 @@ export default function ( action ) {
 			return deleteRoom(action);
 		case actionTypes.SERVER_JOIN_ROOM:
 			return joinRoom(action);
+		case actionTypes.SERVER_READY_TOGGLE:
+			return readyToggle(action);
 		default:
 			return;
 	}

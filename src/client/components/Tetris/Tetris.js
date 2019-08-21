@@ -10,11 +10,6 @@ import { ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN, SPACE_KEY } from '../../
 
 
 const Tetris = ( props ) => {
-
-	useEffect(() => {
-		props.init();
-	}, []);
-
 	const board = (props.board) ? <Board board={props.board} /> : <div>Spinner</div>;
 	const score = (props.score) ? <Score score={props.score} /> : null;
 

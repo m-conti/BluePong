@@ -5,3 +5,5 @@ class Piece {
 		this.y = 0;
 	}
 }
+
+export default Piece;
