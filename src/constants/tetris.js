@@ -7,4 +7,9 @@ export const ARROW_UP = 'ArrowUp';
 export const ARROW_DOWN = 'ArrowDown';
 export const SPACE_KEY = ' ';
 
-export const BOARD = () => new Array(20).fill(0).map(() => new Array(10).fill(0));
+export const RIGHT = 'RIGHT';
+export const LEFT = 'LEFT';
+
+export const BOARD_WIDTH = 10;
+export const BOARD_HEIGHT = 20;
+export const BOARD = () => new Array(BOARD_HEIGHT).fill(0).map(() => new Array(BOARD_WIDTH).fill(0));
