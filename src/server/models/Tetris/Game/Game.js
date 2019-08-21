@@ -1,4 +1,4 @@
-import { pick } from 'lodash';
+import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import { BOARD } from '../../../../constants/tetris';
 import Piece from '../Piece/Piece';
@@ -22,7 +22,20 @@ class Game {
 	}
 
 	get playableBoard() {
-		return this.board; // Append currentPiece to board
+		return this.board;
+		const playableBoard = cloneDeep(this.board);
+		const flatFigure = flatten(this.currentPiece.tetrimino.figure);
+		const lineLength = this.currentPiece.tetrimino.figure.length;
+
+		for (let i = 0; i < flatFigure.length; i++) {
+			if (flatFigure[i]) {
+				playableBoard[this.currentPiece.y + i / lineLength][this.currentPiece.x + i % lineLength]
+					= flatFigure[i];
+			}
+
+		}
+			//			tetrimino.figure
+		return playableBoard; // Append currentPiece to board
 	}
 
 	fetchCurrentPiece() {
@@ -35,30 +48,37 @@ class Game {
 	}
 
 	moveLeft() {
+		console.log('ACTION: LEFT');
 		// ACTION
+		if (this.currentPiece.x >= 1 && !collision(this.currentPiece, LEFT, this.board)) {
+			this.currentPiece.x -= 1;
+		}
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	moveRight() {
+		console.log('ACTION: RIGHT');
 		// ACTION
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	moveDown() {
+		console.log('ACTION: DOWN');
 		// ACTION
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	rotate() {
+		console.log('ACTION: ROTATE');
 		// ACTION
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	drop() {
+		console.log('ACTION: DROP');
 		// ACTION
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
-
 	// SERIALIZER
 	serializeAsOpponent() {
 		return {
@@ -66,6 +86,10 @@ class Game {
 			spectre: this.board,
 		}
 	}
+}
+
+const collision = (piece, direction, board) => {
+	return 0;
 }
 
 export default Game;

@@ -1,6 +1,6 @@
 class Piece {
-	constructor(tetriminos) {
-		this.tetriminos = tetriminos;
+	constructor(tetrimino) {
+		this.tetrimino = tetrimino;
 		this.x = 0;
 		this.y = 0;
 	}

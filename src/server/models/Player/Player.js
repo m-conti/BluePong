@@ -17,7 +17,7 @@ class Player {
 
 	getGame() {
 		if ( !this.room || !this.room.isPlaying ) return null;
-		return this.room.games.find((game) => game.player === this);
+		return this.room.match.games.find((game) => game.player === this);
 	}
 
 	join( room ) {
