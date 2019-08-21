@@ -3,6 +3,8 @@ import generateTetriminos from '../Tetriminos/generateTetriminos';
 import { BOARD } from '../../../../constants/tetris';
 import Piece from '../Piece/Piece';
 import { updateBoard, updateNextPiece, updateScore } from '../../../actions/client/game';
+import { collision } from '../../../../helpers/game/game';
+import { LEFT, RIGHT } from '../../../../constants/tetris';
 
 class Game {
 	constructor( player, tetriminos ) {
@@ -28,8 +30,8 @@ class Game {
 
 		for (let i = 0; i < flatFigure.length; i++) {
 			if (flatFigure[i]) {
-				playableBoard[Math.floor(this.currentPiece.y + i / lineLength)][this.currentPiece.x + i % lineLength]
-					= flatFigure[i];
+				playableBoard[Math.floor(this.currentPiece.y + i / lineLength)]
+					[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
 			}
 		}
 		return playableBoard; // Append currentPiece to board
@@ -45,17 +47,19 @@ class Game {
 	}
 
 	moveLeft() {
-		if (!collision(this.currentPiece, 'LEFT', this.board)) {
+		if (!collision(this.currentPiece, LEFT, this.board)) {
+			this.currentPiece.x = this.currentPiece.x - 1;
+			this.player.socket.emit('action', updateBoard(this.playableBoard));
 		}
 		console.log('ACTION: LEFT');
-		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	moveRight() {
-		if (!collision(this.currentPiece, 'RIGHT', this.board)) {
+		if (!collision(this.currentPiece, RIGHT, this.board)) {
+			this.currentPiece.x = this.currentPiece.x + 1;
+			this.player.socket.emit('action', updateBoard(this.playableBoard));
 		}
 		console.log('ACTION: RIGHT');
-		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	moveDown() {
@@ -82,10 +86,6 @@ class Game {
 			spectre: this.board,
 		}
 	}
-}
-
-const collision = (piece, direction, board) => {
-	return 0;
 }
 
 export default Game;
