@@ -1,6 +1,7 @@
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import { BOARD } from '../../../../constants/tetris';
 import Piece from '../Piece/Piece';
+import { cloneDeep, flatten } from 'lodash';
 import { updateBoard, updateNextPiece } from '../../../actions/client/game';
 
 class Game {
@@ -18,7 +19,19 @@ class Game {
 	}
 
 	get playableBoard() {
-		return this.board; // Append currentPiece to board
+		const playableBoard = cloneDeep(this.board); 
+		const flatFigure = flatten(this.currentPiece.tetrimino.figure);
+		const lineLength = this.currentPiece.tetrimino.figure.length;
+
+		for (let i = 0; i < flatFigure.length; i++;) {
+			if (flatFigure[i]) {
+				playableBoard[this.currentPiece.y + i / lineLength][this.currentPiece.x + i % lineLength]
+					= flatFigure[i];
+			}
+
+		}
+			//			tetrimino.figure
+		return playableBoard; // Append currentPiece to board
 	}
 
 	fetchCurrentPiece() {
@@ -32,6 +45,11 @@ class Game {
 
 	moveLeft() {
 		// ACTION
+		if (this.currentPiece.x >= 1 && !collision(this.currentPiece, LEFT, this.board))
+		{
+			this.currentPiece.x -= 1;
+		}
+		this.currentPiece.tetrimino
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
@@ -54,6 +72,9 @@ class Game {
 		// ACTION
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
+}
+
+const collision = (piece, direction, board) => {
 
 }
 
