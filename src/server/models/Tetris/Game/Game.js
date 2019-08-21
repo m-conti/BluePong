@@ -22,15 +22,16 @@ class Game {
 	}
 
 	get playableBoard() {
-		return this.board;
 		const playableBoard = cloneDeep(this.board);
 		const flatFigure = flatten(this.currentPiece.tetrimino.figure);
 		const lineLength = this.currentPiece.tetrimino.figure.length;
 
+		console.log(flatFigure);
+		console.log(playableBoard);
 		for (let i = 0; i < flatFigure.length; i++) {
 			if (flatFigure[i]) {
-				playableBoard[this.currentPiece.y + i / lineLength][this.currentPiece.x + i % lineLength]
-					= flatFigure[i];
+				playableBoard[Math.floor(this.currentPiece.y + i / lineLength)]
+					[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
 			}
 		}
 		return playableBoard; // Append currentPiece to board
