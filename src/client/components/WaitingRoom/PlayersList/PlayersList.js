@@ -9,9 +9,7 @@ import PlayerCard from './PlayerCard/PlayerCard';
 
 
 const playersList = ( props ) => {
-
-	console.log(props.players);
-	const cards = props.players.map(( player ) => <PlayerCard key={props.playerId} playerId={props.playerId} {...player} />);
+	const cards = props.players.map(( player ) => <PlayerCard key={player._id} playerId={props.playerId} {...player} toggleReady={props.toggleReady} />);
 	return (
 		<div className={classes.PlayersList}>
 			{cards}

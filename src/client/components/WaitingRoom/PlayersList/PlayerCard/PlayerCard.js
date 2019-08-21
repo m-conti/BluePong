@@ -8,7 +8,7 @@ const playerCard = ( props ) => {
 
 	let ready;
 	if ( props.playerId === props._id ) {
-		ready = props.isReady ? <Button>Ready</Button> : <Button>UnReady</Button>;
+		ready = props.isReady ? <Button onClick={props.toggleReady}>Ready</Button> : <Button onClick={props.toggleReady}>UnReady</Button>;
 	}
 	else {
 		ready = props.isReady ? <div>Ready</div> : <div>UnReady</div>;
