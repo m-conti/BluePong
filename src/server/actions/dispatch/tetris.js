@@ -8,49 +8,35 @@ const startGame = ( {meta: {player}} ) => {
 	room.startMatch();
 }
 
-const moveLeft = ( {meta} ) => {
-	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
-	newBoard[0][0] = 1;
-	newBoard[1][0] = 1;
-	newBoard[0][1] = 1;
-	newBoard[1][1] = 1;
-
-	meta.player.socket.emit('action', actions.updateBoard(newBoard));
+const moveLeft = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.moveLeft();
+	}
 }
-const moveRight = ( {meta} ) => {
-	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
-	newBoard[0][9] = 1;
-	newBoard[1][9] = 1;
-	newBoard[0][8] = 1;
-	newBoard[1][8] = 1;
-
-	meta.player.socket.emit('action', actions.updateBoard(newBoard));
+const moveRight = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.moveRight();
+	}
 }
-const moveDown = ( {meta} ) => {
-	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
-	newBoard[18][0] = 1;
-	newBoard[19][0] = 1;
-	newBoard[18][1] = 1;
-	newBoard[19][1] = 1;
-
-	meta.player.socket.emit('action', actions.updateBoard(newBoard));
+const moveDown = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.moveDown();
+	}
 }
-const rotate = ( {meta} ) => {
-	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
-	newBoard[8][9] = 1;
-	newBoard[9][9] = 1;
-	newBoard[8][8] = 1;
-	newBoard[9][8] = 1;
-	meta.player.socket.emit('action', actions.updateBoard(newBoard));
+const rotate = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.rotate();
+	}
 }
-const dropPiece = ( {meta} ) => {
-	const newBoard = Array(20).fill(0).map(() => Array(10).fill(0));
-	newBoard[8][0] = 1;
-	newBoard[9][0] = 1;
-	newBoard[8][1] = 1;
-	newBoard[9][1] = 1;
-
-	meta.player.socket.emit('action', actions.updateBoard(newBoard));
+const dropPiece = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.drop();
+	}
 }
 
 export default function ( action ) {

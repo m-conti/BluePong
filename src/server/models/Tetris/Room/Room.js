@@ -53,7 +53,7 @@ class Room {
 
 	// Players
 	canJoin() {
-		return this.players.length < this.maxPlayers;
+		return (this.players.length < this.maxPlayers) && !this.isPlaying;
 	}
 
 	addPlayer( player ) {
