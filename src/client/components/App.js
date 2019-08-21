@@ -7,7 +7,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { CLIENT_ROOMS } from '../../constants/path';
 import RoomRoutes from '../routes/Rooms/Rooms';
 
-import Tetris from '../containers/Tetris/Tetris';
+// layout
+import Layout from './Layout/Layout';
 
 
 const app = ( props ) => {
@@ -19,9 +20,11 @@ const app = ( props ) => {
 
 	return (
 		<div>
+			<Layout>
 			<Switch>
 				<Route path={CLIENT_ROOMS} component={RoomRoutes}/>
 			</Switch>
+			</Layout>
 		</div>
 	);
 };

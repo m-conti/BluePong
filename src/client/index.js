@@ -13,6 +13,9 @@ import store from './store/store';
 // App
 import App from './containers/App';
 
+// css init
+import './index.css';
+
 const app = (
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
