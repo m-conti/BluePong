@@ -3,8 +3,8 @@ import generateTetriminos from '../Tetriminos/generateTetriminos';
 import { BOARD } from '../../../../constants/tetris';
 import Piece from '../Piece/Piece';
 import { updateBoard, updateNextPiece, updateScore } from '../../../actions/client/game';
-import { collision } from '../../../../helpers/game/game';
-import { LEFT, RIGHT } from '../../../../constants/tetris';
+import { collision, collisionWhenRotate } from '../../../../helpers/game/game';
+import { LEFT, RIGHT, DOWN } from '../../../../constants/tetris';
 
 class Game {
 	constructor( player, tetriminos ) {
@@ -63,28 +63,38 @@ class Game {
 	}
 
 	moveDown() {
-		console.log('ACTION: DOWN');
-		// ACTION
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		console.log('ACTION: DOWN');
 	}
 
 	rotate() {
-		console.log('ACTION: ROTATE');
-		// ACTION
+		if (!collisionWhenRotate(this.currentPiece, this.board)) {
+			this.currentPiece.tetrimino.rotate();
+		}
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		console.log('ACTION: ROTATE');
 	}
 
 	drop() {
-		console.log('ACTION: DROP');
-		// ACTION
+		while(!collision(this.currentPiece, DOWN, this.board)) {
+			this.currentPiece.y = this.currentPiece.y + 1;
+		}
+		this.piecePlaced();
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		console.log('ACTION: DROP');
 	}
+
 	// SERIALIZER
 	serializeAsOpponent() {
 		return {
 			id: this.player._id,
 			spectre: this.board,
 		}
+	}
+
+	piecePlaced() {
+		this.board = this.playableBoard;
+		this.fetchCurrentPiece();
 	}
 }
 
