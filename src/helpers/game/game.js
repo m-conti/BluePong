@@ -48,3 +48,11 @@ export const collisionWhenRotate = (piece, board) => {
 	}
 	return 0;
 }
+
+export const isFullLine = (line) => {
+	for (let i = 0; i < line.length; i++) {
+		if (line[i] === 0)
+			return 0;
+	}
+	return 1;
+}

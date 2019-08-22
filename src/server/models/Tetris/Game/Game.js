@@ -1,10 +1,9 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
-import { BOARD } from '../../../../constants/tetris';
 import Piece from '../Piece/Piece';
 import { updateBoard, updateNextPiece, updateScore } from '../../../actions/client/game';
-import { collision, collisionWhenRotate } from '../../../../helpers/game/game';
-import { LEFT, RIGHT, DOWN } from '../../../../constants/tetris';
+import { collision, collisionWhenRotate, isFullLine } from '../../../../helpers/game/game';
+import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH } from '../../../../constants/tetris';
 
 class Game {
 	constructor( player, tetriminos ) {
@@ -63,7 +62,13 @@ class Game {
 	}
 
 	moveDown() {
-		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		if(!collision(this.currentPiece, DOWN, this.board)) {
+			this.currentPiece.y = this.currentPiece.y + 1;
+			this.player.socket.emit('action', updateBoard(this.playableBoard));
+		}
+		else {
+			this.piecePlaced();	
+		}
 		console.log('ACTION: DOWN');
 	}
 
@@ -80,7 +85,6 @@ class Game {
 			this.currentPiece.y = this.currentPiece.y + 1;
 		}
 		this.piecePlaced();
-		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		console.log('ACTION: DROP');
 	}
 
@@ -94,7 +98,31 @@ class Game {
 
 	piecePlaced() {
 		this.board = this.playableBoard;
+		this.score += 100 * this.removeLines();
 		this.fetchCurrentPiece();
+		this.player.socket.emit('action', updateScore(this.score));
+		this.player.socket.emit('action', updateBoard(this.playableBoard));
+	}
+
+	removeLines() {
+		let numberLinesRemoved = 0;
+		let linesToRemove = [];
+		const copyBoard = cloneDeep(this.board); 
+		
+		for (let i = 0; i < copyBoard.length; i++) {
+			if (isFullLine(copyBoard[i])) {
+				linesToRemove.push(this.board[i]);
+				numberLinesRemoved++;
+			}
+		}
+
+		//DOESN'T WORK PROPERLY YET
+		for (let line of linesToRemove) {
+			this.board.pop(line);
+			this.board.unshift(new Array(BOARD_WIDTH).fill(0));
+		}
+
+		return (numberLinesRemoved);
 	}
 }
 
