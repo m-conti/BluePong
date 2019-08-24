@@ -2,7 +2,7 @@ import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import Piece from '../Piece/Piece';
 import { updateBoard, updateNextPiece, updateScore } from '../../../actions/client/game';
-import { collision, collisionWhenRotate, isFullLine } from '../../../../helpers/game/game';
+import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
 import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH } from '../../../../constants/tetris';
 
 class Game {
@@ -106,22 +106,14 @@ class Game {
 
 	removeLines() {
 		let numberLinesRemoved = 0;
-		let linesToRemove = [];
-		const copyBoard = cloneDeep(this.board); 
 		
-		for (let i = 0; i < copyBoard.length; i++) {
-			if (isFullLine(copyBoard[i])) {
-				linesToRemove.push(this.board[i]);
+		for (let i = 0; i < this.board.length; i++) {
+			if (isFullLine(this.board[i])) {
+				clearLine(this.board[i]);
+				fallDown(this.board, i);
 				numberLinesRemoved++;
 			}
 		}
-
-		//DOESN'T WORK PROPERLY YET
-		for (let line of linesToRemove) {
-			this.board.pop(line);
-			this.board.unshift(new Array(BOARD_WIDTH).fill(0));
-		}
-
 		return (numberLinesRemoved);
 	}
 }

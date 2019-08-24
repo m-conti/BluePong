@@ -56,3 +56,22 @@ export const isFullLine = (line) => {
 	}
 	return 1;
 }
+
+export const clearLine = (line) => {
+	for (let i = 0; i < line.length; i++) {
+		line[i] = 0;
+	}
+}
+
+export const fallDown = (board, line) => {
+	for (let i = line; i >= 0; i--) {
+		for (let j = 0; j < BOARD_WIDTH; j++) {
+			if (i == 0) {
+				board[i][j] = 0;
+			}
+			else {
+				board[i][j] = board[i - 1][j];
+			}
+		}
+	}
+}
