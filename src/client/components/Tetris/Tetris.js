@@ -13,7 +13,7 @@ const Tetris = ( props ) => {
 	const board = (props.board) ? <Board board={props.board} /> : <div>Spinner</div>;
 	const score = (props.score) ? <Score score={props.score} /> : null;
 
-	const keyPressHandler = (event) => {
+	const keyDownPressHandler = (event) => {
 		switch (event.key) {
 			case ARROW_LEFT :
 				props.moveLeft();
@@ -39,13 +39,20 @@ const Tetris = ( props ) => {
 				return;
 		}
 	};
+	
+	const keyUpPressHandler = (event) => {
+		switch (event.key) {
+			case ARROW_DOWN :
+				console.log('down is up');
+		}
+	};
 
 	const opponents = (props.opponents) ? props.opponents.map(o => (
 		<Spectre key={o.id} spectre={o.spectre} />
 	)) : null;
 
 	return (
-		<div className={classes.Tetris} onKeyDown={keyPressHandler} tabIndex={'1'}>
+		<div className={classes.Tetris} onKeyDown={keyDownPressHandler} onKeyUp={keyUpPressHandler} tabIndex={'1'}>
 			{board}
 			{score}
 			{opponents}

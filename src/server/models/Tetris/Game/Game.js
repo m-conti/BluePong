@@ -1,10 +1,9 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
-import { BOARD } from '../../../../constants/tetris';
 import Piece from '../Piece/Piece';
 import { updateBoard, updateNextPiece, updateScore } from '../../../actions/client/game';
-import { collision } from '../../../../helpers/game/game';
-import { LEFT, RIGHT } from '../../../../constants/tetris';
+import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
+import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH } from '../../../../constants/tetris';
 
 class Game {
 	constructor( player, tetriminos ) {
@@ -63,28 +62,59 @@ class Game {
 	}
 
 	moveDown() {
+		if(!collision(this.currentPiece, DOWN, this.board)) {
+			this.currentPiece.y = this.currentPiece.y + 1;
+			this.player.socket.emit('action', updateBoard(this.playableBoard));
+		}
+		else {
+			this.piecePlaced();	
+		}
 		console.log('ACTION: DOWN');
-		// ACTION
-		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
 
 	rotate() {
-		console.log('ACTION: ROTATE');
-		// ACTION
+		if (!collisionWhenRotate(this.currentPiece, this.board)) {
+			this.currentPiece.tetrimino.rotate();
+		}
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		console.log('ACTION: ROTATE');
 	}
 
 	drop() {
+		while(!collision(this.currentPiece, DOWN, this.board)) {
+			this.currentPiece.y = this.currentPiece.y + 1;
+		}
+		this.piecePlaced();
 		console.log('ACTION: DROP');
-		// ACTION
-		this.player.socket.emit('action', updateBoard(this.playableBoard));
 	}
+
 	// SERIALIZER
 	serializeAsOpponent() {
 		return {
 			id: this.player._id,
 			spectre: this.board,
 		}
+	}
+
+	piecePlaced() {
+		this.board = this.playableBoard;
+		this.score += 100 * this.removeLines();
+		this.fetchCurrentPiece();
+		this.player.socket.emit('action', updateScore(this.score));
+		this.player.socket.emit('action', updateBoard(this.playableBoard));
+	}
+
+	removeLines() {
+		let numberLinesRemoved = 0;
+		
+		for (let i = 0; i < this.board.length; i++) {
+			if (isFullLine(this.board[i])) {
+				clearLine(this.board[i]);
+				fallDown(this.board, i);
+				numberLinesRemoved++;
+			}
+		}
+		return (numberLinesRemoved);
 	}
 }
 
