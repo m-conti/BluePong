@@ -1,8 +1,7 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import Piece from '../Piece/Piece';
-import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre, 
-	ameIsOver} from '../../../actions/client/game';
+import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre, gameIsOver} from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
 import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT } from '../../../../constants/tetris';
 
@@ -41,7 +40,7 @@ class Game {
 
 	gameOver() {
 		clearInterval(this.gravityLoop);
-		this.player.socket.emit('action', gameIsOver(this.player.id));
+		this.player.socket.emit('action', gameIsOver(this.player._id));
 	}
 
 	fetchCurrentPiece() {
@@ -123,7 +122,6 @@ class Game {
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
-		//update spectre
 		this.opponents.forEach((opponent) => {
 			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.board));
 		});

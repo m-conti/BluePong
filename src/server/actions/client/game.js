@@ -26,7 +26,7 @@ export const updateOpponentSpectre = (id, spectre) => ({
 	id: id,
 });
 
-export const isGameOver = (id) => ({
+export const gameIsOver = (id) => ({
 	type: actionTypes.CLIENT_GAME_OVER,
 	id: id,
 });
