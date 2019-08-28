@@ -6,6 +6,7 @@ const initialState = {
 	board: null,
 	opponents: null,
 	score: 0,
+	gameIsOver: false,
 };
 
 
@@ -26,6 +27,10 @@ const updateScore = ( state, {score} ) => ({
 	...state,
 	score: score
 });
+const updateGameIsOver = ( state, {id} ) => ({
+	...state,
+	gameIsOver: true
+});
 
 export default ( state = initialState, action ) => {
 
@@ -38,6 +43,8 @@ export default ( state = initialState, action ) => {
 			return updateOpponentSpectre(state, action);
 		case actions.CLIENT_UPDATE_SCORE:
 			return updateScore(state, action);
+		case actions.CLIENT_GAME_OVER:
+			return updateGameIsOver(state, action);
 		default :
 			return state;
 	}
