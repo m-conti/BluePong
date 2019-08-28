@@ -13,6 +13,7 @@ class Match {
 		this.games = players.map((player) => new Game(player, this.tetriminos));
 		this.games.forEach((game) => {
 			const opponentsGames = this.games.filter((g) => g !== game);
+			game.opponents = opponentsGames;
 			const opponents = opponentsGames.map((o) => o.serializeAsOpponent());
 			game.player.socket.emit('action', setOpponents(opponents));
 		});
