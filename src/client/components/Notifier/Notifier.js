@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withSnackbar } from 'notistack';
-
+import { Button} from '@material-ui/core';
 
 const Notifier = ( props ) => {
 
@@ -11,10 +11,13 @@ const Notifier = ( props ) => {
 		for ( let notificationKey in props.notifications ) {
 			const notification = props.notifications[notificationKey];
 			if ( !displayed.find(( elemDisplayed ) => elemDisplayed._id === notification._id) ) {
-				console.log('ADD ', notification);
 				newDisplay.push(notification);
 				props.enqueueSnackbar(notification.message, {
 					variant: notification.status,
+					action: () => (
+						<Button onClick={() => props.dismissNotification(notification._id)}>dismiss</Button>
+					),
+					key: notification._id,
 					onClose: ( event, reason, key ) => {
 						props.dismissNotification(notification._id);
 					},
@@ -24,8 +27,8 @@ const Notifier = ( props ) => {
 		for ( let displayedKey in displayed ) {
 			const displayedNotification = displayed[displayedKey];
 			if ( !props.notifications.find(( elem ) => elem._id === displayedNotification._id) ) {
-				console.log('REMOVE ', displayedNotification._id);
-				newDisplay.splice(newDisplay.findIndex(( elem ) => elem._id === displayedNotification._id), 1);
+				newDisplay.splice(displayedKey, 1);
+				props.closeSnackbar(displayedNotification._id);
 			}
 		}
 		setDisplayed(newDisplay);

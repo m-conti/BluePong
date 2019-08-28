@@ -29,7 +29,7 @@ const Layout = ( props ) => {
 			<SideDrawer
 				open={state.sideDrawer}
 				toggle={sideDrawerToggleHandler}/>
-			<SnackbarProvider maxSnack={4}>
+			<SnackbarProvider maxSnack={4} autoHideDuration={2500}>
 				<main className={classes.Content}>
 					{props.children}
 				</main>
