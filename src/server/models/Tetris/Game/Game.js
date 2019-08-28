@@ -1,9 +1,9 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import Piece from '../Piece/Piece';
-import { updateBoard, updateNextPiece, updateScore } from '../../../actions/client/game';
+import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre } from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
-import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH } from '../../../../constants/tetris';
+import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT } from '../../../../constants/tetris';
 
 class Game {
 	constructor( player, tetriminos ) {
@@ -12,6 +12,7 @@ class Game {
 		this.tetriminosList = tetriminos;
 		this.tetriminosIndex = 0;
 		this.currentPiece = null;
+		this.gravityTimeout = INITIAL_GRAVITY_TIMEOUT;
 		this.board = BOARD();
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -33,7 +34,7 @@ class Game {
 					[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
 			}
 		}
-		return playableBoard; // Append currentPiece to board
+		return playableBoard;
 	}
 
 	fetchCurrentPiece() {
@@ -43,6 +44,13 @@ class Game {
 			this.tetriminosList.push(generateTetriminos());
 		}
 		this.player.socket.emit('action', updateNextPiece(this.nextPiece));
+
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
+		this.interval = setInterval(() => {
+			this.moveDown();
+		}, this.gravityTimeout);
 	}
 
 	moveLeft() {
@@ -102,11 +110,12 @@ class Game {
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		//update spectre
+		//this.player.socket.emit('action', updateOpponentSpectre(this.id, this.playableBoard));
 	}
 
 	removeLines() {
 		let numberLinesRemoved = 0;
-		
 		for (let i = 0; i < this.board.length; i++) {
 			if (isFullLine(this.board[i])) {
 				clearLine(this.board[i]);
