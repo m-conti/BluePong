@@ -1,20 +1,19 @@
-
 import React from 'react';
 
 import classes from './SideDrawer.css';
 
 import Media from 'react-media';
-import * as query from '../../../../constants/query';
+import { query, display } from '../../../../constants/display';
 
-import {Backdrop, SwipeableDrawer} from '@material-ui/core';
+import { Backdrop, SwipeableDrawer } from '@material-ui/core';
+import NavItems from '../NavItems/NavItems';
 
-const sideDrawer = (props) => (
+const sideDrawer = ( props ) => (
 	<Media query={query.PHONE}>
 		<div>
-			<Backdrop open={props.open} onClick={() => props.toggle(false)}/>
-			<SwipeableDrawer  open={props.open} onClose={() => props.toggle(false)} onOpen={() => props.toggle(true)}>
+			<SwipeableDrawer open={props.open} onClose={() => props.toggle(false)} onOpen={() => props.toggle(true)}>
 				<div className={classes.SideDrawer}>
-					Items
+					<NavItems display={display.PHONE}/>
 				</div>
 			</SwipeableDrawer>
 		</div>
