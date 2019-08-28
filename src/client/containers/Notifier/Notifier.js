@@ -1,13 +1,13 @@
-import Room from '../../components/Notifier/Notifier';
+import Notifier from '../../components/Notifier/Notifier';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 const mapStateToProps = ( state ) => ({
-	rooms: state.rooms.rooms,
-	playerId: state.user._id,
+	notifications: state.notifier.notifications,
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
+	dismissNotification: (id) => dispatch(actions.dismissNotification(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Room);
+export default connect(mapStateToProps, mapDispatchToProps)(Notifier);

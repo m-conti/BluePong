@@ -18,3 +18,7 @@ export {
 	joinRoom,
 	toggleReady,
 } from './server/rooms';
+
+export {
+	dismissNotification,
+} from './client/notifier';

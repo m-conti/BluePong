@@ -7,7 +7,7 @@ import { SnackbarProvider } from 'notistack';
 
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import AppBar from '../Navigation/AppBar/AppBar';
-import Notifier from '../Notifier/Notifier';
+import Notifier from '../../containers/Notifier/Notifier';
 
 const Layout = ( props ) => {
 

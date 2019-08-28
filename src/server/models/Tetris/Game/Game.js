@@ -1,7 +1,7 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import Piece from '../Piece/Piece';
-import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre, 
+import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre,
 	ameIsOver} from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
 import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT } from '../../../../constants/tetris';

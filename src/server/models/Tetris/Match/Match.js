@@ -4,7 +4,7 @@ import {setOpponents} from '../../../actions/client/game'
 
 class Match {
 	constructor() {
-		this.games = null;
+		this.games = [];
 		this.tetriminos = [];
 	}
 

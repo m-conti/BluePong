@@ -36,6 +36,9 @@ class Room {
 		console.log(`DELETE ROOM : ${this._id}`);
 		this.players.forEach(( player ) => player.leave(this));
 		sockets.tetris.removeRoom(this._id);
+		this.match.games.forEach((game) => {
+			clearInterval(game.gravityLoop);
+		})
 	}
 
 	serialize() {

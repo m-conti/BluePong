@@ -11,6 +11,7 @@ import history from '../routes/history';
 import userReducer from './reducers/user';
 import tetrisReducer from './reducers/tetris';
 import roomsReducer from './reducers/rooms';
+import notifierReducer from './reducers/notifier';
 import socketReducer, { socket } from './reducers/sockets';
 
 
@@ -19,8 +20,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
 	user: userReducer,
 	tetris: tetrisReducer,
-	io: socketReducer,
 	rooms: roomsReducer,
+	notifier: notifierReducer,
+	io: socketReducer,
 	router: connectRouter(history),
 });
 
