@@ -15,4 +15,4 @@ export const BOARD_WIDTH = 10;
 export const BOARD_HEIGHT = 20;
 export const BOARD = () => new Array(BOARD_HEIGHT).fill(0).map(() => new Array(BOARD_WIDTH).fill(0));
 
-export const INITIAL_GRAVITY_TIMEOUT = 1000;
+export const INITIAL_GRAVITY_TIMEOUT = 500;

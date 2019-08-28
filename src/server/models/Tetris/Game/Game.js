@@ -1,7 +1,8 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import Piece from '../Piece/Piece';
-import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre } from '../../../actions/client/game';
+import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre, 
+	ameIsOver} from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
 import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT } from '../../../../constants/tetris';
 
@@ -31,26 +32,37 @@ class Game {
 		for (let i = 0; i < flatFigure.length; i++) {
 			if (flatFigure[i]) {
 				playableBoard[Math.floor(this.currentPiece.y + i / lineLength)]
-					[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
+				[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
 			}
 		}
 		return playableBoard;
 	}
 
+	gameOver() {
+		clearInterval(this.gravityLoop);
+		this.player.socket.emit('action', gameIsOver(this.player.id));
+	}
+
 	fetchCurrentPiece() {
 		this.currentPiece = new Piece(this.nextPiece);
-		this.tetriminosIndex++;
-		if ( this.tetriminosIndex >= this.tetriminosList.length ) {
-			this.tetriminosList.push(generateTetriminos());
+		if (collision(this.currentPiece, null, this.board)) {
+			this.gameOver();
 		}
-		this.player.socket.emit('action', updateNextPiece(this.nextPiece));
+		else {
+			this.tetriminosIndex++;
+			if ( this.tetriminosIndex >= this.tetriminosList.length ) {
+				this.tetriminosList.push(generateTetriminos());
+			}
+			this.player.socket.emit('action', updateNextPiece(this.nextPiece));
 
-		if (this.interval) {
-			clearInterval(this.interval);
+			if (this.gravityLoop) {
+				clearInterval(this.gravityLoop);
+			}
+			this.gravityLoop = setInterval(() => {
+				//TODO: Check que la game existe encore...
+				this.moveDown();
+			}, this.gravityTimeout);
 		}
-		this.interval = setInterval(() => {
-			this.moveDown();
-		}, this.gravityTimeout);
 	}
 
 	moveLeft() {
