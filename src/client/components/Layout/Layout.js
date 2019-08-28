@@ -7,6 +7,7 @@ import { SnackbarProvider } from 'notistack';
 
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import AppBar from '../Navigation/AppBar/AppBar';
+import Notifier from '../Notifier/Notifier';
 
 const Layout = ( props ) => {
 
@@ -32,7 +33,7 @@ const Layout = ( props ) => {
 				<main className={classes.Content}>
 					{props.children}
 				</main>
-				Not
+				<Notifier />
 			</SnackbarProvider>
 		</Fragment>
 	);

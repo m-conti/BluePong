@@ -22,7 +22,7 @@ export const updateScore = (score) => ({
 
 export const updateOpponentSpectre = (id, spectre) => ({
 	type: actionTypes.CLIENT_UPDATE_OPPONENT_SPECTRE,
-	spectres: spectre,
+	spectre: spectre,
 	id: id,
 });
 

@@ -17,6 +17,7 @@ class Game {
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		this.player.socket.emit('action', updateScore(this.score));
+		this.opponents = [];
 	}
 
 	get nextPiece() {
@@ -111,7 +112,9 @@ class Game {
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		//update spectre
-		//this.player.socket.emit('action', updateOpponentSpectre(this.id, this.playableBoard));
+		this.opponents.forEach((opponent) => {
+			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.board));
+		});
 	}
 
 	removeLines() {
