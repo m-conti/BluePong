@@ -9,11 +9,8 @@ export class I extends Tetriminos {
 	static create() {
 		return new I();
 	}
-	static get rotations() {
+	get rotations() {
 		return I_rotations;
-	}
-	get shape() {
-		return I.rotations[this.rotationIndex % I.rotations.length];
 	}
 }
 
@@ -25,11 +22,8 @@ export class O extends Tetriminos {
 	static create() {
 		return new O();
 	}
-	static get rotations() {
+	get rotations() {
 		return O_rotations;
-	}
-	get shape() {
-		return O.rotations[this.rotationIndex % O.rotations.length];
 	}
 }
 
@@ -41,11 +35,8 @@ export class T extends Tetriminos {
 	static create() {
 		return new T();
 	}
-	static get rotations() {
+	get rotations() {
 		return T_rotations;
-	}
-	get shape() {
-		return T.rotations[this.rotationIndex % T.rotations.length];
 	}
 }
 
@@ -57,11 +48,8 @@ export class J extends Tetriminos {
 	static create() {
 		return new J();
 	}
-	static get rotations() {
+	get rotations() {
 		return J_rotations;
-	}
-	get shape() {
-		return J.rotations[this.rotationIndex % J.rotations.length];
 	}
 }
 
@@ -73,11 +61,8 @@ export class L extends Tetriminos {
 	static create() {
 		return new L();
 	}
-	static get rotations() {
+	get rotations() {
 		return L_rotations;
-	}
-	get shape() {
-		return L.rotations[this.rotationIndex % L.rotations.length];
 	}
 }
 
@@ -90,11 +75,8 @@ export class S extends Tetriminos {
 	static create() {
 		return new S();
 	}
-	static get rotations() {
+	get rotations() {
 		return S_rotations;
-	}
-	get shape() {
-		return S.rotations[this.rotationIndex % S.rotations.length];
 	}
 }
 
@@ -106,11 +88,8 @@ export class Z extends Tetriminos {
 	static create() {
 		return new Z();
 	}
-	static get rotations() {
+	get rotations() {
 		return Z_rotations;
-	}
-	get shape() {
-		return Z.rotations[this.rotationIndex % Z.rotations.length];
 	}
 }
 

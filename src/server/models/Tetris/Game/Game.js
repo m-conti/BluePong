@@ -25,8 +25,8 @@ class Game {
 
 	get playableBoard() {
 		const playableBoard = cloneDeep(this.board);
-		const flatFigure = flatten(this.currentPiece.tetrimino.figure);
-		const lineLength = this.currentPiece.tetrimino.figure.length;
+		const flatFigure = flatten(this.currentPiece.figure);
+		const lineLength = this.currentPiece.figure.length;
 
 		for (let i = 0; i < flatFigure.length; i++) {
 			if (flatFigure[i]) {
@@ -75,14 +75,14 @@ class Game {
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
 		}
 		else {
-			this.piecePlaced();	
+			this.piecePlaced();
 		}
 		console.log('ACTION: DOWN');
 	}
 
 	rotate() {
 		if (!collisionWhenRotate(this.currentPiece, this.board)) {
-			this.currentPiece.tetrimino.rotate();
+			this.currentPiece.rotate();
 		}
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		console.log('ACTION: ROTATE');

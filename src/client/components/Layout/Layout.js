@@ -3,6 +3,7 @@ import React, { useState, Fragment } from 'react';
 import classes from './Layout.css';
 
 import { connect } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
 
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import AppBar from '../Navigation/AppBar/AppBar';
@@ -27,14 +28,16 @@ const Layout = ( props ) => {
 			<SideDrawer
 				open={state.sideDrawer}
 				toggle={sideDrawerToggleHandler}/>
-			<main className={classes.Content}>
-				{props.children}
-			</main>
+			<SnackbarProvider maxSnack={4}>
+				<main className={classes.Content}>
+					{props.children}
+				</main>
+				Not
+			</SnackbarProvider>
 		</Fragment>
 	);
 };
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps)(Layout);

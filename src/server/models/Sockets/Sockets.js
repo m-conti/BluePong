@@ -43,7 +43,7 @@ class Sockets {
 					this.dispatch(action);
 				}
 				catch ( error ) {
-					console.error(error.message);
+					console.error(error);
 				}
 			});
 
