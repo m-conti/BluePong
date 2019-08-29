@@ -1,7 +1,13 @@
 .Layout {
-
 }
 
 .Content {
+	margin: auto;
+	width: 80%;
+}
 
+@media (min-width: 1000px) {
+	.Content {
+		width: 800px;
+	}
 }

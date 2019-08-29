@@ -21,16 +21,11 @@ class Tetris {
 		const room = new Room(generateId(this.rooms), roomOpt.name, roomOpt);
 		player.join(room);
 		this.rooms.push(room);
-
-		// trigger for clients
 		sockets.io.emit('action', actions.updateRoom(room));
-
 		return room;
 	}
 	removeRoom(id) {
 		remove(this.rooms, (room) => room._id === id);
-
-		// trigger for clients
 		sockets.io.emit('action', actions.updateRooms(this.rooms));
 	}
 }

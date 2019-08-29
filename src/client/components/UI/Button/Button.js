@@ -1,12 +1,12 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import { PRIMARY_COLOR, WHITE_COLOR } from '../../../styles/constant';
 
 const style = {
 	root: {
-		background: '#AD0F10',
-		color: '#FBD806',
+		color: PRIMARY_COLOR,
 	}
-}
+};
 
 export default withStyles(style)(Button);

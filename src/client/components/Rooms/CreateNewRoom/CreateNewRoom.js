@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import * as propTypes from 'prop-types';
 
 import classes from './CreateNewRoom.css';
 
-import { Button, Dialog, DialogActions, DialogContent, Slider, TextField } from '@material-ui/core';
+import { Dialog, DialogActions, DialogContent } from '@material-ui/core';
+import TextField from '../../UI/TextField/TextField';
+import Slider from '../../UI/Slider/Slider';
+import Button from '../../UI/Button/Button';
 
-const CreateNewRoom = ( props ) => {
+const CreateNewRoom = (props) => {
 
 
 	const [state, setState] = useState({
@@ -16,8 +19,8 @@ const CreateNewRoom = ( props ) => {
 	});
 
 
-	const toggleModalNewRoom = ( open ) => {
-		if ( typeof (open) === 'undefined' ) open = !state.showModal;
+	const toggleModalNewRoom = (open) => {
+		if (typeof (open) === 'undefined') open = !state.showModal;
 		setState({
 			...state,
 			showModal: Boolean(open),
@@ -31,7 +34,7 @@ const CreateNewRoom = ( props ) => {
 		});
 	};
 
-	const changeMaxPlayer =  (value) => {
+	const changeMaxPlayer = (value) => {
 		if (value !== state.playerMax) {
 			setState({...state, playerMax: value});
 		}
@@ -52,10 +55,12 @@ const CreateNewRoom = ( props ) => {
 						fullWidth
 					/>
 					<label htmlFor="max-player">Max Player</label>
-					<Slider id="max-player" value={state.playerMax} max={4} min={1} step={1} valueLabelDisplay={'auto'} onChange={(_, value) => changeMaxPlayer(value)} />
+					<Slider id="max-player" value={state.playerMax} max={4} min={1} step={1} valueLabelDisplay={'auto'}
+						onChange={(_, value) => changeMaxPlayer(value)}/>
 				</DialogContent>
 				<DialogActions>
-					<Button color={'primary'} onClick={() => props.create({name:state.name, playerMax:state.playerMax})}>
+					<Button color={'primary'}
+							onClick={() => props.create({name: state.name, playerMax: state.playerMax})}>
 						Create
 					</Button>
 				</DialogActions>

@@ -13,7 +13,7 @@ const sideDrawer = ( props ) => (
 		<div>
 			<SwipeableDrawer open={props.open} onClose={() => props.toggle(false)} onOpen={() => props.toggle(true)}>
 				<div className={classes.SideDrawer}>
-					<NavItems display={display.PHONE}/>
+					<NavItems display={display.PHONE} user={props.user} />
 				</div>
 			</SwipeableDrawer>
 		</div>

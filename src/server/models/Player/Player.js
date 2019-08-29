@@ -1,6 +1,7 @@
 import { omit } from 'lodash';
 
 import sockets from '../Sockets/Sockets';
+import { updateUser } from '../../actions/client/user';
 
 class Player {
 	constructor( socket, id ) {
@@ -15,6 +16,12 @@ class Player {
 		return omit(this, ['socket', 'token', 'room']);
 	}
 
+	serializeMe() {
+		const me = this.serialize();
+		me.roomId = this.room ? this.room._id : null;
+		return me;
+	}
+
 	getGame() {
 		if ( !this.room || !this.room.isPlaying ) return null;
 		return this.room.match.games.find((game) => game.player === this);
@@ -24,11 +31,13 @@ class Player {
 		if ( this.room ) throw new Error(`player can't join '${room.name}' cause he's already in '${this.room.name}' `);
 		room.addPlayer(this);
 		this.room = room;
+		this.socket.emit('action', updateUser(this));
 	}
 
 	leave( room ) {
 		if ( this.room !== room ) return;
 		this.room = null;
+		this.socket.emit('action', updateUser(this));
 		console.log('LEAVE', room._id);
 	}
 

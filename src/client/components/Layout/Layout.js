@@ -25,8 +25,9 @@ const Layout = ( props ) => {
 
 	return (
 		<Fragment>
-			<AppBar drawerToggleClicked={sideDrawerToggleHandler}/>
+			<AppBar drawerToggleClicked={sideDrawerToggleHandler} user={props.user} />
 			<SideDrawer
+				user={props.user}
 				open={state.sideDrawer}
 				toggle={sideDrawerToggleHandler}/>
 			<SnackbarProvider maxSnack={4} autoHideDuration={2500}>
@@ -39,6 +40,8 @@ const Layout = ( props ) => {
 	);
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+	user: state.user,
+});
 
 export default connect(mapStateToProps)(Layout);

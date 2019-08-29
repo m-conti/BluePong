@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import NavItem from './NavItem/NavItem';
 import { generateLinks } from '../../../helpers/routes/links';
@@ -15,20 +15,29 @@ const style = makeStyles({
 		alignItems: 'center',
 		height: '100%',
 	},
-	desktop: {},
-	phone: {}
+	desktop: {
+		flexFlow: 'row',
+	},
+	phone: {
+		flexFlow: 'column',
+	}
 });
 
-const navItems = ( props ) => {
+const NavItems = ( props ) => {
+
+	const [links, setLinks] = useState([]);
+	useEffect(() => {
+		setLinks(generateLinks());
+	}, [props.user]);
 
 	const classes = style();
 	const navClasses = props.display === display.DESKTOP ? [classes.root, classes.desktop] : [classes.root, classes.phone];
 	return (
 		<div className={navClasses.join(' ')}>
-			{generateLinks().map(( elem, key ) => <NavItem display={props.display} key={key} link={elem.link}
+			{links.map(( elem, key ) => <NavItem display={props.display} key={key} link={elem.link}
 														   exact={elem.exact}>{elem.name}</NavItem>)}
 		</div>
 	);
 };
 
-export default navItems;
+export default NavItems;

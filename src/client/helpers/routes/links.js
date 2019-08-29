@@ -1,5 +1,6 @@
 import store from '../../store/store';
-
+import * as path from '../../../constants/path';
+import {CLIENT_ROOMS} from "../../../constants/path";
 
 
 
@@ -14,7 +15,7 @@ class Link {
 class LinksList {
 	constructor() {
 		this.links = [
-			new Link('Home', '/', true),
+//			new Link('Home', '/', true),
 		];
 	}
 	push(name, link, exact) {
@@ -30,8 +31,10 @@ export const generateLinks = () => {
 
 	// FAIRE AUTH
 	if (state.user) {
-		list.push('Gomoku', '/gomoku', false);
-		list.push('Rooms', '/rooms', false);
+		if (state.user.roomId) {
+			list.push('Tetris', `${path.CLIENT_ROOMS}/${state.user.roomId}`, true);
+		}
+		list.push('Rooms', path.CLIENT_ROOMS, true);
 		list.push('Profile', '/profile', false);
 		list.push('Log Out', '/logout', true);
 	}
