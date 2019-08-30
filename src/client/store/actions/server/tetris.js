@@ -2,6 +2,17 @@ import remote from './remote';
 import * as actions from '../../../../actions/actionTypes/tetris';
 import { BOARD } from '../../../../constants/tetris';
 
+
+// VIEWER
+
+export const refreshGame = (id) => ({
+	meta: remote,
+	type: actions.SERVER_REFRESH_GAME,
+	id: id
+});
+
+// PLAYER
+
 export const startGame = () => ({
 	meta: remote,
 	type: actions.SERVER_START_GAME,

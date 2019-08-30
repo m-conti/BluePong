@@ -28,6 +28,7 @@ class Player {
 	}
 
 	join( room ) {
+		if ( room && this.room === room ) throw new Error(`player is already in '${room.name}' `);
 		if ( this.room ) throw new Error(`player can't join '${room.name}' cause he's already in '${this.room.name}' `);
 		room.addPlayer(this);
 		this.room = room;

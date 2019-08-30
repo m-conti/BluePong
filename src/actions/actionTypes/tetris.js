@@ -1,5 +1,10 @@
 
 // actions launched on client side
+
+// viewer
+export const CLIENT_REFRESH_GAME = 'CLIENT_REFRESH_GAME'
+
+// player
 export const CLIENT_SET_OPPONENTS = 'CLIENT_SET_OPPONENTS';
 export const CLIENT_UPDATE_BOARD = 'CLIENT_UPDATE_BOARD';
 export const CLIENT_UPDATE_OPPONENT_SPECTRE = 'CLIENT_UPDATE_OPPONENT_SPECTRE';
@@ -8,6 +13,9 @@ export const CLIENT_UPDATE_NEXT_PIECE = 'CLIENT_UPDATE_NEXT_PIECE';
 export const CLIENT_GAME_OVER = 'CLIENT_GAME_OVER';
 
 // actions launched on server side
+
+// viewer action
+export const SERVER_REFRESH_GAME = 'SERVER_REFRESH_GAME';
 
 // piece actions
 export const SERVER_START_GAME = 'SERVER_START_GAME';

@@ -1,4 +1,5 @@
 export {
+	refreshGame,
 	startGame,
 	moveRight,
 	moveLeft,
