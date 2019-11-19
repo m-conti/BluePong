@@ -6,14 +6,30 @@ import playerType from '../../../propTypes/player/player';
 import classes from './PlayersList.css';
 
 import PlayerCard from './PlayerCard/PlayerCard';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
 
 const playersList = ( props ) => {
-	const cards = props.players.map(( player ) => <PlayerCard key={player._id} playerId={props.playerId} {...player} toggleReady={props.toggleReady} />);
+	const cards = props.players.map(( player ) => <PlayerCard
+		key={player._id}
+		isPlayer={props.playerId === player._id}
+		isMaster={props.isMaster}
+		toggleReady={props.toggleReady}
+		leaveRoom={() => props.leaveRoom(player._id)}
+		{...player} />);
 	return (
-		<div className={classes.PlayersList}>
-			{cards}
-		</div>
+		<Table>
+			<TableHead>
+				<TableRow>
+					<TableCell>Name</TableCell>
+					<TableCell>Status</TableCell>
+					<TableCell>Actions</TableCell>
+				</TableRow>
+			</TableHead>
+			<TableBody>
+				{cards}
+			</TableBody>
+		</Table>
 	);
 };
 

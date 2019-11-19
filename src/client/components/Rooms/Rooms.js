@@ -8,12 +8,12 @@ import classes from './Rooms.css';
 import RoomsList from './RoomsList/RoomsList';
 import CreateNewRoom from './CreateNewRoom/CreateNewRoom';
 
-import { withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const Rooms = ( props ) => {
 
 	const roomList = props.rooms ?
-		<RoomsList rooms={props.rooms} onDeleteRoom={props.deleteRoom} onJoinRoom={props.joinRoom}/>
+		<RoomsList rooms={props.rooms} onDeleteRoom={props.deleteRoom} onJoinRoom={props.joinRoom} user={props.user} />
 		: null;
 
 	return (

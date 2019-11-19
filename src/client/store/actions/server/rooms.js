@@ -28,3 +28,9 @@ export const toggleReady = () => ({
 	meta: remote,
 	type: actions.SERVER_READY_TOGGLE,
 });
+
+export const leaveRoom = ( id ) => ({
+	meta: remote,
+	type: actions.SERVER_LEAVE_ROOM,
+	id: id,
+});

@@ -4,22 +4,28 @@ import * as propTypes from 'prop-types';
 import playerType from '../../../../propTypes/player/player';
 
 import { TableRow, TableCell, IconButton } from '@material-ui/core';
-import { Delete, CastConnected } from '@material-ui/icons';
+import { Delete, PlayArrow } from '@material-ui/icons';
 
 
 const roomListed = ( props ) => {
+	let state;
+
+	if (props.isDone) { state = 'Done' }
+	else if (props.isPlaying) { state = 'Playing' }
+	else { state = 'Waiting' }
+
 	return (
 		<TableRow>
 			<TableCell>{props.name}</TableCell>
 			<TableCell>{props.players.length} / {props.maxPlayers}</TableCell>
 			<TableCell>{props.creationTime}</TableCell>
-			<TableCell>{props.isDone ? 'Fini' : props.isPlaying ? 'En cours' : 'En Attente'}</TableCell>
+			<TableCell>{state}</TableCell>
 			<TableCell>
-				<IconButton aria-label="Delete" onClick={() => props.onDeleteRoom(props._id)}>
+				{props.isMaster ? <IconButton aria-label="Delete" onClick={() => props.onDeleteRoom(props._id)}>
 					<Delete/>
-				</IconButton>
+				</IconButton> : null}
 				<IconButton aria-label="Connect" onClick={() => props.onJoinRoom(props._id)}>
-					<CastConnected/>
+					<PlayArrow />
 				</IconButton>
 			</TableCell>
 		</TableRow>

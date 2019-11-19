@@ -28,6 +28,13 @@ const joinRoom = ( {meta: {player}, id} ) => {
 	player.join(room);
 	player.socket.emit('action', push(`${CLIENT_ROOMS}/${id}`));
 };
+const leaveRoom = ( {meta: {player}, id} ) => {
+	const playerToKick = sockets.getPlayerById(id);
+	const room = playerToKick.room;
+	if (player !== playerToKick && (!playerToKick.room || room.master._id !== player._id)) { return; }
+	room.removePlayer(playerToKick);
+	playerToKick.leave(room);
+};
 const readyToggle = ( {meta: {player}} ) => {
 	if ( !player.room ) return;
 	player.room.togglePlayerReady(player);
@@ -46,6 +53,8 @@ export default function ( action ) {
 			return deleteRoom(action);
 		case actionTypes.SERVER_JOIN_ROOM:
 			return joinRoom(action);
+		case actionTypes.SERVER_LEAVE_ROOM:
+			return leaveRoom(action);
 		case actionTypes.SERVER_READY_TOGGLE:
 			return readyToggle(action);
 		default:

@@ -9,6 +9,7 @@ const mapStateToProps = ( state ) => ({
 const mapDispatchToProps = ( dispatch ) => ({
 	toggleReady: () => dispatch(actions.toggleReady()),
 	startGame: () => dispatch(actions.startGame()),
+	leaveRoom: (id) => dispatch(actions.leaveRoom(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

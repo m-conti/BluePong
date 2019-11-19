@@ -4,6 +4,7 @@ import * as actions from '../../store/actions/index';
 
 const mapStateToProps = ( state ) => ({
 	rooms: state.rooms.rooms,
+	user: state.user,
 });
 
 const mapDispatchToProps = ( dispatch ) => ({

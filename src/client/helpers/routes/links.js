@@ -35,8 +35,8 @@ export const generateLinks = () => {
 			list.push('Tetris', `${path.CLIENT_ROOMS}/${state.user.roomId}`, true);
 		}
 		list.push('Rooms', path.CLIENT_ROOMS, true);
-		list.push('Profile', '/profile', false);
-		list.push('Log Out', '/logout', true);
+		// list.push('Profile', '/profile', false);
+		// list.push('Log Out', '/logout', true);
 	}
 	else {
 		list.push('Sign In', '/auth', true);

@@ -10,11 +10,18 @@ import PlayersList from './PlayersList/PlayersList';
 
 
 const WaitingRoom = ( props ) => {
-	const startGameButton = props.playerId === props.room.master._id ? <Button onClick={props.startGame} disabled={!props.room.canLaunch}>Start Game</Button> : null;
+
+	const startGameButton = props.playerId === props.room.master._id ? <Button
+		onClick={props.startGame}
+		disabled={!props.room.canLaunch}>Start Game</Button> : null;
 
 	return (
 		<div className={classes.WaitingRoom}>
-			<PlayersList playerId={props.playerId} players={props.room.players} toggleReady={props.toggleReady}/>
+			<PlayersList playerId={props.playerId}
+						 players={props.room.players}
+						 isMaster={props.playerId === props.room.master._id}
+						 toggleReady={props.toggleReady}
+						 leaveRoom={props.leaveRoom} />
 			{startGameButton}
 		</div>
 	);

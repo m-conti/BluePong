@@ -18,7 +18,12 @@ export {
 	deleteRoom,
 	joinRoom,
 	toggleReady,
+	leaveRoom,
 } from './server/rooms';
+
+export {
+	setName,
+} from './server/user';
 
 export {
 	dismissNotification,

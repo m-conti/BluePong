@@ -7,18 +7,20 @@ import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from 
 import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT } from '../../../../constants/tetris';
 
 class Game {
-	constructor( player, tetriminos ) {
+	constructor( player, match ) {
 		this.player = player;
 		this.score = 0;
-		this.tetriminosList = tetriminos;
+		this.tetriminosList = match.tetriminos;
 		this.tetriminosIndex = 0;
 		this.currentPiece = null;
 		this.gravityTimeout = INITIAL_GRAVITY_TIMEOUT;
 		this.board = BOARD();
 		this.fetchCurrentPiece();
+		this.over = false;
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		this.player.socket.emit('action', updateScore(this.score));
 		this.opponents = [];
+		this.match = match;
 	}
 
 	get nextPiece() {
@@ -41,6 +43,9 @@ class Game {
 
 	gameOver() {
 		clearInterval(this.gravityLoop);
+		console.log('GAME OVER !');
+		this.over = true;
+		this.match.checkEnd();
 		this.player.socket.emit('action', gameIsOver(this.player._id));
 	}
 
@@ -60,13 +65,13 @@ class Game {
 				clearInterval(this.gravityLoop);
 			}
 			this.gravityLoop = setInterval(() => {
-				//TODO: Check que la game existe encore...
 				this.moveDown();
 			}, this.gravityTimeout);
 		}
 	}
 
 	moveLeft() {
+		if (this.over) { return; }
 		if (!collision(this.currentPiece, LEFT, this.board)) {
 			this.currentPiece.x = this.currentPiece.x - 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -75,6 +80,7 @@ class Game {
 	}
 
 	moveRight() {
+		if (this.over) { return; }
 		if (!collision(this.currentPiece, RIGHT, this.board)) {
 			this.currentPiece.x = this.currentPiece.x + 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -83,6 +89,7 @@ class Game {
 	}
 
 	moveDown() {
+		if (this.over) { return; }
 		if(!collision(this.currentPiece, DOWN, this.board)) {
 			this.currentPiece.y = this.currentPiece.y + 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -94,6 +101,7 @@ class Game {
 	}
 
 	rotate() {
+		if (this.over) { return; }
 		if (!collisionWhenRotate(this.currentPiece, this.board)) {
 			this.currentPiece.rotate();
 		}
@@ -102,6 +110,7 @@ class Game {
 	}
 
 	drop() {
+		if (this.over) { return; }
 		while(!collision(this.currentPiece, DOWN, this.board)) {
 			this.currentPiece.y = this.currentPiece.y + 1;
 		}
@@ -113,7 +122,10 @@ class Game {
 	serializeAsOpponent() {
 		return {
 			id: this.player._id,
+			name: this.player.name,
 			spectre: this.board,
+			over: this.over,
+			score: this.score,
 		}
 	}
 

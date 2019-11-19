@@ -1,16 +1,18 @@
 import Game from '../Game/Game';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
-import {setOpponents} from '../../../actions/client/game'
+import { setOpponents, matchIsOver } from '../../../actions/client/game';
+import { pick } from 'lodash';
 
 class Match {
-	constructor() {
+	constructor(room) {
 		this.games = [];
 		this.tetriminos = [];
+		this.room = room;
 	}
 
 	init(players) {
 		this.tetriminos.push(generateTetriminos());
-		this.games = players.map((player) => new Game(player, this.tetriminos));
+		this.games = players.map((player) => new Game(player, this));
 		this.games.forEach((game) => {
 			const opponentsGames = this.games.filter((g) => g !== game);
 			game.opponents = opponentsGames;
@@ -22,6 +24,23 @@ class Match {
 	start() {
 
 	}
+
+	end() {
+		console.log('GAME ENDED !');
+		this.games.forEach((game) => {
+			const opponents = game.opponents.map((o) => o.serializeAsOpponent());
+			game.player.socket.emit('action', matchIsOver(opponents));
+		});
+		this.room.isDone = true;
+		this.room.update();
+	}
+
+	checkEnd() {
+		if (this.games.every((game) => game.over)) {
+			this.end();
+		}
+	}
+
 }
 
 export default Match;

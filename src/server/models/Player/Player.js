@@ -2,6 +2,7 @@ import { omit } from 'lodash';
 
 import sockets from '../Sockets/Sockets';
 import { updateUser } from '../../actions/client/user';
+import { resetTetrisState } from '../../actions/client/game';
 
 class Player {
 	constructor( socket, id ) {
@@ -9,7 +10,12 @@ class Player {
 		this.isAdmin = false;
 		this._id = id;
 		this.room = null;
+		this.name = null;
 		console.log('CONNECT');
+	}
+
+	setName(name) {
+		this.name = name;
 	}
 
 	serialize() {
@@ -39,6 +45,7 @@ class Player {
 		if ( this.room !== room ) return;
 		this.room = null;
 		this.socket.emit('action', updateUser(this));
+		this.socket.emit('action', resetTetrisState());
 		console.log('LEAVE', room._id);
 	}
 

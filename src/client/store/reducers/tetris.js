@@ -7,8 +7,10 @@ const initialState = {
 	opponents: null,
 	score: 0,
 	gameIsOver: false,
+	matchIsOver: false,
 };
 
+const resetState = () => (initialState);
 
 const setOpponents = ( state, {opponents} ) => ({
 	...state,
@@ -29,7 +31,12 @@ const updateScore = ( state, {score} ) => ({
 });
 const updateGameIsOver = ( state, {id} ) => ({
 	...state,
-	gameIsOver: true
+	gameIsOver: true,
+});
+const updateMatchOver = ( state, { opponents }) => ({
+	...state,
+	matchIsOver: true,
+	opponents: opponents,
 });
 
 export default ( state = initialState, action ) => {
@@ -45,6 +52,10 @@ export default ( state = initialState, action ) => {
 			return updateScore(state, action);
 		case actions.CLIENT_GAME_OVER:
 			return updateGameIsOver(state, action);
+		case actions.CLIENT_MATCH_OVER:
+			return updateMatchOver(state, action);
+		case actions.CLIENT_RESET_STATE:
+			return resetState(state, action);
 		default :
 			return state;
 	}

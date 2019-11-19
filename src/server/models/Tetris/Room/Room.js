@@ -7,17 +7,17 @@ import * as actions from '../../../actions/client/rooms';
 import Match from '../Match/Match';
 
 class Room {
-	constructor( id, name, {maxPlayers, maxViewers} ) {
+	constructor( id, name, {playerMax, ViewerMax} ) {
 		this._id = id;
 		this.name = name;
 
 		this.creationTime = Date.now();
 		this.endingTime = null;
 
-		this.maxPlayers = maxPlayers || MAX_PLAYERS;
-		this.maxViewers = maxViewers || MAX_VIEWERS;
+		this.maxPlayers = playerMax || MAX_PLAYERS;
+		this.maxViewers = ViewerMax || MAX_VIEWERS;
 
-		this.match = new Match();
+		this.match = new Match(this);
 
 		this.players = [];
 		this.viewers = [];
@@ -30,6 +30,10 @@ class Room {
 	}
 	get canLaunch() {
 		return this.readyState.slice(0, this.players.length).every((val) => val);
+	}
+
+	update() {
+		sockets.io.emit('action', actions.updateRoom(this));
 	}
 
 	delete() {
@@ -64,7 +68,7 @@ class Room {
 		this.players.push(player);
 		if ( !this.master ) this.master = player;
 		this.readyState.fill(false);
-		sockets.io.emit('action', actions.updateRoom(this));
+		this.update()
 	}
 
 	removePlayer( player ) {
@@ -72,20 +76,20 @@ class Room {
 		if ( !this.players.length ) return this.delete();
 		if ( this.master === player ) this.master = this.players[0];
 		this.readyState.fill(false);
-		sockets.io.emit('action', actions.updateRoom(this));
+		this.update();
 	}
 
 	togglePlayerReady(player) {
 		const idx = this.players.findIndex((p) => p === player);
 		this.readyState[idx] = !this.readyState[idx];
-		sockets.io.emit('action', actions.updateRoom(this));
+		this.update();
 	}
 
 	// Match
 	startMatch() {
 		this.match.init(this.players);
 		this.isPlaying = true;
-		sockets.io.emit('action', actions.updateRoom(this));
+		this.update();
 		this.match.start();
 	}
 }

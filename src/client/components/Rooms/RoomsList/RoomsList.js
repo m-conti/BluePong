@@ -5,7 +5,7 @@ import roomType from '../../../propTypes/room/room';
 
 import classes from './RoomsList.css';
 
-import {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 
 import RoomListed from './RoomListed/RoomListed';
 
@@ -20,6 +20,8 @@ const roomsList = (props) => {
 			name={elem.name}
 			players={elem.players}
 			isDone={elem.isDone}
+			isPlaying={elem.isPlaying}
+			isMaster={elem.master._id === props.user._id}
 			onDeleteRoom={props.onDeleteRoom}
 			onJoinRoom={props.onJoinRoom}
 		/>
@@ -33,7 +35,7 @@ const roomsList = (props) => {
 						<TableCell>Name</TableCell>
 						<TableCell>Slots</TableCell>
 						<TableCell>Creation Time</TableCell>
-						<TableCell>Etat</TableCell>
+						<TableCell>State</TableCell>
 						<TableCell>Actions</TableCell>
 					</TableRow>
 				</TableHead>

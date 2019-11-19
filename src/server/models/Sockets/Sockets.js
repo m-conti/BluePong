@@ -21,6 +21,10 @@ class Sockets {
 		return this.players.find(( player ) => player.socket === socket);
 	}
 
+	getPlayerById( id ) {
+		return this.players.find(( player ) => player._id === id);
+	}
+
 	addPlayer( socket ) {
 		const player = new Player(socket, generateId(this.players));
 		this.players.push(player);

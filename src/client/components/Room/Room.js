@@ -21,7 +21,7 @@ const Room = ( props ) => {
 		route = !room.isPlaying ? <WaitingRoom room={room}/> : <Tetris/>;
 	}
 	else {
-		route = <ViewTetris room={room} />;
+		route = <Redirect to={CLIENT_ROOMS}/>;
 	}
 
 	return route;

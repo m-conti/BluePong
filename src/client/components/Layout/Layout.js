@@ -5,6 +5,8 @@ import classes from './Layout.css';
 import { connect } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
 
+import SetName from '../../containers/SetName/SetName';
+
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import AppBar from '../Navigation/AppBar/AppBar';
 import Notifier from '../../containers/Notifier/Notifier';
@@ -25,16 +27,17 @@ const Layout = ( props ) => {
 
 	return (
 		<Fragment>
-			<AppBar drawerToggleClicked={sideDrawerToggleHandler} user={props.user} />
+			<AppBar drawerToggleClicked={sideDrawerToggleHandler} user={props.user}/>
 			<SideDrawer
 				user={props.user}
 				open={state.sideDrawer}
 				toggle={sideDrawerToggleHandler}/>
+			<SetName/>
 			<SnackbarProvider maxSnack={4} autoHideDuration={2500}>
 				<main className={classes.Content}>
 					{props.children}
 				</main>
-				<Notifier />
+				<Notifier/>
 			</SnackbarProvider>
 		</Fragment>
 	);
