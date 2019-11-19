@@ -23,6 +23,7 @@ const app = ( props ) => {
 			<Layout>
 			<Switch>
 				<Route path={CLIENT_ROOMS} component={RoomRoutes}/>
+				<Redirect to={CLIENT_ROOMS} />
 			</Switch>
 			</Layout>
 		</div>

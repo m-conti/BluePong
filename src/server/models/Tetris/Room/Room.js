@@ -68,7 +68,7 @@ class Room {
 		this.players.push(player);
 		if ( !this.master ) this.master = player;
 		this.readyState.fill(false);
-		this.update()
+		this.update();
 	}
 
 	removePlayer( player ) {

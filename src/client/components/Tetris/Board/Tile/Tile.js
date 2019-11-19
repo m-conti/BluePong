@@ -4,14 +4,12 @@ import * as propTypes from 'prop-types';
 import classes from './Tile.css';
 
 const Tile = ( props ) => {
-	const colors = ['', classes.tealColor, classes.navyColor, classes.communistYellowColor,
-		classes.communistRedColor, classes.communistRedColor,
-		classes.communistYellowColor, classes.communistRedColor];
+	const colors = [classes.Empty, classes.I, classes.O, classes.T, classes.J, classes.L, classes.S, classes.Z];
 
 	const tileClasses = [classes.Tile];
 	tileClasses.push(colors[props.content]);
 
-	return <div className={tileClasses.join(' ')}>{props.content}</div>;
+	return <div className={tileClasses.join(' ')} />;
 };
 
 Tile.propTypes = {

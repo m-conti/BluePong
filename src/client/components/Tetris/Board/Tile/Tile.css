@@ -5,20 +5,35 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-image: url('../../../../images/tile2.png');
+	background-size: 100% 100%;
+	border-radius: 3px;
+	margin-left: 1px;
+	margin-bottom: 1px;
 }
 
-.tealColor {
-	background-color: #39CCCC;
+.Empty {
+	opacity: 0;
 }
 
-.navyColor {
-	background-color: #001F3F;
+.I {
+	background-color: aqua;
 }
-
-.communistYellowColor {
-	background-color: #FAF333;
+.O {
+	background-color: yellow;
 }
-
-.communistRedColor {
-	background-color: #DA0A0A;
+.T {
+	background-color: blueviolet;
+}
+.J {
+	background-color: blue;
+}
+.L {
+	background-color: orange;
+}
+.S {
+	background-color: lime;
+}
+.Z {
+	background-color: red;
 }
