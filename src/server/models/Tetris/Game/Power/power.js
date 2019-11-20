@@ -1,5 +1,6 @@
 import { maxBy, minBy } from 'lodash';
 import { TILE_BLOCK_VALUE } from '../../../../../constants/tetris';
+import { updateBoard } from '../../../../actions/client/game';
 
 class Power {
 	constructor() {
@@ -65,9 +66,11 @@ class RegularRemoveHandicapLines extends Power {
 		if (!nbLines) { return; }
 		const board = game.board;
 		for (let i = 0; i < nbLines; i++) {
-			if (board[board.length - 1] !== TILE_BLOCK_VALUE) { break; }
+			if (board[board.length - 1][0] !== TILE_BLOCK_VALUE) { break; }
 			game.removeLine(board.length - 1);
 		}
+		game.player.socket.emit('action', updateBoard(game.playableBoard));
+		game.updateSpectre();
 	}
 }
 
