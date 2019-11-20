@@ -39,3 +39,8 @@ export const matchIsOver = (opponents) => ({
 export const resetTetrisState = () => ({
 	type: actionTypes.CLIENT_RESET_STATE,
 });
+
+export const updatePower = (power) => ({
+	type: actionTypes.CLIENT_UPDATE_POWER,
+	power: power.serialize()
+})

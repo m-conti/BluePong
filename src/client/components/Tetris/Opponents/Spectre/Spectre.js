@@ -8,7 +8,7 @@ const Spectre = ( props ) => {
 
 	const tileArray = props.spectre.map((content, rowNumber) => {
 		const rowContent = content.map((x, column) => (
-			<SpectreTile content={x} key={`${rowNumber}.${column}`} />
+			<SpectreTile little={props.little} content={x} key={`${rowNumber}.${column}`} />
 		));
 		return (
 			<div className={classes.SpectreBoardRow} key={rowNumber}>
@@ -16,9 +16,11 @@ const Spectre = ( props ) => {
 			</div>
 		)
 	});
+	const spectreClasses = [classes.Spectre];
+	if (props.little) { spectreClasses.push(classes.SpectreLittle); }
 
 	return (
-		<div className={classes.Spectre}>
+		<div className={spectreClasses.join(' ')}>
 			{tileArray}
 		</div>
 	);

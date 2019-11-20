@@ -1,10 +1,29 @@
 import Tetriminos from '../Tetriminos';
-import { I_rotations, O_rotations, T_rotations, J_rotations, L_rotations, S_rotations, Z_rotations } from './rotations';
+
+import {
+	TILE_I_VALUE,
+	TILE_O_VALUE,
+	TILE_T_VALUE,
+	TILE_J_VALUE,
+	TILE_L_VALUE,
+	TILE_S_VALUE,
+	TILE_Z_VALUE
+} from '../../../../../constants/tetris';
+
+import {
+	I_rotations,
+	O_rotations,
+	T_rotations,
+	J_rotations,
+	L_rotations,
+	S_rotations,
+	Z_rotations
+} from './rotations';
 
 export class I extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 1;
+		this.value = TILE_I_VALUE;
 	}
 	static create() {
 		return new I();
@@ -17,7 +36,7 @@ export class I extends Tetriminos {
 export class O extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 2;
+		this.value = TILE_O_VALUE;
 	}
 	static create() {
 		return new O();
@@ -30,7 +49,7 @@ export class O extends Tetriminos {
 export class T extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 3;
+		this.value = TILE_T_VALUE;
 	}
 	static create() {
 		return new T();
@@ -43,7 +62,7 @@ export class T extends Tetriminos {
 export class J extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 4;
+		this.value = TILE_J_VALUE;
 	}
 	static create() {
 		return new J();
@@ -56,7 +75,7 @@ export class J extends Tetriminos {
 export class L extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 5;
+		this.value = TILE_L_VALUE;
 	}
 	static create() {
 		return new L();
@@ -70,7 +89,7 @@ export class L extends Tetriminos {
 export class S extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 6;
+		this.value = TILE_S_VALUE;
 	}
 	static create() {
 		return new S();
@@ -83,7 +102,7 @@ export class S extends Tetriminos {
 export class Z extends Tetriminos {
 	constructor() {
 		super();
-		this.value = 7;
+		this.value = TILE_Z_VALUE;
 	}
 	static create() {
 		return new Z();

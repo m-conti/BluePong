@@ -4,8 +4,10 @@ import { cloneDeep } from 'lodash';
 
 const initialState = {
 	board: null,
+	nextPiece: null,
 	opponents: null,
 	score: 0,
+	power: null,
 	gameIsOver: false,
 	matchIsOver: false,
 };
@@ -29,6 +31,14 @@ const updateScore = ( state, {score} ) => ({
 	...state,
 	score: score
 });
+const updatePower = ( state, {power} ) => ({
+	...state,
+	power: power,
+});
+const updateNextPiece = ( state, {piece} ) => ({
+	...state,
+	nextPiece: piece,
+});
 const updateGameIsOver = ( state, {id} ) => ({
 	...state,
 	gameIsOver: true,
@@ -50,6 +60,10 @@ export default ( state = initialState, action ) => {
 			return updateOpponentSpectre(state, action);
 		case actions.CLIENT_UPDATE_SCORE:
 			return updateScore(state, action);
+		case actions.CLIENT_UPDATE_POWER:
+			return updatePower(state, action);
+		case actions.CLIENT_UPDATE_NEXT_PIECE:
+			return updateNextPiece(state, action);
 		case actions.CLIENT_GAME_OVER:
 			return updateGameIsOver(state, action);
 		case actions.CLIENT_MATCH_OVER:

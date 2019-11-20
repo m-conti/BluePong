@@ -6,6 +6,8 @@ export {
 	moveDown,
 	drop,
 	rotate,
+	nextPower,
+	previousPower,
 } from './server/tetris';
 
 export {

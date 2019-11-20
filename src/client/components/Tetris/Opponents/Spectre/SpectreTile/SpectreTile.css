@@ -1,0 +1,20 @@
+.SpectreTile {
+	height: 2vh;
+	width: 2vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.LittleTile {
+	height: 0.8vh;
+	width: 0.8vh;
+}
+
+.Empty {
+	background-color: #282232;
+}
+
+.Full {
+	background-color: #F7DC6F;
+}

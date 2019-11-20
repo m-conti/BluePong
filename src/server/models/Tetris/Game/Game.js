@@ -1,10 +1,14 @@
 import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
-import Piece from '../Piece/Piece';
 
-import { updateBoard, updateNextPiece, updateScore, updateOpponentSpectre, gameIsOver} from '../../../actions/client/game';
+import Piece from '../Piece/Piece';
+import { updateBoard, updateNextPiece, updateScore, updatePower, updateOpponentSpectre, gameIsOver} from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
-import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT } from '../../../../constants/tetris';
+
+import { regularPowers } from './Power/power';
+
+import { LEFT, RIGHT, DOWN, BOARD, BOARD_WIDTH, INITIAL_GRAVITY_TIMEOUT, TILE_BLOCK_VALUE } from '../../../../constants/tetris';
+
 
 class Game {
 	constructor( player, match ) {
@@ -12,6 +16,7 @@ class Game {
 		this.score = 0;
 		this.tetriminosList = match.tetriminos;
 		this.tetriminosIndex = 0;
+		this.powerIndex = 0;
 		this.currentPiece = null;
 		this.gravityTimeout = INITIAL_GRAVITY_TIMEOUT;
 		this.board = BOARD();
@@ -19,6 +24,7 @@ class Game {
 		this.over = false;
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		this.player.socket.emit('action', updateScore(this.score));
+		this.player.socket.emit('action', updatePower(this.power));
 		this.opponents = [];
 		this.match = match;
 	}
@@ -35,10 +41,30 @@ class Game {
 		for (let i = 0; i < flatFigure.length; i++) {
 			if (flatFigure[i]) {
 				playableBoard[Math.floor(this.currentPiece.y + i / lineLength)]
-				[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
+					[Math.floor(this.currentPiece.x + i % lineLength)] = flatFigure[i];
 			}
 		}
 		return playableBoard;
+	}
+
+	get power() {
+		return regularPowers[this.powerIndex];
+	}
+
+	nextPower() {
+		this.powerIndex = (this.powerIndex + 1) % regularPowers.length;
+		this.player.socket.emit('action', updatePower(this.power));
+	}
+
+	previousPower() {
+		this.powerIndex = this.powerIndex > 0 ? (this.powerIndex - 1) : (regularPowers.length - 1);
+		this.player.socket.emit('action', updatePower(this.power));
+	}
+
+	updateSpectre() {
+		this.opponents.forEach((opponent) => {
+			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.board));
+		});
 	}
 
 	gameOver() {
@@ -59,7 +85,7 @@ class Game {
 			if ( this.tetriminosIndex >= this.tetriminosList.length ) {
 				this.tetriminosList.push(generateTetriminos());
 			}
-			this.player.socket.emit('action', updateNextPiece(this.nextPiece));
+			this.player.socket.emit('action', updateNextPiece(this.nextPiece.serialize()));
 
 			if (this.gravityLoop) {
 				clearInterval(this.gravityLoop);
@@ -135,19 +161,42 @@ class Game {
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
-		this.opponents.forEach((opponent) => {
-			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.board));
-		});
+		this.updateSpectre();
+	}
+
+	addHandicapLines(nbLines) {
+		if (this.over) { return; }
+		for (let i = 0; i < nbLines; i++) {
+			this.addHandicapLine();
+		}
+		this.player.socket.emit('action', updateBoard(this.playableBoard));
+		this.updateSpectre();
+	}
+
+	addHandicapLine() {
+		if (this.board.shift().some(elem => elem)) {
+			this.gameOver();
+		}
+		this.board.push(new Array(BOARD_WIDTH).fill(TILE_BLOCK_VALUE))
+	}
+
+	removeLine(line) {
+		if (line < 0 || line >= this.board.length) { return; }
+
+		clearLine(this.board[line]);
+		fallDown(this.board, line);
 	}
 
 	removeLines() {
 		let numberLinesRemoved = 0;
 		for (let i = 0; i < this.board.length; i++) {
-			if (isFullLine(this.board[i])) {
-				clearLine(this.board[i]);
-				fallDown(this.board, i);
+			if (isFullLine(this.board[i]) && this.board[i][0] !== TILE_BLOCK_VALUE) {
+				this.removeLine(i);
 				numberLinesRemoved++;
 			}
+		}
+		if (numberLinesRemoved) {
+			this.power.use(this, numberLinesRemoved);
 		}
 		return (numberLinesRemoved);
 	}

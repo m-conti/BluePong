@@ -8,9 +8,9 @@ const SpectreTile = ( props ) => {
 	useEffect(() => {
 	}, []);
 
-	const colors = [classes.fullSpectreTile, classes.emptySpectreTile];
 	const tileClasses = [classes.SpectreTile];
-	tileClasses.push(colors[props.content]);
+	if (props.little) { tileClasses.push(classes.LittleTile) }
+	tileClasses.push(props.content ? classes.Full : classes.Empty);
 
 	return (
 		<div className={tileClasses.join(' ')} />

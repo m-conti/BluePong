@@ -1,0 +1,15 @@
+.NextPiece {
+	border: 1px solid black;
+	border-radius:6px;
+	background-color: #282232;
+	height: 22vh;
+	padding: auto;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+
+.Array {
+	margin-top: 6vh;
+	display: flex;
+	flex-direction: column;
+}

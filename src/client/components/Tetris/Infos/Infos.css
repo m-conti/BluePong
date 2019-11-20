@@ -1,0 +1,25 @@
+.Infos {
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #282232;
+	margin-bottom: 20px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.Title {
+	margin: 0;
+	color: #F7DC6F;
+	font-weight: bolder;
+}
+
+.Value {
+	margin: 0;
+	float: right;
+	color: #F7DC6F;
+}
+
+.Part {
+	flex: 1;
+}

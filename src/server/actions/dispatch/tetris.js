@@ -6,38 +6,51 @@ const startGame = ( {meta: {player}} ) => {
 	if ( !room ) throw new Error('player is not in a room');
 	if ( player !== room.master ) throw new Error('player is not the master of the room');
 	room.startMatch();
-}
+};
 
 const moveLeft = ( {meta: {player}} ) => {
 	const game = player.getGame();
 	if (game) {
 		game.moveLeft();
 	}
-}
+};
 const moveRight = ( {meta: {player}} ) => {
 	const game = player.getGame();
 	if (game) {
 		game.moveRight();
 	}
-}
+};
 const moveDown = ( {meta: {player}} ) => {
 	const game = player.getGame();
 	if (game) {
 		game.moveDown();
 	}
-}
+};
 const rotate = ( {meta: {player}} ) => {
 	const game = player.getGame();
 	if (game) {
 		game.rotate();
 	}
-}
+};
 const dropPiece = ( {meta: {player}} ) => {
 	const game = player.getGame();
 	if (game) {
 		game.drop();
 	}
-}
+};
+
+const nextPower = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.nextPower();
+	}
+};
+const previousPower = ( {meta: {player}} ) => {
+	const game = player.getGame();
+	if (game) {
+		game.previousPower();
+	}
+};
 
 export default function ( action ) {
 	switch ( action.type ) {
@@ -53,6 +66,10 @@ export default function ( action ) {
 			return rotate(action);
 		case actionTypes.SERVER_DROP_PIECE:
 			return dropPiece(action);
+		case actionTypes.SERVER_NEXT_POWER:
+			return nextPower(action);
+		case actionTypes.SERVER_PREVIOUS_POWER:
+			return previousPower(action);
 		default:
 			return;
 	}

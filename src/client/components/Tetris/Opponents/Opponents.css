@@ -1,0 +1,8 @@
+.Opponents {
+	flex: 0;
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+	width: 100%;
+	flex-wrap: wrap;
+}

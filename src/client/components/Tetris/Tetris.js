@@ -4,16 +4,17 @@ import * as propTypes from 'prop-types';
 import classes from './Tetris.css';
 
 import Board from './Board/Board';
-import Score from './Score/Score';
-import Spectre from './Spectre/Spectre';
+import Infos from './Infos/Infos';
+import Opponents from './Opponents/Opponents';
+import NextPiece from './NextPiece/NextPiece';
 import MatchOver from './MatchOver/MatchOver';
 
-import { ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN, SPACE_KEY } from '../../../constants/tetris';
+import { ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN, SPACE_KEY, Z_KEY, X_KEY } from '../../../constants/tetris';
 
 
 const Tetris = ( props ) => {
 	const board = (props.board) ? <Board board={props.board} /> : <div>Spinner</div>;
-	const score = (props.score) ? <Score score={props.score} /> : null;
+	const nextPiece = (props.nextPiece) ? <NextPiece {...props.nextPiece} /> : null;
 
 	const [ref, setRef] = useState(null);
 
@@ -43,6 +44,12 @@ const Tetris = ( props ) => {
 				props.drop();
 				console.log('space');
 				return;
+			case X_KEY :
+				props.powerNext();
+				return;
+			case Z_KEY :
+				props.powerPrevious();
+				return;
 			default :
 				return;
 		}
@@ -55,10 +62,6 @@ const Tetris = ( props ) => {
 		}
 	};
 
-	const opponents = (props.opponents) ? props.opponents.map(o => (
-		<Spectre key={o.id} spectre={o.spectre} />
-	)) : null;
-
 	const matchOver = props.matchIsOver ? <MatchOver
 		leave={props.leave}
 		opponents={props.opponents}
@@ -68,8 +71,11 @@ const Tetris = ( props ) => {
 	return (
 		<div className={classes.Tetris} ref={setRef} onKeyDown={keyDownPressHandler} onKeyUp={keyUpPressHandler} tabIndex={'1'}>
 			{board}
-			{score}
-			{opponents}
+			<div className={classes.Hud}>
+				<Infos score={props.score} power={props.power} />
+				{nextPiece}
+				<Opponents opponents={props.opponents} />
+			</div>
 			{matchOver}
 		</div>
 	);
@@ -83,6 +89,8 @@ Tetris.propTypes = {
 	moveDown: propTypes.func.isRequired,
 	rotate: propTypes.func.isRequired,
 	drop: propTypes.func.isRequired,
+	powerNext: propTypes.func.isRequired,
+	powerPrevious: propTypes.func.isRequired,
 	opponents: propTypes.arrayOf(propTypes.shape({
 		id: propTypes.string.isRequired,
 		spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired).isRequired,

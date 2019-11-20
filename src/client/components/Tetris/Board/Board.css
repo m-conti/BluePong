@@ -1,4 +1,4 @@
-.BoardRow {
+.Row {
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
@@ -8,7 +8,5 @@
 	border: 1px solid black;
 	border-radius: 6px;
 	background-color: #282232;
-	padding: 3px;
-	padding-right: 4px;
-	padding-top: 4px;
+	padding: 4px 4px 3px 3px;
 }

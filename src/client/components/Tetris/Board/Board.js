@@ -16,7 +16,7 @@ const Board = ( props ) => {
 			<Tile content={x} key={`${rowNumber}.${column}`} />
 		));
 		return (
-			<div className={classes.BoardRow} key={rowNumber}>
+			<div className={classes.Row} key={rowNumber}>
 				{rowContent}
 			</div>
 		)

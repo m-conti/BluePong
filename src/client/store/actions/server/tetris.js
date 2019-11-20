@@ -18,6 +18,7 @@ export const startGame = () => ({
 	type: actions.SERVER_START_GAME,
 });
 
+// PIECE
 export const moveLeft = () => ({
 	meta: remote,
 	type: actions.SERVER_MOVE_PIECE_LEFT
@@ -37,4 +38,14 @@ export const drop = () => ({
 export const rotate = () => ({
 	meta: remote,
 	type: actions.SERVER_ROTATE_PIECE
+});
+
+// POWER
+export const nextPower = () => ({
+	meta: remote,
+	type: actions.SERVER_NEXT_POWER
+});
+export const previousPower = () => ({
+	meta: remote,
+	type: actions.SERVER_PREVIOUS_POWER
 });
