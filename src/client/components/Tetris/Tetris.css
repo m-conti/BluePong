@@ -21,3 +21,15 @@
 	flex-direction: column;
 	align-items: stretch;
 }
+
+@media (max-width: 599px) {
+	.Hud {
+		width: 120px;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1080px) {
+	.Hud {
+		width: 300px;
+	}
+}

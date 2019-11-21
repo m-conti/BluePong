@@ -6,8 +6,9 @@
 	width: 80%;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
 	.Content {
-		width: 800px;
+		width: 1080px;
 	}
 }
+

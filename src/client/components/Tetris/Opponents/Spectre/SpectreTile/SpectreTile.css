@@ -18,3 +18,25 @@
 .Full {
 	background-color: #F7DC6F;
 }
+
+@media (max-width: 599px) {
+	.SpectreTile {
+		width: 8px;
+	}
+
+	.LittleTile {
+		height: 4px;
+		width: 4px;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1080px) {
+	.SpectreTile {
+		width: 14px;
+	}
+
+	.LittleTile {
+		height: 6px;
+		width: 6px;
+	}
+}

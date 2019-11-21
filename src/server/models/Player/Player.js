@@ -19,7 +19,7 @@ class Player {
 	}
 
 	serialize() {
-		return omit(this, ['socket', 'token', 'room']);
+		return omit(this, ['socket', 'room']);
 	}
 
 	serializeMe() {

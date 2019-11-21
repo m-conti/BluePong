@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import * as propTypes from 'prop-types';
+
+import userType from '../../../propTypes/user/user';
+
+import { values } from 'lodash';
 
 import NavItem from './NavItem/NavItem';
 import { generateLinks } from '../../../helpers/routes/links';
@@ -38,6 +43,11 @@ const NavItems = ( props ) => {
 														   exact={elem.exact}>{elem.name}</NavItem>)}
 		</div>
 	);
+};
+
+NavItems.propTypes = {
+	user: userType.isRequired,
+	display: propTypes.oneOf(values(display)),
 };
 
 export default NavItems;

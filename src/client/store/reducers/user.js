@@ -3,6 +3,8 @@ import * as actions from '../../../actions/actionTypes/user';
 const initialState = {
 	_id: null,
 	isAdmin: false,
+	name: null,
+	roomId: null,
 };
 
 const updateUserInfos = ( state, {user} ) => ({
