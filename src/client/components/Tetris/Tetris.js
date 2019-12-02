@@ -26,23 +26,18 @@ const Tetris = ( props ) => {
 		switch (event.key) {
 			case ARROW_LEFT :
 				props.moveLeft();
-				console.log('left');
 				return;
 			case ARROW_RIGHT :
 				props.moveRight();
-				console.log('right');
 				return;
 			case ARROW_UP :
 				props.rotate();
-				console.log('up');
 				return;
 			case ARROW_DOWN :
 				props.moveDown();
-				console.log('down');
 				return;
 			case SPACE_KEY :
 				props.drop();
-				console.log('space');
 				return;
 			case X_KEY :
 				props.powerNext();
@@ -55,13 +50,6 @@ const Tetris = ( props ) => {
 		}
 	};
 
-	const keyUpPressHandler = (event) => {
-		switch (event.key) {
-			case ARROW_DOWN :
-				console.log('down is up');
-		}
-	};
-
 	const matchOver = props.matchIsOver ? <MatchOver
 		leave={props.leave}
 		opponents={props.opponents}
@@ -69,7 +57,7 @@ const Tetris = ( props ) => {
 		playerScore={props.score} /> : null;
 
 	return (
-		<div className={classes.Tetris} ref={setRef} onKeyDown={keyDownPressHandler} onKeyUp={keyUpPressHandler} tabIndex={'1'}>
+		<div className={classes.Tetris} ref={setRef} onKeyDown={keyDownPressHandler} tabIndex={'1'}>
 			{board}
 			<div className={classes.Hud}>
 				<Infos score={props.score} power={props.power} />

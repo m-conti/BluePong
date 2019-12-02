@@ -2,13 +2,11 @@ import SocketSimulator from '../../tests/simulators/socket';
 import actionSimulator from '../../tests/simulators/actions';
 
 import sockets from '../../models/Sockets/Sockets';
-import Player from '../../models/Player/Player';
-import Room from '../../models/Tetris/Room/Room';
 
 import * as actionTypes from '../../../actions/actionTypes/user';
 
 
-describe('dispatchRoom', () => {
+describe('dispatchUser', () => {
 	const socket = new SocketSimulator();
 	let player;
 
@@ -24,7 +22,11 @@ describe('dispatchRoom', () => {
 		sockets.io.reset();
 	});
 
-	it('', () => {
+	it(actionTypes.SERVER_SET_NAME, () => {
+		const action = actionSimulator(actionTypes.SERVER_SET_NAME, {name:'nameTest'});
+		sockets.simulateAction(player, action);
 
+		expect(player.socket.actions.length).toBe(1);
+		expect(sockets.io.actions.length).toBe(0);
 	});
 });

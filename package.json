@@ -12,7 +12,7 @@
     "srv-dist": "NODE_ENV=production babel src --out-dir dist",
     "api-dev": "NODE_ENV=development nodemon --watch src/api --exec babel-node src/api/main.js",
     "api-dist": "NODE_ENV=production babel src --out-dir dist",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --notify --verbose",
     "coverage": "NODE_ENV=test jest --coverage"
   },
   "dependencies": {

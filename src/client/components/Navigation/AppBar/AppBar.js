@@ -28,7 +28,6 @@ const style = makeStyles({
 
 const AppBar = ( props ) => {
 	const classes = {appBar: appBarStyle(), ...style()};
-	console.log(classes);
 	return (
 		<MaterialBar position="static" classes={classes.appBar}>
 			<Toolbar>

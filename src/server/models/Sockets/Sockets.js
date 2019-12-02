@@ -54,7 +54,6 @@ class Sockets {
 			socket.emit('action', userActions.updateUser(player));
 
 			socket.on('action', ( action ) => {
-				console.log(action);
 				try {
 					action.meta.player = this.getPlayer(socket);
 					this.dispatch(action);
