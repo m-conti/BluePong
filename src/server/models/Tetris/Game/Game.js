@@ -69,7 +69,6 @@ class Game {
 
 	gameOver() {
 		clearInterval(this.gravityLoop);
-		console.log('GAME OVER !');
 		this.over = true;
 		this.match.checkEnd();
 		this.player.socket.emit('action', gameIsOver(this.player._id));
@@ -102,7 +101,6 @@ class Game {
 			this.currentPiece.x = this.currentPiece.x - 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
 		}
-		console.log('ACTION: LEFT');
 	}
 
 	moveRight() {
@@ -111,7 +109,6 @@ class Game {
 			this.currentPiece.x = this.currentPiece.x + 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
 		}
-		console.log('ACTION: RIGHT');
 	}
 
 	moveDown() {
@@ -123,7 +120,6 @@ class Game {
 		else {
 			this.piecePlaced();
 		}
-		console.log('ACTION: DOWN');
 	}
 
 	rotate() {
@@ -132,7 +128,6 @@ class Game {
 			this.currentPiece.rotate();
 		}
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
-		console.log('ACTION: ROTATE');
 	}
 
 	drop() {
@@ -141,7 +136,6 @@ class Game {
 			this.currentPiece.y = this.currentPiece.y + 1;
 		}
 		this.piecePlaced();
-		console.log('ACTION: DROP');
 	}
 
 	// SERIALIZER

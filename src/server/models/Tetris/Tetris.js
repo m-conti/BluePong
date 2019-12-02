@@ -21,7 +21,6 @@ class Tetris {
 		const room = new Room(generateId(this.rooms), roomOpt.name, roomOpt);
 		player.join(room);
 		this.rooms.push(room);
-		sockets.io.emit('action', actions.updateRoom(room));
 		return room;
 	}
 	removeRoom(id) {

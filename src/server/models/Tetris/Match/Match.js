@@ -1,7 +1,6 @@
 import Game from '../Game/Game';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 import { setOpponents, matchIsOver } from '../../../actions/client/game';
-import { pick } from 'lodash';
 
 class Match {
 	constructor(room) {
@@ -26,7 +25,6 @@ class Match {
 	}
 
 	end() {
-		console.log('GAME ENDED !');
 		this.games.forEach((game) => {
 			const opponents = game.opponents.map((o) => o.serializeAsOpponent());
 			game.player.socket.emit('action', matchIsOver(opponents));

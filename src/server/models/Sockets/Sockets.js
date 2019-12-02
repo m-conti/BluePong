@@ -8,6 +8,7 @@ import dispatch from '../../actions/dispatch/dispatch';
 import Player from '../Player/Player';
 import Tetris from '../Tetris/Tetris';
 import generateId from '../../../helpers/utilities/generateId';
+import SocketSimulator from '../../tests/simulators/socket';
 
 class Sockets {
 	constructor() {
@@ -15,6 +16,15 @@ class Sockets {
 		this.dispatch = dispatch;
 		this.players = [];
 		this.tetris = new Tetris();
+	}
+
+	simulate() {
+		this.io = new SocketSimulator();
+	}
+
+	simulateAction( player, action ) {
+		action.meta.player = player;
+		this.dispatch(action);
 	}
 
 	getPlayer( socket ) {
@@ -44,6 +54,7 @@ class Sockets {
 			socket.emit('action', userActions.updateUser(player));
 
 			socket.on('action', ( action ) => {
+				console.log(action);
 				try {
 					action.meta.player = this.getPlayer(socket);
 					this.dispatch(action);

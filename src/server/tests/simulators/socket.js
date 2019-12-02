@@ -9,7 +9,6 @@ class SocketSimulator {
 	}
 
 	emit(action, params) {
-		if (action !== 'action') { return; }
 		this.actions.push(params);
 	}
 }

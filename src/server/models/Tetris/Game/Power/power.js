@@ -10,7 +10,7 @@ class Power {
 	}
 
 	use(game, nbLines) {
-		return;
+		return ;
 	}
 
 	serialize() {
@@ -22,7 +22,7 @@ class Power {
 	}
 }
 
-class RegularAddHandicapBest extends Power {
+export class RegularAddHandicapBest extends Power {
 	constructor() {
 		super();
 		this.name = 'Challenge';
@@ -38,7 +38,7 @@ class RegularAddHandicapBest extends Power {
 	}
 }
 
-class RegularAddHandicapWorst extends Power {
+export class RegularAddHandicapWorst extends Power {
 	constructor() {
 		super();
 		this.name = 'Bully';
@@ -54,7 +54,7 @@ class RegularAddHandicapWorst extends Power {
 	}
 }
 
-class RegularRemoveHandicapLines extends Power {
+export class RegularRemoveHandicapLines extends Power {
 	constructor() {
 		super();
 		this.name = 'Restore';

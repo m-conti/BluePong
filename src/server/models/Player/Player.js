@@ -11,7 +11,6 @@ class Player {
 		this._id = id;
 		this.room = null;
 		this.name = null;
-		console.log('CONNECT');
 	}
 
 	setName(name) {
@@ -42,15 +41,15 @@ class Player {
 	}
 
 	leave( room ) {
-		if ( this.room !== room ) return;
+		if ( !room || !this.room ) { throw Error('player can\'t leave no room'); }
+		if ( this.room !== room ) { throw Error(`player try to leave ${room.name} but he's in ${this.room.name}`); }
 		this.room = null;
+		room.removePlayer(this);
 		this.socket.emit('action', updateUser(this));
 		this.socket.emit('action', resetTetrisState());
-		console.log('LEAVE', room._id);
 	}
 
 	disconnect() {
-		console.log('DISCONNECT');
 		if ( this.room ) this.room.removePlayer(this);
 		sockets.removePlayer(this);
 	}

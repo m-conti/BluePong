@@ -7,7 +7,7 @@ export default function ( action ) {
 			action.meta.player.socket.emit('action', {type: actionTypes.PONG});
 			break;
 		case actionTypes.PONG:
-			console.error('ERROR : pong call on server side');
+			throw new Error('Pong call on server side');
 			break;
 		default:
 			return;

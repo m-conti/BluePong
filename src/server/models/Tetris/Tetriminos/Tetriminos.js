@@ -4,8 +4,8 @@ class Tetriminos {
 		this.value = 0;
 	}
 
-	static get rotations() {
-		return Array(4).fill(false).map(() => Array(4).fill(false));
+	get rotations() {
+		return [new Array(4).fill(true).map(() => Array(4).fill(0))];
 	}
 
 	serialize() {

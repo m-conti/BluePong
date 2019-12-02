@@ -1,4 +1,4 @@
-import { remove, omit, isEqual } from 'lodash';
+import { remove, omit } from 'lodash';
 import { MAX_PLAYERS, MAX_VIEWERS } from '../../../../constants/tetris';
 
 import sockets from '../../Sockets/Sockets';
@@ -37,9 +37,8 @@ class Room {
 	}
 
 	delete() {
-		console.log(`DELETE ROOM : ${this._id}`);
-		this.players.forEach(( player ) => player.leave(this));
 		sockets.tetris.removeRoom(this._id);
+		this.players.forEach(( player ) => player.leave(this));
 		this.match.games.forEach((game) => {
 			clearInterval(game.gravityLoop);
 		})
@@ -73,7 +72,13 @@ class Room {
 
 	removePlayer( player ) {
 		remove(this.players, ( p ) => p === player);
-		if ( !this.players.length ) return this.delete();
+		if ( !this.players.length ) {
+			try {
+				sockets.tetris.getRoom(this._id);
+				return this.delete();
+			}
+			catch ( error ) { return; }
+		}
 		if ( this.master === player ) this.master = this.players[0];
 		this.readyState.fill(false);
 		this.update();

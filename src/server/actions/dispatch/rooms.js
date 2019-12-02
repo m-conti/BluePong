@@ -32,7 +32,6 @@ const leaveRoom = ( {meta: {player}, id} ) => {
 	const playerToKick = sockets.getPlayerById(id);
 	const room = playerToKick.room;
 	if (player !== playerToKick && (!playerToKick.room || room.master._id !== player._id)) { return; }
-	room.removePlayer(playerToKick);
 	playerToKick.leave(room);
 };
 const readyToggle = ( {meta: {player}} ) => {
