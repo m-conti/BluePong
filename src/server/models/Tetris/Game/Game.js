@@ -72,6 +72,7 @@ class Game {
 		this.over = true;
 		this.match.checkEnd();
 		this.player.socket.emit('action', gameIsOver(this.player._id));
+		this.updateSpectre();
 	}
 
 	fetchCurrentPiece() {
