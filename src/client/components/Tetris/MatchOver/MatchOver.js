@@ -16,7 +16,7 @@ import {
 import Button from '../../UI/Button/Button';
 const matchOver = ( props ) => {
 
-	const [state, setState] = useState({
+	const [state] = useState({
 		open: true,
 	});
 
@@ -27,10 +27,10 @@ const matchOver = ( props ) => {
 		</TableRow>
 	)) : null;
 
-	const restartButton = props.isMaster ? <Button onClick={props.restart}>Restart</Button>: null;
+	const restartButton = props.isMaster ? <Button onClick={props.restart}>Restart</Button> : null;
 
 	return (
-		<Dialog classes={classes.MatchOver} open={state.open} onClose={() => props.leave(props.player._id)}>
+		<Dialog classes={classes.MatchOver} onClose={() => props.leave(props.player._id)} open={state.open}>
 			<DialogContent>
 				<Table>
 					<TableHead>

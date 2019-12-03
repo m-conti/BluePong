@@ -4,11 +4,11 @@ import * as propTypes from 'prop-types';
 import playerType from '../../../propTypes/player/player';
 
 import PlayerCard from './PlayerCard/PlayerCard';
-import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
 
-const playersList = (props) => {
-	const cards = props.players.map((player) => <PlayerCard
+const playersList = ( props ) => {
+	const cards = props.players.map(( player ) => <PlayerCard
 		isMaster={props.isMaster}
 		isPlayer={props.playerId === player._id}
 		key={player._id}

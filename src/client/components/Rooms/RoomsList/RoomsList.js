@@ -13,17 +13,17 @@ const roomsList = (props) => {
 
 	const roomListed = props.rooms.map((elem) => (
 		<RoomListed
-			key={elem._id}
 			_id={elem._id}
 			creationTime={elem.creationTime}
+			key={elem._id}
+			isPlaying={elem.isPlaying}
+			isDone={elem.isDone}
+			isMaster={elem.master._id === props.user._id}
 			maxPlayers={elem.maxPlayers}
 			name={elem.name}
-			players={elem.players}
-			isDone={elem.isDone}
-			isPlaying={elem.isPlaying}
-			isMaster={elem.master._id === props.user._id}
 			onDeleteRoom={props.onDeleteRoom}
 			onJoinRoom={props.onJoinRoom}
+			players={elem.players}
 		/>
 	));
 
