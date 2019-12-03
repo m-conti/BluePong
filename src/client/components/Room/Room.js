@@ -18,7 +18,7 @@ const Room = ( props ) => {
 		return <Redirect to={CLIENT_ROOMS}/>;
 	}
 	if ( props.playerRoomId === room._id ) {
-		route = !room.isPlaying ? <WaitingRoom room={room}/> : <Tetris isMaster={props.playerId === room.master._id} />;
+		route = room.isPlaying ? <Tetris isMaster={props.playerId === room.master._id} /> : <WaitingRoom room={room}/>;
 	}
 	else {
 		route = <Redirect to={CLIENT_ROOMS}/>;

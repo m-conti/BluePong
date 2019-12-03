@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import * as propTypes from 'prop-types';
 import roomType from '../../propTypes/room/room';
@@ -13,8 +13,11 @@ import { withRouter } from 'react-router-dom';
 const Rooms = ( props ) => {
 
 	const roomList = props.rooms ?
-		<RoomsList rooms={props.rooms} onDeleteRoom={props.deleteRoom} onJoinRoom={props.joinRoom} user={props.user} />
-		: null;
+		<RoomsList
+			onDeleteRoom={props.deleteRoom}
+			onJoinRoom={props.joinRoom}
+			rooms={props.rooms}
+			user={props.user} /> : null;
 
 	return (
 		<div className={classes.Rooms}>

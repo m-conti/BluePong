@@ -17,19 +17,20 @@ const WaitingRoom = (props) => {
 
 	return (
 		<div className={classes.WaitingRoom}>
-			<PlayersList playerId={props.playerId}
-				players={props.room.players}
+			<PlayersList
 				isMaster={props.playerId === props.room.master._id}
-				toggleReady={props.toggleReady}
-				leaveRoom={props.leaveRoom}/>
+				leaveRoom={props.leaveRoom}
+				playerId={props.playerId}
+				players={props.room.players}
+				toggleReady={props.toggleReady}/>
 			{startGameButton}
 		</div>
 	);
 };
 
 WaitingRoom.propTypes = {
-	room: roomType,
 	playerId: propTypes.number.isRequired,
+	room: roomType,
 };
 
 export default WaitingRoom;
