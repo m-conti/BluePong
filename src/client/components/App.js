@@ -21,10 +21,10 @@ const app = ( props ) => {
 	return (
 		<div>
 			<Layout>
-			<Switch>
-				<Route path={CLIENT_ROOMS} component={RoomRoutes}/>
-				<Redirect to={CLIENT_ROOMS} />
-			</Switch>
+				<Switch>
+					<Route component={RoomRoutes} path={CLIENT_ROOMS}/>
+					<Redirect to={CLIENT_ROOMS} />
+				</Switch>
 			</Layout>
 		</div>
 	);

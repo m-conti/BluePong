@@ -20,10 +20,10 @@ const CreateNewRoom = (props) => {
 
 
 	const toggleModalNewRoom = (open) => {
-		if (typeof (open) === 'undefined') open = !state.showModal;
+		const openParam = (typeof (open) === 'undefined') ? !state.showModal : open;
 		setState({
 			...state,
-			showModal: Boolean(open),
+			showModal: Boolean(openParam),
 		});
 	};
 
@@ -43,26 +43,26 @@ const CreateNewRoom = (props) => {
 	return (
 		<div className={classes.CreateNewRoom}>
 			<Button onClick={toggleModalNewRoom}>Add New Room</Button>
-			<Dialog open={state.showModal} onClose={() => toggleModalNewRoom(false)}>
+			<Dialog onClose={() => toggleModalNewRoom(false)} open={state.showModal}>
 				<DialogContent>
 					<TextField
 						autoFocus
-						id="name"
-						label="Name"
-						type="text"
-						value={state.name}
-						onChange={changeName}
 						fullWidth
+						id='name'
+						label='Name'
+						onChange={changeName}
+						type='text'
+						value={state.name}
 					/>
 					<div className={classes.labelMaxPlayer}>
-						<label htmlFor="max-player">Max Player</label>
+						<label htmlFor='max-player'>Max Player</label>
 					</div>
-					<Slider id="max-player" value={state.playerMax} max={4} min={1} step={1} valueLabelDisplay={'auto'}
-						onChange={(_, value) => changeMaxPlayer(value)}/>
+					<Slider id='max-player' max={4} min={1} onChange={(_, value) => changeMaxPlayer(value)}
+						step={1} value={state.playerMax} valueLabelDisplay={'auto'}/>
 				</DialogContent>
 				<DialogActions>
 					<Button color={'primary'}
-							onClick={() => props.create({name: state.name, playerMax: state.playerMax})}>
+						onClick={() => props.create({name: state.name, playerMax: state.playerMax})}>
 						Create
 					</Button>
 				</DialogActions>

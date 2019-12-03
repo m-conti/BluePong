@@ -19,21 +19,23 @@ const Layout = ( props ) => {
 	});
 
 	const sideDrawerToggleHandler = ( open ) => {
-		if ( typeof (open) === 'undefined' )
+		if ( typeof (open) === 'undefined' ) {
 			setState({...state, sideDrawer: !state.sideDrawer});
-		else
+		}
+		else {
 			setState({...state, sideDrawer: Boolean(open)});
+		}
 	};
 
 	return (
 		<Fragment>
 			<AppBar drawerToggleClicked={sideDrawerToggleHandler} user={props.user}/>
 			<SideDrawer
-				user={props.user}
 				open={state.sideDrawer}
-				toggle={sideDrawerToggleHandler}/>
+				toggle={sideDrawerToggleHandler}
+				user={props.user}/>
 			<SetName/>
-			<SnackbarProvider maxSnack={4} autoHideDuration={2500}>
+			<SnackbarProvider autoHideDuration={2500} maxSnack={4}>
 				<main className={classes.Content}>
 					{props.children}
 				</main>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { Slider } from '@material-ui/core';
 import { PRIMARY_COLOR } from '../../../styles/constant';
