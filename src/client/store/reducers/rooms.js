@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash';
 import * as actions from '../../../actions/actionTypes/rooms';
 
 const initialState = {
@@ -14,8 +13,8 @@ const updateRoom = ( state, {room} ) => {
 	const newRooms = [...state.rooms];
 	const index = state.rooms.findIndex(( r ) => r._id === room._id);
 
-	if ( index !== -1 ) newRooms[index] = room;
-	else newRooms.push(room);
+	if ( index === -1 ) { newRooms.push(room); }
+	else { newRooms[index] = room; }
 
 	return {
 		...state,

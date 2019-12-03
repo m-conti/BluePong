@@ -15,10 +15,10 @@ const roomsList = (props) => {
 		<RoomListed
 			_id={elem._id}
 			creationTime={elem.creationTime}
-			key={elem._id}
-			isPlaying={elem.isPlaying}
 			isDone={elem.isDone}
 			isMaster={elem.master._id === props.user._id}
+			isPlaying={elem.isPlaying}
+			key={elem._id}
 			maxPlayers={elem.maxPlayers}
 			name={elem.name}
 			onDeleteRoom={props.onDeleteRoom}
