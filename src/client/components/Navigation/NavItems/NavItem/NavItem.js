@@ -1,5 +1,4 @@
 import React from 'react';
-import * as propTypes from 'prop-types';
 
 import {NavLink} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core';
@@ -51,14 +50,6 @@ const navItem = (props) => {
 				to={props.link}>{props.children}</NavLink>
 		</div>
 	);
-};
-
-
-navItem.propTypes = {
-	children: propTypes.string,
-	display: propTypes.string,
-	exact: propTypes.bool,
-	link: propTypes.string,
 };
 
 export default navItem;

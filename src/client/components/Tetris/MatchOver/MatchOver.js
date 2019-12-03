@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import * as propTypes from 'prop-types';
 
-import classes from './MatchOver.css';
-
 import {
 	Dialog,
 	DialogContent,
@@ -32,7 +30,7 @@ const matchOver = ( props ) => {
 	const restartButton = props.isMaster ? <Button onClick={props.restart}>Restart</Button> : null;
 	const winnerIcon = props.winner ? <Grade /> : null;
 	return (
-		<Dialog classes={classes.MatchOver} onClose={() => props.leave(props.player._id)} open={state.open}>
+		<Dialog onClose={() => props.leave(props.player._id)} open={state.open}>
 			<DialogContent>
 				<Table>
 					<TableHead>
