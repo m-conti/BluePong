@@ -11,7 +11,7 @@ import {
 	TableRow,
 	TableCell
 } from '@material-ui/core';
-import { Grade, Icon } from '@material-ui/icons';
+import { Grade } from '@material-ui/icons';
 import Button from '../../UI/Button/Button';
 const matchOver = ( props ) => {
 
@@ -20,7 +20,7 @@ const matchOver = ( props ) => {
 	});
 
 	const opponentScores = props.opponents ? props.opponents.map(o => (
-		<TableRow key={o._id}>
+		<TableRow key={o.id}>
 			<TableCell>{o.name}</TableCell>
 			<TableCell>{o.winner ? <Grade /> : null}</TableCell>
 			<TableCell>{o.score}</TableCell>

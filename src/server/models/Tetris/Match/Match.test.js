@@ -43,11 +43,6 @@ describe('Match', () => {
 		match.checkEnd();
 		expect(room.isDone).toBe(false);
 	});
-	it('checkEnd do nothing if 1 / 2 games are over', () => {
-		match.games[0].over = true;
-		match.checkEnd();
-		expect(room.isDone).toBe(false);
-	});
 	it('checkEnd set room.isDone if all games are over', () => {
 		match.games[0].over = true;
 		match.games[1].over = true;
