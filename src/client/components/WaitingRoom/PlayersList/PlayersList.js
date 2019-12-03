@@ -9,12 +9,12 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 
 const playersList = ( props ) => {
 	const cards = props.players.map(( player ) => <PlayerCard
-	  isPlayer={props.playerId === player._id}
-	  isMaster={props.isMaster}
-	  key={player._id}
-	  leaveRoom={() => props.leaveRoom(player._id)}
-	  toggleReady={props.toggleReady}
-	  {...player} />);
+		isPlayer={props.playerId === player._id}
+		isMaster={props.isMaster}
+		key={player._id}
+		leaveRoom={() => props.leaveRoom(player._id)}
+		toggleReady={props.toggleReady}
+		{...player} />);
 	return (
 		<Table>
 			<TableHead>
