@@ -35,6 +35,9 @@ const SetName = ( props ) => {
 					label="Name"
 					type="text"
 					value={state.name}
+					inputProps={{
+						maxLength: 10,
+					}}
 					onChange={changeName}
 					fullWidth
 				/>

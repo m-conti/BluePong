@@ -37,7 +37,7 @@ const leaveRoom = ( {meta: {player}, id} ) => {
 const readyToggle = ( {meta: {player}} ) => {
 	if ( !player.room ) return;
 	player.room.togglePlayerReady(player);
-}
+};
 
 
 export default function ( action ) {

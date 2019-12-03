@@ -1,6 +1,7 @@
 export {
 	refreshGame,
 	startGame,
+	restartGame,
 	moveRight,
 	moveLeft,
 	moveDown,

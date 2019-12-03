@@ -16,12 +16,15 @@ const Spectre = ( props ) => {
 			</div>
 		)
 	});
-	const spectreClasses = [classes.Spectre];
-	if (props.little) { spectreClasses.push(classes.SpectreLittle); }
+	const opponentClasses = [classes.Opponent];
+	if (props.little) { opponentClasses.push(classes.OpponentLittle); }
 
 	return (
-		<div className={spectreClasses.join(' ')}>
-			{tileArray}
+		<div className={opponentClasses.join(' ')}>
+			<div className={classes.Name}>{props.name}</div>
+			<div className={classes.Spectre}>
+				{tileArray}
+			</div>
 		</div>
 	);
 };

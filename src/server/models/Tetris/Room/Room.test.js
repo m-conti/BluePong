@@ -89,6 +89,26 @@ describe('Room', () => {
 		room.startMatch();
 		expect(room.match.games.length).toBe(1);
 	});
+	it('restart match on gameover set new match', () => {
+		room.addPlayer(player);
+		room.startMatch();
+		expect(room.isPlaying).toBe(true);
+		room.match.games[0].gameOver();
+		room.restart();
+		expect(room.players.length).toBe(1);
+		expect(room.isPlaying).toBe(false);
+		expect(room.isDone).toBe(false);
+		expect(room.match.games.length).toBe(0);
+	});
+	it('restart match without gameover throw', () => {
+		room.addPlayer(player);
+		room.startMatch();
+		expect(() => room.restart()).toThrow(new Error('Match isn\'t done'));
+	});
+	it('restart match without start', () => {
+		room.addPlayer(player);
+		expect(() => room.restart()).toThrow(new Error('Match hasn\'t started before'));
+	});
 
 	it('delete after start don\'t throw', () => {
 		player.join(room);

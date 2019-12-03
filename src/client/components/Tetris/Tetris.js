@@ -54,7 +54,10 @@ const Tetris = ( props ) => {
 		leave={props.leave}
 		opponents={props.opponents}
 		player={props.player}
-		playerScore={props.score} /> : null;
+		playerScore={props.score}
+		restart={props.restart}
+		isMaster={props.isMaster}
+	/> : null;
 
 	return (
 		<div className={classes.Tetris} ref={setRef} onKeyDown={keyDownPressHandler} tabIndex={'1'}>

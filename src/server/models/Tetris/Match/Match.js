@@ -10,6 +10,7 @@ class Match {
 	}
 
 	init(players) {
+		this.tetriminos = [];
 		this.tetriminos.push(generateTetriminos());
 		this.games = players.map((player) => new Game(player, this));
 		this.games.forEach((game) => {

@@ -5,8 +5,17 @@
 	flex: 0;
 }
 
-.Spectre {
+.Opponent {
 	margin: 20px;
+}
+
+.Name {
+	display: flex;
+	color: #282232;
+	text-overflow: ellipsis;
+}
+
+.Spectre {
 	padding: 6px;
 	display: flex;
 	flex-direction: column;
@@ -16,6 +25,18 @@
 	flex: 0;
 }
 
-.SpectreLittle {
+.OpponentLittle {
 	margin: 6px;
+}
+
+@media (max-width: 599px) {
+	.Name {
+		width: 80px;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1080px) {
+	.Name {
+		width: 140px;
+	}
 }

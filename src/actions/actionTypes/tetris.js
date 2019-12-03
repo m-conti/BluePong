@@ -20,12 +20,17 @@ export const CLIENT_RESET_STATE = 'CLIENT_RESET_STATE';
 // viewer action
 export const SERVER_REFRESH_GAME = 'SERVER_REFRESH_GAME';
 
-// piece actions
+// game actions
 export const SERVER_START_GAME = 'SERVER_START_GAME';
+export const SERVER_RESTART_GAME = 'SERVER_RESTART_GAME';
+
+// piece actions
 export const SERVER_MOVE_PIECE_LEFT = 'SERVER_MOVE_PIECE_LEFT';
 export const SERVER_MOVE_PIECE_RIGHT = 'SERVER_MOVE_PIECE_RIGHT';
 export const SERVER_MOVE_PIECE_DOWN = 'SERVER_MOVE_PIECE_DOWN';
 export const SERVER_ROTATE_PIECE = 'SERVER_ROTATE_PIECE';
 export const SERVER_DROP_PIECE = 'SERVER_DROP_PIECE';
+
+// power actions
 export const SERVER_NEXT_POWER = 'SERVER_NEXT_POWER';
 export const SERVER_PREVIOUS_POWER = 'SERVER_PREVIOUS_POWER';

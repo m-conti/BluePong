@@ -5,6 +5,7 @@ const startGame = ( {meta: {player}} ) => {
 	const room = player.room;
 	if ( !room ) throw new Error('player is not in a room');
 	if ( player !== room.master ) throw new Error('player is not the master of the room');
+	if (!room.canLaunch) throw new Error('Every players aren\'t ready');
 	room.startMatch();
 };
 
@@ -52,6 +53,13 @@ const previousPower = ( {meta: {player}} ) => {
 	}
 };
 
+const restartGame = ( {meta: {player}} ) => {
+	const room = player.room;
+	if ( !room ) throw new Error('player is not in a room');
+	if ( player !== room.master ) throw new Error('player is not the master of the room');
+	room.restart();
+};
+
 export default function ( action ) {
 	switch ( action.type ) {
 		case actionTypes.SERVER_START_GAME:
@@ -70,6 +78,8 @@ export default function ( action ) {
 			return nextPower(action);
 		case actionTypes.SERVER_PREVIOUS_POWER:
 			return previousPower(action);
+		case actionTypes.SERVER_RESTART_GAME:
+			return restartGame(action);
 		default:
 			return;
 	}

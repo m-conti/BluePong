@@ -29,14 +29,3 @@
 		width: 4px;
 	}
 }
-
-@media (min-width: 600px) and (max-width: 1080px) {
-	.SpectreTile {
-		width: 14px;
-	}
-
-	.LittleTile {
-		height: 6px;
-		width: 6px;
-	}
-}

@@ -82,6 +82,6 @@ describe('dispatchRoom', () => {
 
 		expect(player1.socket.actions.length).toBe(2);
 		expect(player2.socket.actions.length).toBe(0);
-		expect(sockets.io.actions.length).toBe(1);
+		expect(sockets.io.actions.length).toBe(2);
 	});
 });
