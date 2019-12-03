@@ -9,8 +9,8 @@ const opponents = ( props ) => {
 
 	const opponents = (props.opponents) ? props.opponents.map(o => (
 		[
-			<Spectre key={o.id} name={o.name} little={props.opponents.length > 1} spectre={o.spectre} />,
-			<div className={classes.Wrap} />,
+			<Spectre key={o.id} little={props.opponents.length > 1} name={o.name} spectre={o.spectre} />,
+			<div className={classes.Wrap} key={`${o.id} wrap`} />,
 		]
 	)) : null;
 
