@@ -22,6 +22,7 @@ class Game {
 		this.board = BOARD();
 		this.fetchCurrentPiece();
 		this.over = false;
+		this.winner = false;
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updatePower(this.power));
@@ -153,6 +154,7 @@ class Game {
 			spectre: this.board,
 			over: this.over,
 			score: this.score,
+			winner: this.winner,
 		}
 	}
 

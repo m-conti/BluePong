@@ -12,6 +12,7 @@
 }
 
 .Empty {
+	opacity: 0;
 	background-color: #282232;
 }
 

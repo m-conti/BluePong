@@ -36,9 +36,10 @@ export const gameIsOver = (id) => ({
 	id: id,
 });
 
-export const matchIsOver = (opponents) => ({
+export const matchIsOver = (opponents, winner) => ({
 	type: actionTypes.CLIENT_MATCH_OVER,
 	opponents: opponents,
+	winner: winner,
 });
 
 export const resetTetrisState = () => ({

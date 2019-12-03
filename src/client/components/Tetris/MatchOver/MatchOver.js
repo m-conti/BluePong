@@ -13,6 +13,7 @@ import {
 	TableRow,
 	TableCell
 } from '@material-ui/core';
+import { Grade, Icon } from '@material-ui/icons';
 import Button from '../../UI/Button/Button';
 const matchOver = ( props ) => {
 
@@ -23,12 +24,13 @@ const matchOver = ( props ) => {
 	const opponentScores = props.opponents ? props.opponents.map(o => (
 		<TableRow key={o._id}>
 			<TableCell>{o.name}</TableCell>
+			<TableCell>{o.winner ? <Grade /> : null}</TableCell>
 			<TableCell>{o.score}</TableCell>
 		</TableRow>
 	)) : null;
 
 	const restartButton = props.isMaster ? <Button onClick={props.restart}>Restart</Button> : null;
-
+	const winnerIcon = props.winner ? <Grade /> : null;
 	return (
 		<Dialog classes={classes.MatchOver} onClose={() => props.leave(props.player._id)} open={state.open}>
 			<DialogContent>
@@ -36,12 +38,14 @@ const matchOver = ( props ) => {
 					<TableHead>
 						<TableRow>
 							<TableCell>Name</TableCell>
+							<TableCell>Winner</TableCell>
 							<TableCell>Score</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						<TableRow>
 							<TableCell>{props.player.name}</TableCell>
+							<TableCell>{winnerIcon}</TableCell>
 							<TableCell>{props.playerScore}</TableCell>
 						</TableRow>
 						{opponentScores}

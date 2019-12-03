@@ -57,6 +57,7 @@ const Tetris = ( props ) => {
 		player={props.player}
 		playerScore={props.score}
 		restart={props.restart}
+		winner={props.winner}
 	/> : null;
 
 	return (

@@ -10,6 +10,7 @@ const mapStateToProps = ( state ) => ({
 	score: state.tetris.score,
 	power: state.tetris.power,
 	matchIsOver: state.tetris.matchIsOver,
+	winner: state.tetris.winner,
 });
 
 const mapDispatchToProps = ( dispatch ) => ({

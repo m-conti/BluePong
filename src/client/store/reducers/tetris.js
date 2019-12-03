@@ -8,6 +8,7 @@ const initialState = {
 	opponents: null,
 	score: 0,
 	power: null,
+	winner: false,
 	gameIsOver: false,
 	matchIsOver: false,
 };
@@ -48,10 +49,11 @@ const updateGameIsOver = ( state ) => ({
 	...state,
 	gameIsOver: true,
 });
-const updateMatchOver = ( state, { opponents }) => ({
+const updateMatchOver = ( state, { opponents, winner }) => ({
 	...state,
 	matchIsOver: true,
 	opponents: opponents,
+	winner: winner,
 });
 
 export default ( state = initialState, action ) => {

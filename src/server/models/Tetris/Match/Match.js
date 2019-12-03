@@ -28,7 +28,7 @@ class Match {
 	end() {
 		this.games.forEach((game) => {
 			const opponents = game.opponents.map((o) => o.serializeAsOpponent());
-			game.player.socket.emit('action', matchIsOver(opponents));
+			game.player.socket.emit('action', matchIsOver(opponents, game.winner));
 		});
 		this.room.isDone = true;
 		this.room.update();
@@ -43,7 +43,10 @@ class Match {
 			}
 			else { game = this.games[i]}
 		}
-		if (end === 1) { game.gameOver(); }
+		if (end === 1) {
+			game.winner = true;
+			game.gameOver();
+		}
 		if (!end) { this.end(); }
 	}
 
