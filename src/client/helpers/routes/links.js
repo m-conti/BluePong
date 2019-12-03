@@ -1,7 +1,5 @@
 import store from '../../store/store';
 import * as path from '../../../constants/path';
-import {CLIENT_ROOMS} from "../../../constants/path";
-
 
 
 class Link {
@@ -15,7 +13,7 @@ class Link {
 class LinksList {
 	constructor() {
 		this.links = [
-//			new Link('Home', '/', true),
+		//	new Link('Home', '/', true),
 		];
 	}
 	push(name, link, exact) {

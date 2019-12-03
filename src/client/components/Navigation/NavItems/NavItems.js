@@ -39,15 +39,15 @@ const NavItems = ( props ) => {
 	const navClasses = props.display === display.DESKTOP ? [classes.root, classes.desktop] : [classes.root, classes.phone];
 	return (
 		<div className={navClasses.join(' ')}>
-			{links.map(( elem, key ) => <NavItem display={props.display} key={key} link={elem.link}
-														   exact={elem.exact}>{elem.name}</NavItem>)}
+			{links.map(( elem, key ) => <NavItem display={props.display} exact={elem.exact} key={key}
+				link={elem.link}>{elem.name}</NavItem>)}
 		</div>
 	);
 };
 
 NavItems.propTypes = {
-	user: userType.isRequired,
 	display: propTypes.oneOf(values(display)),
+	user: userType.isRequired,
 };
 
 export default NavItems;

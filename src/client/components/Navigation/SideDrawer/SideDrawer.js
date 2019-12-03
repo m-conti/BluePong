@@ -1,17 +1,18 @@
 import React from 'react';
+import * as propTypes from 'prop-types';
 
 import classes from './SideDrawer.css';
 
 import Media from 'react-media';
 import { query, display } from '../../../../constants/display';
 
-import { Backdrop, SwipeableDrawer } from '@material-ui/core';
+import { SwipeableDrawer } from '@material-ui/core';
 import NavItems from '../NavItems/NavItems';
 
 const sideDrawer = ( props ) => (
 	<Media query={query.PHONE}>
 		<div>
-			<SwipeableDrawer open={props.open} onClose={() => props.toggle(false)} onOpen={() => props.toggle(true)}>
+			<SwipeableDrawer onClose={() => props.toggle(false)} onOpen={() => props.toggle(true)} open={props.open}>
 				<div className={classes.SideDrawer}>
 					<NavItems display={display.PHONE} user={props.user} />
 				</div>
@@ -19,5 +20,11 @@ const sideDrawer = ( props ) => (
 		</div>
 	</Media>
 );
+
+sideDrawer.propTypes = {
+	open: propTypes.func.isRequired,
+	user: propTypes.shape({}),
+	toggle: propTypes.func.isRequired,
+}
 
 export default sideDrawer;

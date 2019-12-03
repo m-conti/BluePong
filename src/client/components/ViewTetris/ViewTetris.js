@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 
-import classes from './ViewTetris.css';
 
-
-const viewTetris = ( props ) => {
+const viewTetris = () => {
 
 	useEffect(() => {
 

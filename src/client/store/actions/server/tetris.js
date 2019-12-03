@@ -1,6 +1,5 @@
 import remote from './remote';
 import * as actions from '../../../../actions/actionTypes/tetris';
-import { BOARD } from '../../../../constants/tetris';
 
 
 // VIEWER

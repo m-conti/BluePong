@@ -3,7 +3,7 @@ import React from 'react';
 import * as propTypes from 'prop-types';
 import roomType from '../../propTypes/room/room';
 
-import classes from './Room.css';
+// import classes from './Room.css';
 
 import { CLIENT_ROOMS } from '../../../constants/path';
 import { Redirect } from 'react-router-dom';

@@ -39,7 +39,7 @@ const updateNextPiece = ( state, {piece} ) => ({
 	...state,
 	nextPiece: piece,
 });
-const updateGameIsOver = ( state, {id} ) => ({
+const updateGameIsOver = ( state ) => ({
 	...state,
 	gameIsOver: true,
 });

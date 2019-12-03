@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as propTypes from 'prop-types';
 
 import classes from './MatchOver.css';
 
@@ -51,5 +52,10 @@ const matchOver = ( props ) => {
 		</Dialog>
 	);
 };
+
+matchOver.propTypes = {
+	leave: propTypes.func.isRequired,
+	player: propTypes.shape({}),
+}
 
 export default matchOver;

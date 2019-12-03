@@ -31,12 +31,12 @@ const SetName = ( props ) => {
 			<DialogContent>
 				<TextField
 					autoFocus
-					id="name"
-					label="Name"
-					type="text"
-					value={state.name}
-					onChange={changeName}
 					fullWidth
+					id='name'
+					label='Name'
+					onChange={changeName}
+					type='text'
+					value={state.name}
 				/>
 			</DialogContent>
 			<DialogActions>

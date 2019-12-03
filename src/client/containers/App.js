@@ -4,7 +4,7 @@ import App from '../components/App';
 
 import * as actions from '../store/actions/index';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = () => ({
 
 });
 

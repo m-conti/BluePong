@@ -57,10 +57,10 @@ const Tetris = ( props ) => {
 		playerScore={props.score} /> : null;
 
 	return (
-		<div className={classes.Tetris} ref={setRef} onKeyDown={keyDownPressHandler} tabIndex={'1'}>
+		<div className={classes.Tetris} onKeyDown={keyDownPressHandler} ref={setRef} tabIndex={'1'}>
 			{board}
 			<div className={classes.Hud}>
-				<Infos score={props.score} power={props.power} />
+				<Infos power={props.power} score={props.score} />
 				{nextPiece}
 				<Opponents opponents={props.opponents} />
 			</div>
@@ -71,18 +71,23 @@ const Tetris = ( props ) => {
 
 Tetris.propTypes = {
 	board: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired),
+	drop: propTypes.func.isRequired,
 	init: propTypes.func.isRequired,
+	leave: propTypes.func.isRequired,
+	matchIsOver: propTypes.bool.isRequired,
+	moveDown: propTypes.func.isRequired,
 	moveLeft: propTypes.func.isRequired,
 	moveRight: propTypes.func.isRequired,
-	moveDown: propTypes.func.isRequired,
-	rotate: propTypes.func.isRequired,
-	drop: propTypes.func.isRequired,
-	powerNext: propTypes.func.isRequired,
-	powerPrevious: propTypes.func.isRequired,
+	nextPiece: propTypes.func.isRequired,
 	opponents: propTypes.arrayOf(propTypes.shape({
 		id: propTypes.string.isRequired,
 		spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired).isRequired,
 	}).isRequired),
+	player: propTypes.shape({}),
+	power: propTypes.func.isRequired,
+	powerNext: propTypes.func.isRequired,
+	powerPrevious: propTypes.func.isRequired,
+	rotate: propTypes.func.isRequired,
 	score: propTypes.number.isRequired,
 };
 

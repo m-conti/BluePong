@@ -8,7 +8,7 @@ const Notifier = ( props ) => {
 
 	useEffect(() => {
 		const newDisplay = [...displayed];
-		for ( let notificationKey in props.notifications ) {
+		for ( const notificationKey in props.notifications ) {
 			const notification = props.notifications[notificationKey];
 			if ( !displayed.find(( elemDisplayed ) => elemDisplayed._id === notification._id) ) {
 				newDisplay.push(notification);
@@ -18,13 +18,13 @@ const Notifier = ( props ) => {
 						<Button onClick={() => props.dismissNotification(notification._id)}>dismiss</Button>
 					),
 					key: notification._id,
-					onClose: ( event, reason, key ) => {
+					onClose: () => {
 						props.dismissNotification(notification._id);
 					},
 				});
 			}
 		}
-		for ( let displayedKey in displayed ) {
+		for ( const displayedKey in displayed ) {
 			const displayedNotification = displayed[displayedKey];
 			if ( !props.notifications.find(( elem ) => elem._id === displayedNotification._id) ) {
 				newDisplay.splice(displayedKey, 1);
