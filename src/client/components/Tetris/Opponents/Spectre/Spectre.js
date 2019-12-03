@@ -8,7 +8,7 @@ const Spectre = ( props ) => {
 
 	const tileArray = props.spectre.map((content, rowNumber) => {
 		const rowContent = content.map((x, column) => (
-			<SpectreTile little={props.little} content={x} key={`${rowNumber}.${column}`} />
+			<SpectreTile content={x} key={`${rowNumber}.${column}`} little={props.little}/>
 		));
 		return (
 			<div className={classes.SpectreBoardRow} key={rowNumber}>
