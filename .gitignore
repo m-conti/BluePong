@@ -8,3 +8,4 @@ node_modules
 coverage
 .nyc*
 db
+.DS_Store
