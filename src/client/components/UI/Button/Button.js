@@ -6,6 +6,7 @@ import { PRIMARY_COLOR, WHITE_COLOR } from '../../../styles/constant';
 const style = {
 	root: {
 		color: PRIMARY_COLOR,
+		margin: '10px',
 	}
 };
 

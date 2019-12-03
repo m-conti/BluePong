@@ -54,7 +54,9 @@ const CreateNewRoom = (props) => {
 						onChange={changeName}
 						fullWidth
 					/>
-					<label htmlFor="max-player">Max Player</label>
+					<div className={classes.labelMaxPlayer}>
+						<label htmlFor="max-player">Max Player</label>
+					</div>
 					<Slider id="max-player" value={state.playerMax} max={4} min={1} step={1} valueLabelDisplay={'auto'}
 						onChange={(_, value) => changeMaxPlayer(value)}/>
 				</DialogContent>
