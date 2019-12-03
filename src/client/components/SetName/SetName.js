@@ -33,6 +33,9 @@ const SetName = ( props ) => {
 					autoFocus
 					fullWidth
 					id='name'
+					inputProps={{
+						maxLength: 10,
+					}}
 					label='Name'
 					onChange={changeName}
 					type='text'

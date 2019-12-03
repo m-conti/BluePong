@@ -27,6 +27,8 @@ const matchOver = ( props ) => {
 		</TableRow>
 	)) : null;
 
+	const restartButton = props.isMaster ? <Button onClick={props.restart}>Restart</Button>: null;
+
 	return (
 		<Dialog classes={classes.MatchOver} open={state.open} onClose={() => props.leave(props.player._id)}>
 			<DialogContent>
@@ -48,6 +50,7 @@ const matchOver = ( props ) => {
 			</DialogContent>
 			<DialogActions>
 				<Button onClick={() => props.leave(props.player._id)}>Leave</Button>
+				{restartButton}
 			</DialogActions>
 		</Dialog>
 	);

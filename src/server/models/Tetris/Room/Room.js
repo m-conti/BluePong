@@ -5,6 +5,7 @@ import sockets from '../../Sockets/Sockets';
 import * as actions from '../../../actions/client/rooms';
 
 import Match from '../Match/Match';
+import {resetTetrisState} from "../../../actions/client/game";
 
 class Room {
 	constructor( id, name, {playerMax, ViewerMax} ) {
@@ -32,6 +33,23 @@ class Room {
 		return this.readyState.slice(0, this.players.length).every((val) => val);
 	}
 
+	reset() {
+		this.match = new Match(this);
+		this.readyState = new Array(this.maxPlayers).fill(false);
+		this.isPlaying = false;
+		this.isDone = false;
+		this.update();
+	}
+
+	restart() {
+		if (!this.isPlaying) throw new Error('Match hasn\'t started before');
+		if (!this.isDone) throw new Error('Match isn\'t done');
+		this.reset();
+		this.players.forEach((player) => {
+			player.socket.emit('action', resetTetrisState());
+		});
+	}
+
 	update() {
 		sockets.io.emit('action', actions.updateRoom(this));
 	}
@@ -41,7 +59,8 @@ class Room {
 		this.players.forEach(( player ) => player.leave(this));
 		this.match.games.forEach((game) => {
 			clearInterval(game.gravityLoop);
-		})
+		});
+		sockets.io.emit('action', actions.updateRooms(sockets.tetris.rooms));
 	}
 
 	serialize() {

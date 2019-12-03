@@ -6,3 +6,7 @@
 	width: 100%;
 	flex-wrap: wrap;
 }
+
+.Wrap {
+	flex: 1;
+}

@@ -16,6 +16,10 @@ export const startGame = () => ({
 	meta: remote,
 	type: actions.SERVER_START_GAME,
 });
+export const restartGame = () => ({
+	meta: remote,
+	type: actions.SERVER_RESTART_GAME,
+});
 
 // PIECE
 export const moveLeft = () => ({

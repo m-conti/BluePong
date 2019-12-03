@@ -22,6 +22,7 @@ const mapDispatchToProps = ( dispatch ) => ({
 	leave: (id) => dispatch(actions.leaveRoom(id)),
 	powerNext: () => dispatch(actions.nextPower()),
 	powerPrevious: () => dispatch(actions.previousPower()),
+	restart: () => dispatch(actions.restartGame()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tetris);
