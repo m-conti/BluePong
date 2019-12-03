@@ -21,10 +21,10 @@ const roomListed = ( props ) => {
 			<TableCell>{props.creationTime}</TableCell>
 			<TableCell>{state}</TableCell>
 			<TableCell>
-				{props.isMaster ? <IconButton aria-label="Delete" onClick={() => props.onDeleteRoom(props._id)}>
+				{props.isMaster ? <IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
 					<Delete/>
 				</IconButton> : null}
-				<IconButton aria-label="Connect" onClick={() => props.onJoinRoom(props._id)}>
+				<IconButton aria-label='Connect' onClick={() => props.onJoinRoom(props._id)}>
 					<PlayArrow />
 				</IconButton>
 			</TableCell>
@@ -33,14 +33,14 @@ const roomListed = ( props ) => {
 };
 
 roomListed.propTypes = {
+	_id: propTypes.number.isRequired,
 	creationTime: propTypes.number,
+	isDone: propTypes.bool.isRequired,
 	maxPlayers: propTypes.number.isRequired,
 	name: propTypes.string,
 	onDeleteRoom: propTypes.func.isRequired,
 	onJoinRoom: propTypes.func.isRequired,
 	players: propTypes.arrayOf(playerType).isRequired,
-	isDone: propTypes.bool.isRequired,
-	_id: propTypes.number.isRequired,
 };
 
 export default roomListed;

@@ -51,12 +51,12 @@ const Tetris = ( props ) => {
 	};
 
 	const matchOver = props.matchIsOver ? <MatchOver
+		isMaster={props.isMaster}
 		leave={props.leave}
 		opponents={props.opponents}
 		player={props.player}
 		playerScore={props.score}
 		restart={props.restart}
-		isMaster={props.isMaster}
 	/> : null;
 
 	return (
