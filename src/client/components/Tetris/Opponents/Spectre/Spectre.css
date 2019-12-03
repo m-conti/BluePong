@@ -25,6 +25,15 @@
 	flex: 0;
 }
 
+.GameOver .Spectre {
+	background-color: #FF0000;
+}
+
+.GameOver .Name {
+	text-decoration: line-through;
+	font-weight: bold;
+}
+
 .OpponentLittle {
 	margin: 6px;
 }

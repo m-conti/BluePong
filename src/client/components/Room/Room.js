@@ -28,7 +28,6 @@ const Room = ( props ) => {
 };
 
 Room.propTypes = {
-	playerId: propTypes.number.isRequired,
 	rooms: propTypes.arrayOf(roomType),
 };
 

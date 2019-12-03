@@ -12,15 +12,15 @@ class Location {
 
 exports.location = {
 	server: new Location({
-		host: '10.11.3.6',
+		host: 'localhost',
 		port: 3004,
 	}),
 	api: new Location({
-		host: '10.11.3.6',
+		host: 'localhost',
 		port: 3005,
 	}),
 	client: new Location({
-		host: '10.11.3.6',
+		host: 'localhost',
 		port: 8080,
 	})
 };

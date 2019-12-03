@@ -1,5 +1,4 @@
 import React from 'react';
-import * as propTypes from 'prop-types';
 
 import classes from './Spectre.css';
 import SpectreTile from './SpectreTile/SpectreTile';
@@ -18,6 +17,7 @@ const Spectre = ( props ) => {
 	});
 	const opponentClasses = [classes.Opponent];
 	if (props.little) { opponentClasses.push(classes.OpponentLittle); }
+	if (props.gameover) { opponentClasses.push(classes.GameOver); }
 
 	return (
 		<div className={opponentClasses.join(' ')}>
@@ -27,10 +27,6 @@ const Spectre = ( props ) => {
 			</div>
 		</div>
 	);
-};
-
-Spectre.propTypes = {
-	spectre: propTypes.arrayOf(propTypes.arrayOf(propTypes.number.isRequired).isRequired).isRequired,
 };
 
 export default Spectre;

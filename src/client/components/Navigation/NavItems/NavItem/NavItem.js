@@ -55,9 +55,9 @@ const navItem = (props) => {
 
 
 navItem.propTypes = {
-	children: propTypes.shape({}),
+	children: propTypes.string,
 	display: propTypes.string,
-	exact: propTypes.shape({}),
+	exact: propTypes.bool,
 	link: propTypes.string,
 };
 

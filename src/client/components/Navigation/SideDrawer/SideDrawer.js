@@ -22,7 +22,7 @@ const sideDrawer = ( props ) => (
 );
 
 sideDrawer.propTypes = {
-	open: propTypes.func.isRequired,
+	open: propTypes.bool.isRequired,
 	toggle: propTypes.func.isRequired,
 	user: propTypes.shape({}),
 }
