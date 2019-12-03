@@ -35,9 +35,16 @@ class Match {
 	}
 
 	checkEnd() {
-		if (this.games.every((game) => game.over)) {
-			this.end();
+		let end = this.games.length;
+		let game = null;
+		for (let i = 0; i < this.games.length; ++i) {
+			if (this.games[i].over) {
+				end--;
+			}
+			else { game = this.games[i]}
 		}
+		if (end === 1) { game.gameOver(); }
+		if (!end) { this.end(); }
 	}
 
 }
