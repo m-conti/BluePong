@@ -2,7 +2,7 @@ import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 
 import Piece from '../Piece/Piece';
-import { updateBoard, updateNextPiece, updateScore, updatePower, updateOpponentSpectre, gameIsOver} from '../../../actions/client/game';
+import { updateBoard, updateNextPiece, updateScore, updatePower, updateOpponentSpectre, updateOpponent, gameIsOver} from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
 
 import { regularPowers } from './Power/power';
@@ -67,12 +67,18 @@ class Game {
 		});
 	}
 
+	updateAsOpponent() {
+		this.opponents.forEach((opponent) => {
+			opponent.player.socket.emit('action', updateOpponent(this.serializeAsOpponent()));
+		});
+	}
+
 	gameOver() {
 		clearInterval(this.gravityLoop);
 		this.over = true;
 		this.match.checkEnd();
 		this.player.socket.emit('action', gameIsOver(this.player._id));
-		this.updateSpectre();
+		this.updateAsOpponent();
 	}
 
 	fetchCurrentPiece() {

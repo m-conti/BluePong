@@ -26,6 +26,11 @@ export const updateOpponentSpectre = (id, spectre) => ({
 	id: id,
 });
 
+export const updateOpponent = (opponent) => ({
+	type: actionTypes.CLIENT_UPDATE_OPPONENT,
+	opponent: opponent,
+});
+
 export const gameIsOver = (id) => ({
 	type: actionTypes.CLIENT_GAME_OVER,
 	id: id,

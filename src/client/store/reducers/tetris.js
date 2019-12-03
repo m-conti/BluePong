@@ -27,6 +27,11 @@ const updateOpponentSpectre = ( state, {id, spectre} ) => {
 	newOpponents[state.opponents.findIndex(( elem ) => elem.id === id)].spectre = spectre;
 	return {...state, opponents: newOpponents};
 };
+const updateOpponent = ( state, {opponent} ) => {
+	const newOpponents = cloneDeep(state.opponents);
+	newOpponents[state.opponents.findIndex(( elem ) => elem.id === opponent.id)] = opponent;
+	return {...state, opponents: newOpponents};
+};
 const updateScore = ( state, {score} ) => ({
 	...state,
 	score: score
@@ -58,6 +63,8 @@ export default ( state = initialState, action ) => {
 			return updateBoard(state, action);
 		case actions.CLIENT_UPDATE_OPPONENT_SPECTRE:
 			return updateOpponentSpectre(state, action);
+		case actions.CLIENT_UPDATE_OPPONENT:
+			return updateOpponent(state, action);
 		case actions.CLIENT_UPDATE_SCORE:
 			return updateScore(state, action);
 		case actions.CLIENT_UPDATE_POWER:
