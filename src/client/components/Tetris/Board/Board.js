@@ -24,8 +24,11 @@ const Board = ( props ) => {
 
 
 	return (
-		<div className={classes.Board}>
-			{tileArray}
+		<div>
+			<div className={classes.Board}>
+				{tileArray}
+			</div>
+			<div className={classes.Wrap} />
 		</div>
 	);
 };

@@ -38,6 +38,15 @@
 	margin: 6px;
 }
 
+.Wrap {
+	flex: 1;
+}
+
+.Wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
 @media (max-width: 599px) {
 	.Name {
 		width: 80px;
