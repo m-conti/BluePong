@@ -16,17 +16,11 @@
     "coverage": "NODE_ENV=test jest --coverage"
   },
   "dependencies": {
-    "@babel/core": "7.5.5",
     "@material-ui/styles": "^4.3.3",
     "@svgr/webpack": "4.3.2",
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
     "axios": "^0.19.0",
-    "babel-eslint": "10.0.2",
-    "babel-loader": "8.0.6",
-    "babel-plugin-emotion": "^10.0.16",
-    "babel-plugin-named-asset-import": "^0.3.3",
-    "babel-preset-react-app": "^9.0.1",
     "bcrypt": "^3.0.6",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
@@ -101,6 +95,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
+    "@babel/core": "7.5.5",
     "@babel/cli": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
@@ -109,7 +104,12 @@
     "@babel/register": "^7.5.5",
     "@material-ui/core": "^4.3.2",
     "@material-ui/icons": "^4.2.1",
+    "babel-eslint": "10.0.2",
     "babel-jest": "^24.9.0",
+    "babel-loader": "8.0.6",
+    "babel-plugin-emotion": "^10.0.16",
+    "babel-plugin-named-asset-import": "^0.3.3",
+    "babel-preset-react-app": "^9.0.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "concurrently": "^4.1.1",
