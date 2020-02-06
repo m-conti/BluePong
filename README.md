@@ -79,7 +79,7 @@ X     : change to right power
 ```
 the power proc for each line you do.
 
-### Images
+## Images
 ![alt text](./Images/1v1_game.png)
 ![alt text](./Images/create_room.png)
 ![alt text](./Images/room.png)
