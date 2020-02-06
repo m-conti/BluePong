@@ -50,6 +50,8 @@ Test, test and re-test …
 $ npm run test
 ```
 
+## How To Use
+
 ### Lobby
 
 You need to choose a name.
