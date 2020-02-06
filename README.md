@@ -62,5 +62,35 @@ Test, test and re-test …
 $ npm run test
 ```
 
+### Lobby
+
+You need to choose a name.
+
+After that you can join or create a room, to start to play.
+
+### In a room
+
+You can set ready or not. leave the room... Or if you are the Room's Master you can start the game if everybody is ready. Or he can kick poeple if he want.
+
+### In game
+
+It's a Tetris multiplayer
+
+Keyboard :
+
+```
+UP    : rotate the piece
+DOWN  : move the piece down
+LEFT  : move the piece left
+RIGHT : move the piece right
+SPACE : drop the piece
+Z     : change to left power
+X     : change to right power
+```
+the power proc for each line you do.
+
 ### Images
-![alt text](./Images/screenshot_game.png)
+![alt text](./Images/1v1_game.png)
+![alt text](./Images/create_room.png)
+![alt text](./Images/room.png)
+![alt text](./Images/multi_game.png)
