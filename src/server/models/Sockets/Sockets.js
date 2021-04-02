@@ -59,7 +59,7 @@ class Sockets {
 					this.dispatch(action);
 				}
 				catch ( error ) {
-					console.error(error);
+					console.error(error.message);
 					socket.emit('action', notifierActions.displayNotification({
 						message: error.message,
 						status: 'error',

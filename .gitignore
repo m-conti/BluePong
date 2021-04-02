@@ -9,3 +9,4 @@ coverage
 .nyc*
 db
 .DS_Store
+package-lock.json

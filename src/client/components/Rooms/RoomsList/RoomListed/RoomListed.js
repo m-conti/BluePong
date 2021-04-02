@@ -3,11 +3,23 @@ import React from 'react';
 import * as propTypes from 'prop-types';
 import playerType from '../../../../propTypes/player/player';
 
+import { withRouter } from 'react-router-dom';
+import { CLIENT_ROOMS } from '../../../../../constants/path'
+
 import { TableRow, TableCell, IconButton } from '@material-ui/core';
 import { Delete, PlayArrow } from '@material-ui/icons';
 
 
+
 const roomListed = ( props ) => {
+
+	const tryToJoinRoom = () => {
+		if (props.players.some((player) => player._id === props.user._id))
+			props.history.push(`${CLIENT_ROOMS}/${props._id}`);
+		else
+			props.onJoinRoom(props._id)
+	};
+
 	let state;
 
 	if (props.isDone) { state = 'Done' }
@@ -24,7 +36,7 @@ const roomListed = ( props ) => {
 				{props.isMaster ? <IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
 					<Delete/>
 				</IconButton> : null}
-				<IconButton aria-label='Connect' onClick={() => props.onJoinRoom(props._id)}>
+				<IconButton aria-label='Connect' onClick={tryToJoinRoom}>
 					<PlayArrow />
 				</IconButton>
 			</TableCell>
@@ -43,4 +55,4 @@ roomListed.propTypes = {
 	players: propTypes.arrayOf(playerType).isRequired,
 };
 
-export default roomListed;
+export default withRouter(roomListed);

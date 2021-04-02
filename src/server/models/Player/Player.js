@@ -13,7 +13,7 @@ class Player {
 		this.name = null;
 	}
 
-	setName(name) {
+	setName( name ) {
 		this.name = name;
 	}
 
