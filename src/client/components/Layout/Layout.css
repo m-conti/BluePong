@@ -36,4 +36,3 @@
 :global(.MuiTableRow-root):last-child > :global(.MuiTableCell-root) {
   border-bottom: transparent;
 }
-

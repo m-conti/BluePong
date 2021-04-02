@@ -63,7 +63,7 @@ const CreateNewRoom = (props) => {
 					<Slider id='max-player' max={4} min={1} onChange={(_, value) => changeMaxPlayer(value)}
 						step={1} value={state.playerMax} valueLabelDisplay={'auto'}/>
 				</DialogContent>
-				<DialogActions>
+				<DialogActions className={classes.createRoomButtonContainer}>
 					<Button color={'primary'}
 						onClick={() => props.create({name: state.name, playerMax: state.playerMax})}>
 						Create

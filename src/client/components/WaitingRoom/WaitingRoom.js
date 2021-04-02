@@ -24,7 +24,9 @@ const WaitingRoom = (props) => {
 				playerId={props.playerId}
 				players={props.room.players}
 				toggleReady={props.toggleReady}/>
-			{startGameButton}
+			<div className={classes.startGameButtonWrapper}>
+				{startGameButton}
+			</div>
 		</div>
 	);
 };

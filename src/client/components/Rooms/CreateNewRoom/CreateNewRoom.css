@@ -1,4 +1,5 @@
 .CreateNewRoom {
+	text-align: center;
 }
 
 .labelMaxPlayer {
@@ -8,4 +9,8 @@
 
 .dialogTitle {
 	text-align: center
+}
+
+div .createRoomButtonContainer {
+	justify-content: center;
 }

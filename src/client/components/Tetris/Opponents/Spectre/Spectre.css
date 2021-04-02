@@ -1,28 +1,27 @@
+.Opponent {
+	flex-grow: 1;
+}
 
 .SpectreBoardRow {
 	display: flex;
 	flex-direction: row;
-	flex: 0;
-}
-
-.Opponent {
-	margin: 20px;
 }
 
 .Name {
 	display: flex;
 	color: #282232;
 	text-overflow: ellipsis;
+	justify-content: center;
+	padding: 5px 0px 3px 0px;
 }
 
 .Spectre {
-	padding: 6px;
 	display: flex;
 	flex-direction: column;
 	border: 1px solid black;
 	border-radius: 6px;
 	background-color: #282232;
-	flex: 0;
+	width: 100%;
 }
 
 .GameOver .Spectre {
@@ -35,7 +34,7 @@
 }
 
 .OpponentLittle {
-	margin: 6px;
+	/* margin: 6px; */
 }
 
 .Wrap {
@@ -45,16 +44,4 @@
 .Wrapper {
 	display: flex;
 	flex-direction: row;
-}
-
-@media (max-width: 599px) {
-	.Name {
-		width: 80px;
-	}
-}
-
-@media (min-width: 600px) and (max-width: 1080px) {
-	.Name {
-		width: 140px;
-	}
 }

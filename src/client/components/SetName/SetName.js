@@ -46,7 +46,7 @@ const SetName = ( props ) => {
 					value={state.name}
 				/>
 			</DialogContent>
-			<DialogActions>
+			<DialogActions className={classes.setNameButton}>
 				<Button color={'primary'} onClick={setName}>Set Name</Button>
 			</DialogActions>
 		</Dialog>

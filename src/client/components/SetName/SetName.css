@@ -1,7 +1,10 @@
 .SetName {
+}
 
+div .setNameButton {
+	justify-content: center;
 }
 
 .dialogTitle {
-	text-align: center
+	text-align: center;
 }

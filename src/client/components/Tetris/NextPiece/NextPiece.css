@@ -2,34 +2,15 @@
 	border: 1px solid black;
 	border-radius:6px;
 	background-color: #282232;
-	height: 22vh;
+	height: 16vh;
 	padding: auto;
-	vertical-align: middle;
-	box-sizing: border-box;
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .Array {
-	margin-top: 6vh;
 	display: flex;
 	flex-direction: column;
-}
-
-@media (max-width: 599px) {
-	.NextPiece {
-		height: 120px;
-	}
-
-	.Array {
-		margin-top: 40px;
-	}
-}
-
-@media (min-width: 600px) and (max-width: 1080px) {
-	.NextPiece {
-		height: 300px;
-	}
-
-	.Array {
-		margin-top: 100px;
-	}
 }

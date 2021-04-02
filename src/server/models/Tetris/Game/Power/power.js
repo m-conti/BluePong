@@ -42,7 +42,7 @@ export class RegularAddHandicapWorst extends Power {
 	constructor() {
 		super();
 		this.name = 'Bully';
-		this.description = 'add one handicap line to the wrost opponent';
+		this.description = 'add one handicap line to the worst opponent';
 		this.mode = 'regular';
 	}
 

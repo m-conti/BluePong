@@ -1,9 +1,9 @@
 .SpectreTile {
-	height: 2vh;
-	width: 2vh;
+    height: 2.66vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-grow: 1;
 }
 
 .LittleTile {
@@ -18,15 +18,4 @@
 
 .Full {
 	background-color: #F7DC6F;
-}
-
-@media (max-width: 599px) {
-	.SpectreTile {
-		width: 8px;
-	}
-
-	.LittleTile {
-		height: 4px;
-		width: 4px;
-	}
 }
