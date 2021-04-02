@@ -24,17 +24,14 @@ class LinksList {
 
 export const generateLinks = () => {
 	const state = store.getState();
-
 	const list = new LinksList();
 
-	// FAIRE AUTH
 	if (state.user) {
 		if (state.user.roomId) {
-			list.push('Tetris', `${path.CLIENT_ROOMS}/${state.user.roomId}`, true);
+			const roomUser = state.rooms.rooms.find(( room ) => room._id === state.user.roomId);
+			list.push(roomUser.name ? roomUser.name : "Room " + state.user.roomId, `${path.CLIENT_ROOMS}/${state.user.roomId}`, true);
 		}
 		list.push('Rooms', path.CLIENT_ROOMS, true);
-		// list.push('Profile', '/profile', false);
-		// list.push('Log Out', '/logout', true);
 	}
 	else {
 		list.push('Sign In', '/auth', true);
