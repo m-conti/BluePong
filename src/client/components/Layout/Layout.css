@@ -1,4 +1,5 @@
 .Layout {
+
 }
 
 .Content {
@@ -10,5 +11,29 @@
 	.Content {
 		width: 1080px;
 	}
+}
+
+
+
+/*
+**	TABLE
+*/
+
+:global(table.MuiTable-root) {
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
+}
+
+:global(th.MuiTableCell-head) {
+	font-weight: 600;
+}
+
+:global(td.MuiTableCell-root), :global(th.MuiTableCell-root) {
+	padding: 18px 24px;
+}
+
+:global(.MuiTableRow-root):last-child > :global(.MuiTableCell-root) {
+  border-bottom: transparent;
 }
 

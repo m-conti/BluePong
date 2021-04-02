@@ -10,6 +10,7 @@ import { CLIENT_ROOMS } from '../../../../../constants/path'
 import { TableRow, TableCell, IconButton } from '@material-ui/core';
 import { Delete, PlayArrow } from '@material-ui/icons';
 import Tooltip from '../../../UI/Tooltip/Tooltip';
+import ProgressBar from '../../../UI/ProgressBar/ProgressBar';
 
 
 
@@ -33,7 +34,11 @@ const roomListed = ( props ) => {
 	return (
 		<TableRow>
 			<TableCell>{props.name}</TableCell>
-			<TableCell>{props.players.length} / {props.maxPlayers}</TableCell>
+			<TableCell>
+				<Tooltip title={`${props.players.length} / ${props.maxPlayers}`}>
+					<ProgressBar variant="determinate" value={(props.players.length / props.maxPlayers) * 100} />
+				</Tooltip>
+			</TableCell>
 			<TableCell>{moment(props.creationTime).format("LLL")}</TableCell>
 			<TableCell>{state}</TableCell>
 			<TableCell>

@@ -1,3 +1,8 @@
 .PlayersList {
 
 }
+
+.LeaderColumn:global(.MuiTableCell-root) {
+  padding: 18px 0 18px 28px;
+  width: 32px;
+}
