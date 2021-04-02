@@ -24,6 +24,7 @@ const roomsList = (props) => {
 			onDeleteRoom={props.onDeleteRoom}
 			onJoinRoom={props.onJoinRoom}
 			players={elem.players}
+			user={props.user}
 		/>
 	));
 

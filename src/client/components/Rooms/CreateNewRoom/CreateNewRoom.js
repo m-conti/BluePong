@@ -42,7 +42,7 @@ const CreateNewRoom = (props) => {
 
 	return (
 		<div className={classes.CreateNewRoom}>
-			<Button onClick={toggleModalNewRoom}>Add New Room</Button>
+			<Button onClick={toggleModalNewRoom} disabled={props.disabled}>Add New Room</Button>
 			<Dialog onClose={() => toggleModalNewRoom(false)} open={state.showModal}>
 				<DialogContent>
 					<TextField
@@ -73,6 +73,7 @@ const CreateNewRoom = (props) => {
 
 CreateNewRoom.propTypes = {
 	create: propTypes.func.isRequired,
+	disabled: propTypes.bool.isRequired,
 };
 
 export default CreateNewRoom;

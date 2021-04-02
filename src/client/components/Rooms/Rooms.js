@@ -22,7 +22,7 @@ const Rooms = ( props ) => {
 	return (
 		<div className={classes.Rooms}>
 			{roomList}
-			<CreateNewRoom create={props.createRoom}/>
+			<CreateNewRoom create={props.createRoom} disabled={!!props.user.roomId} />
 		</div>
 	);
 };
