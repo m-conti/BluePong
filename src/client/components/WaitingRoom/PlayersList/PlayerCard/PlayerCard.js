@@ -24,7 +24,7 @@ const playerCard = ( props ) => {
 	return (
 		<TableRow>
 			<TableCell>{props.name}</TableCell>
-			<TableCell>{props.isReady ? <Done /> : <Clear color='error' />}</TableCell>
+			<TableCell>{props.isReady ? <Tooltip title="ready"><Done /></Tooltip> : <Tooltip title="not ready"><Clear color='error' /></Tooltip>}</TableCell>
 			{actions}
 		</TableRow>
 	);
