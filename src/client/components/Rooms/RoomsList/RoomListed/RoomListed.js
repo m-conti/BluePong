@@ -8,16 +8,19 @@ import { CLIENT_ROOMS } from '../../../../../constants/path'
 
 import { TableRow, TableCell, IconButton } from '@material-ui/core';
 import { Delete, PlayArrow } from '@material-ui/icons';
+import Tooltip from '../../../UI/Tooltip/Tooltip';
 
 
 
 const roomListed = ( props ) => {
 
 	const tryToJoinRoom = () => {
-		if (props.players.some((player) => player._id === props.user._id))
+		if (props.players.some((player) => player._id === props.user._id)) {
 			props.history.push(`${CLIENT_ROOMS}/${props._id}`);
-		else
+		}
+		else {
 			props.onJoinRoom(props._id)
+		}
 	};
 
 	let state;
@@ -33,12 +36,14 @@ const roomListed = ( props ) => {
 			<TableCell>{props.creationTime}</TableCell>
 			<TableCell>{state}</TableCell>
 			<TableCell>
-				{props.isMaster ? <IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
+				{props.isMaster ? <Tooltip title="delete room"><IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
 					<Delete/>
-				</IconButton> : null}
-				<IconButton aria-label='Connect' onClick={tryToJoinRoom}>
-					<PlayArrow />
-				</IconButton>
+				</IconButton></Tooltip> : null}
+				<Tooltip title="join room">
+					<IconButton aria-label='Connect' onClick={tryToJoinRoom}>
+						<PlayArrow />
+					</IconButton>
+				</Tooltip>
 			</TableCell>
 		</TableRow>
 	);
