@@ -8,6 +8,7 @@ export const ARROW_DOWN = 'ArrowDown';
 export const SPACE_KEY = ' ';
 export const Z_KEY = 'z';
 export const X_KEY = 'x';
+export const P_KEY = 'p';
 
 export const RIGHT = 'RIGHT';
 export const LEFT = 'LEFT';

@@ -49,4 +49,9 @@ export const resetTetrisState = () => ({
 export const updatePower = (power) => ({
 	type: actionTypes.CLIENT_UPDATE_POWER,
 	power: power.serialize()
-})
+});
+
+export const updatePause = (pause) => ({
+	type: actionTypes.CLIENT_UPDATE_PAUSE,
+	pause,
+});

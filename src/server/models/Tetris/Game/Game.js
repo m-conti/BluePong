@@ -2,7 +2,7 @@ import { pick, cloneDeep, flatten } from 'lodash';
 import generateTetriminos from '../Tetriminos/generateTetriminos';
 
 import Piece from '../Piece/Piece';
-import { updateBoard, updateNextPiece, updateScore, updatePower, updateOpponentSpectre, updateOpponent, gameIsOver} from '../../../actions/client/game';
+import { updateBoard, updateNextPiece, updateScore, updatePower, updateOpponentSpectre, updateOpponent, gameIsOver, updatePause } from '../../../actions/client/game';
 import { collision, collisionWhenRotate, isFullLine, clearLine, fallDown } from '../../../../helpers/game/game';
 
 import { regularPowers } from './Power/power';
@@ -23,6 +23,7 @@ class Game {
 		this.fetchCurrentPiece();
 		this.over = false;
 		this.winner = false;
+		this.pause = false;
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updatePower(this.power));
@@ -50,6 +51,10 @@ class Game {
 
 	get power() {
 		return regularPowers[this.powerIndex];
+	}
+
+	get isPlaying() {
+		return !(this.over || this.pause);
 	}
 
 	nextPower() {
@@ -104,7 +109,7 @@ class Game {
 	}
 
 	moveLeft() {
-		if (this.over) { return; }
+		if (!this.isPlaying) { return; }
 		if (!collision(this.currentPiece, LEFT, this.board)) {
 			this.currentPiece.x = this.currentPiece.x - 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -112,7 +117,7 @@ class Game {
 	}
 
 	moveRight() {
-		if (this.over) { return; }
+		if (!this.isPlaying) { return; }
 		if (!collision(this.currentPiece, RIGHT, this.board)) {
 			this.currentPiece.x = this.currentPiece.x + 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -120,7 +125,7 @@ class Game {
 	}
 
 	moveDown() {
-		if (this.over) { return; }
+		if (!this.isPlaying) { return; }
 		if(!collision(this.currentPiece, DOWN, this.board)) {
 			this.currentPiece.y = this.currentPiece.y + 1;
 			this.player.socket.emit('action', updateBoard(this.playableBoard));
@@ -131,7 +136,7 @@ class Game {
 	}
 
 	rotate() {
-		if (this.over) { return; }
+		if (!this.isPlaying) { return; }
 		if (!collisionWhenRotate(this.currentPiece, this.board)) {
 			this.currentPiece.rotate();
 		}
@@ -139,11 +144,27 @@ class Game {
 	}
 
 	drop() {
-		if (this.over) { return; }
+		if (!this.isPlaying) { return; }
 		while(!collision(this.currentPiece, DOWN, this.board)) {
 			this.currentPiece.y = this.currentPiece.y + 1;
 		}
 		this.piecePlaced();
+	}
+
+	togglePause(value=!this.pause) {
+		return this.pause = value;
+	}
+
+	performPause() {
+		if (this.togglePause()) {
+			clearInterval(this.gravityLoop);
+		}
+		else {
+			this.gravityLoop = setInterval(() => {
+				this.moveDown();
+			}, this.gravityTimeout);
+		}
+		this.player.socket.emit('action', updatePause(this.pause));
 	}
 
 	// SERIALIZER
@@ -168,7 +189,7 @@ class Game {
 	}
 
 	addHandicapLines(nbLines) {
-		if (this.over) { return; }
+		if (!this.isPlaying) { return; }
 		for (let i = 0; i < nbLines; i++) {
 			this.addHandicapLine();
 		}

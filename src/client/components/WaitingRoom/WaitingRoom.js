@@ -17,7 +17,7 @@ const WaitingRoom = (props) => {
 
 	return (
 		<div className={classes.WaitingRoom}>
-			<h1 className={classes.TitleWaitingRoom}>{props.room.name ? props.room.name : props.room.master.name + "'s room"}</h1>
+			<div className={classes.TitleWaitingRoom}><h1>{props.room.name ? props.room.name : props.room.master.name + "'s room"}</h1></div>
 			<PlayersList
 				masterId={props.room.master._id}
 				leaveRoom={props.leaveRoom}

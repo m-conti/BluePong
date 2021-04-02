@@ -9,6 +9,7 @@ export {
 	rotate,
 	nextPower,
 	previousPower,
+	pauseGame,
 } from './server/tetris';
 
 export {
