@@ -4,7 +4,7 @@ import * as propTypes from 'prop-types';
 
 import classes from './CreateNewRoom.css';
 
-import { Dialog, DialogActions, DialogContent } from '@material-ui/core';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import TextField from '../../UI/TextField/TextField';
 import Slider from '../../UI/Slider/Slider';
 import Button from '../../UI/Button/Button';
@@ -44,12 +44,15 @@ const CreateNewRoom = (props) => {
 		<div className={classes.CreateNewRoom}>
 			<Button onClick={toggleModalNewRoom} disabled={props.disabled}>Add New Room</Button>
 			<Dialog onClose={() => toggleModalNewRoom(false)} open={state.showModal}>
+				<DialogTitle className={classes.dialogTitle}>
+					Create a new Room
+				</DialogTitle>
 				<DialogContent>
 					<TextField
 						autoFocus
 						fullWidth
 						id='name'
-						label='Name'
+						label='Name of the room'
 						onChange={changeName}
 						type='text'
 						value={state.name}

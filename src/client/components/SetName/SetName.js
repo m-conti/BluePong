@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogActions } from '@material-ui/core';
+import { Dialog, DialogContent, DialogActions, DialogTitle } from '@material-ui/core';
 import Button from '../UI/Button/Button';
 import TextField from '../UI/TextField/TextField';
+import classes from './SetName.css';
 
 const SetName = ( props ) => {
 
@@ -28,6 +29,9 @@ const SetName = ( props ) => {
 
 	return (
 		<Dialog open={!props.name}>
+			<DialogTitle className={classes.dialogTitle}>
+				Enter your name
+			</DialogTitle>
 			<DialogContent>
 				<TextField
 					autoFocus

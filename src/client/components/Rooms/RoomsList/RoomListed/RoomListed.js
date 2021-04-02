@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import * as propTypes from 'prop-types';
 import playerType from '../../../../propTypes/player/player';
@@ -30,7 +31,7 @@ const roomListed = ( props ) => {
 		<TableRow>
 			<TableCell>{props.name}</TableCell>
 			<TableCell>{props.players.length} / {props.maxPlayers}</TableCell>
-			<TableCell>{props.creationTime}</TableCell>
+			<TableCell>{moment(props.creationTime).format("LLL")}</TableCell>
 			<TableCell>{state}</TableCell>
 			<TableCell>
 				{props.isMaster ? <IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
