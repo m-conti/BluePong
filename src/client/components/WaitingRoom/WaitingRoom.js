@@ -5,7 +5,7 @@ import roomType from '../../propTypes/room/room';
 
 import classes from './WaitingRoom.css';
 
-import {Button} from '@material-ui/core';
+import Button from '../UI/Button/Button';
 import PlayersList from './PlayersList/PlayersList';
 
 
