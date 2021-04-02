@@ -22,7 +22,7 @@
 :global(table.MuiTable-root) {
   margin-top: 20px;
   border-radius: 20px;
-  box-shadow: 0 0 15px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 0 15px 0 rgba(63, 81, 181, 0.1);
 }
 
 :global(th.MuiTableCell-head) {

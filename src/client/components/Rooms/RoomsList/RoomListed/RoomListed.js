@@ -34,11 +34,11 @@ const roomListed = ( props ) => {
 	return (
 		<TableRow>
 			<TableCell>{props.name}</TableCell>
-			<TableCell>
 				<Tooltip title={`${props.players.length} / ${props.maxPlayers}`}>
+			<TableCell>
 					<ProgressBar variant="determinate" value={(props.players.length / props.maxPlayers) * 100} />
-				</Tooltip>
 			</TableCell>
+				</Tooltip>
 			<TableCell>{moment(props.creationTime).format("LLL")}</TableCell>
 			<TableCell>{state}</TableCell>
 			<TableCell>

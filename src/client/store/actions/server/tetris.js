@@ -43,6 +43,11 @@ export const rotate = () => ({
 	type: actions.SERVER_ROTATE_PIECE
 });
 
+export const pauseGame = () => ({
+	meta: remote,
+	type: actions.SERVER_PAUSE_GAME
+});
+
 // POWER
 export const nextPower = () => ({
 	meta: remote,

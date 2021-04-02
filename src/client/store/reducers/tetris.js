@@ -9,6 +9,7 @@ const initialState = {
 	score: 0,
 	power: null,
 	winner: false,
+	pause: false,
 	gameIsOver: false,
 	matchIsOver: false,
 };
@@ -45,6 +46,10 @@ const updateNextPiece = ( state, {piece} ) => ({
 	...state,
 	nextPiece: piece,
 });
+const updatePause = ( state, {pause} ) => ({
+	...state,
+	pause,
+});
 const updateGameIsOver = ( state ) => ({
 	...state,
 	gameIsOver: true,
@@ -73,6 +78,8 @@ export default ( state = initialState, action ) => {
 			return updatePower(state, action);
 		case actions.CLIENT_UPDATE_NEXT_PIECE:
 			return updateNextPiece(state, action);
+		case actions.CLIENT_UPDATE_PAUSE:
+			return updatePause(state, action);
 		case actions.CLIENT_GAME_OVER:
 			return updateGameIsOver(state, action);
 		case actions.CLIENT_MATCH_OVER:

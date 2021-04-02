@@ -28,8 +28,14 @@ class Player {
 	}
 
 	getGame() {
+		const match = this.getMatch();
+		if ( !match ) return null;
+		return match.games.find((game) => game.player === this);
+	}
+	
+	getMatch() {
 		if ( !this.room || !this.room.isPlaying ) return null;
-		return this.room.match.games.find((game) => game.player === this);
+		return this.room.match;
 	}
 
 	join( room ) {

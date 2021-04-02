@@ -34,6 +34,12 @@ class Match {
 		this.room.update();
 	}
 
+	pause() {
+		this.games.forEach((game) => {
+			game.performPause();
+		})
+	}
+
 	checkEnd() {
 		let end = this.games.length;
 		let game = null;

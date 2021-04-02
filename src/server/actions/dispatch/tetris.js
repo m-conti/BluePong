@@ -53,6 +53,13 @@ const previousPower = ( {meta: {player}} ) => {
 	}
 };
 
+const togglePause = ( {meta: {player}} ) => {
+	const match = player.getMatch();
+	if (match) {
+		match.pause();
+	}
+};
+
 const restartGame = ( {meta: {player}} ) => {
 	const room = player.room;
 	if ( !room ) throw new Error('player is not in a room');
@@ -80,6 +87,8 @@ export default function ( action ) {
 			return previousPower(action);
 		case actionTypes.SERVER_RESTART_GAME:
 			return restartGame(action);
+		case actionTypes.SERVER_PAUSE_GAME:
+			return togglePause(action);
 		default:
 			return;
 	}
