@@ -25,10 +25,5 @@ const store = createStore(
 	)
 );
 
-// if (module.hot) {
-// 	module.hot.accept('./reducers', () => {
-// 		store.replaceReducer(reducers);
-// 	});
-// }
 
 export default store;
