@@ -69,7 +69,7 @@ const Tetris = ( props ) => {
 			<div className={classes.Hud}>
 				<Infos power={props.power} score={props.score} />
 				{nextPiece}
-				<Opponents opponents={props.opponents} />
+				{props.opponents.length > 0 ? <Opponents opponents={props.opponents} /> : null}
 			</div>
 			{matchOver}
 			<PauseGame open={props.pause} />
