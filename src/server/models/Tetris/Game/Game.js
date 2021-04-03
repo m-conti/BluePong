@@ -57,6 +57,13 @@ class Game {
 		return !(this.over || this.pause);
 	}
 
+	get spectre() {
+		return this.board.reduce((array, line, index) => {
+			const previousLine = array.length ? array[index - 1] : null;
+			return [...array, line.map((value, index) => !!(value | (previousLine && previousLine[index])))];
+		}, []);
+	}
+
 	nextPower() {
 		this.powerIndex = (this.powerIndex + 1) % regularPowers.length;
 		this.player.socket.emit('action', updatePower(this.power));
@@ -69,7 +76,7 @@ class Game {
 
 	updateSpectre() {
 		this.opponents.forEach((opponent) => {
-			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.board));
+			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.spectre));
 		});
 	}
 
@@ -172,7 +179,7 @@ class Game {
 		return {
 			id: this.player._id,
 			name: this.player.name,
-			spectre: this.board,
+			spectre: this.spectre,
 			over: this.over,
 			score: this.score,
 			winner: this.winner,
@@ -219,8 +226,8 @@ class Game {
 				numberLinesRemoved++;
 			}
 		}
-		if (numberLinesRemoved) {
-			this.power.use(this, numberLinesRemoved);
+		if (numberLinesRemoved - 1 > 0) {
+			this.power.use(this, numberLinesRemoved - 1);
 		}
 		return (numberLinesRemoved);
 	}
