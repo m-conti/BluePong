@@ -17,10 +17,11 @@
 	display: flex;
 	flex-direction: row;
 	text-overflow: ellipsis;
-	justify-content: center;
+	justify-content: space-between;
 	color: #F7DC6F;
 	font-weight: bolder;
 	min-height: 4vh;
+	align-items: center;
 }
 
 .Spectre {

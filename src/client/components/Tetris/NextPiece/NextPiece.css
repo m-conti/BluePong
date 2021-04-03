@@ -2,13 +2,13 @@
 	border: 1px solid black;
 	border-radius:6px;
 	background-color: #282232;
-	height: 12vh;
+	height: 15vh;
 	padding: auto;
 	display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-	flex-grow: 1;
+	/* flex-grow: 1; */
 }
 
 .Array {
