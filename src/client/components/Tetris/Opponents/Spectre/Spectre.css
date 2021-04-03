@@ -15,7 +15,7 @@
 
 .OpponentInfos {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	text-overflow: ellipsis;
 	justify-content: center;
 	color: #F7DC6F;
