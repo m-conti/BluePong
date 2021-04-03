@@ -49,4 +49,20 @@ describe('Match', () => {
 		match.checkEnd();
 		expect(room.isDone).toBe(true);
 	});
+	it('pause is set for eachPlayer', () => {
+		match.pause();
+		match.games.forEach((game) => {
+			expect(game.pause).toBe(true);
+		});
+	});
+	it('pause is unset for eachPlayer', () => {
+		match.pause();
+		match.games.forEach((game) => {
+			expect(game.pause).toBe(true);
+		});
+		match.pause();
+		match.games.forEach((game) => {
+			expect(game.pause).toBe(false);
+		});
+	});
 });
