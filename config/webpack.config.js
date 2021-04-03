@@ -157,6 +157,7 @@ module.exports = function ( webpackEnv ) {
 			isEnvDevelopment &&
 			require.resolve('react-dev-utils/webpackHotDevClient'),
 			// Finally, this is your app's code:
+			'react-hot-loader/patch',
 			paths.appIndexJs,
 			// We include the app code last so that if there is a runtime error during
 			// initialization, it doesn't blow up the WebpackDevServer client, and
@@ -398,7 +399,7 @@ module.exports = function ( webpackEnv ) {
 										{helpers: true},
 									],
 								],
-								plugins: ["@babel/plugin-proposal-export-default-from", "emotion"],
+								plugins: ["react-hot-loader/babel", "@babel/plugin-proposal-export-default-from", "emotion"],
 								cacheDirectory: true,
 								cacheCompression: isEnvProduction,
 

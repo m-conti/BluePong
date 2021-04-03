@@ -144,31 +144,37 @@ describe('Game', () => {
 		expect(game1.nextPiece).toEqual(new L());
 	});
 	it('score increase after complete line', () => {
-		game1.board[19] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
-		game1.powerIndex = 0;
-		game1.drop();
-		expect(game2.board[19]).toEqual(new Array(10).fill(TILE_BLOCK_VALUE));
-	});
-	it('perform power: addLaneBest', () => {
 		const scoreBefore = game1.score;
 		game1.board[19] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
 		game1.powerIndex = 0;
 		game1.drop();
 		expect(game1.score).toEqual(scoreBefore + 100);
 	});
+	it('perform power: addLaneBest', () => {
+		game1.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
+		game1.board[19] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
+		game1.powerIndex = 0;
+		game1.rotate();
+		game1.drop();
+		expect(game2.board[19]).toEqual(new Array(10).fill(TILE_BLOCK_VALUE));
+	});
 	it('perform power: addLaneWorst', () => {
-		game1.board[19] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
+		game1.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
+		game1.board[19] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game1.powerIndex = 1;
+		game1.rotate();
 		game1.drop();
 		expect(game3.board[19]).toEqual(new Array(10).fill(TILE_BLOCK_VALUE));
 	});
 	it('perform power: removeLine', () => {
-		game1.board[17] = [1, 2, 3, 0, 0, 0, 0, 4, 5, 6];
-		game1.board[18] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
+		game1.board[16] = [1, 2, 3, 0, 0, 0, 0, 4, 5, 6];
+		game1.board[17] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
+		game1.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game1.board[19] = new Array(10).fill(TILE_BLOCK_VALUE);
 		game1.powerIndex = 2;
+		game1.rotate();
 		game1.drop();
-		expect(game1.board[19]).toEqual([1, 2, 3, 0, 0, 0, 0, 4, 5, 6]);
+		expect(game1.board[19]).toEqual([1, 2, 3, 0, 0, 1, 0, 4, 5, 6]);
 	});
 	it('removeLine: do nothing if the last line isn\'t a handicap line', () => {
 		game1.board[18] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
@@ -196,6 +202,49 @@ describe('Game', () => {
 		game1.previousPower();
 		expect(game1.powerIndex).toBe(0);
 	});
+	it('pause is stopping game', () => {
+		const board = emptyBoard;
+		board[1] = [0, 0, 0, 1, 1, 1, 1, 0, 0, 0];
+		game1.performPause();
+		jest.advanceTimersByTime(game1.gravityTimeout);
+		expect(game1.playableBoard).toEqual(board);
+		jest.advanceTimersByTime(game1.gravityTimeout);
+		expect(game1.playableBoard).toEqual(board);
+		jest.advanceTimersByTime(game1.gravityTimeout);
+		expect(game1.playableBoard).toEqual(board);
+	});
+	it('unpause is continue game', () => {
+		const board = emptyBoard;
+		board[1] = [0, 0, 0, 1, 1, 1, 1, 0, 0, 0];
+		game1.performPause();
+		jest.advanceTimersByTime(game1.gravityTimeout);
+		expect(game1.playableBoard).toEqual(board);
+		jest.advanceTimersByTime(game1.gravityTimeout);
+		expect(game1.playableBoard).toEqual(board);
+		
+		game1.performPause();
+		board[1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		board[2] = [0, 0, 0, 1, 1, 1, 1, 0, 0, 0];
+
+		jest.advanceTimersByTime(game1.gravityTimeout);
+		expect(game1.playableBoard).toEqual(board);
+	});
+	it('pause is blocking movements', () => {
+		const board = emptyBoard;
+		game1.performPause();
+		board[1] = [0, 0, 0, 1, 1, 1, 1, 0, 0, 0];
+
+		game1.rotate();
+		expect(game1.playableBoard).toEqual(board);
+		game1.moveLeft();
+		expect(game1.playableBoard).toEqual(board);
+		game1.moveDown();
+		expect(game1.playableBoard).toEqual(board);
+		game1.moveRight();
+		expect(game1.playableBoard).toEqual(board);
+		game1.drop();
+		expect(game1.playableBoard).toEqual(board);
+	});
 	it('if tetriminosIndex > tetriminos.length generate a new tetriminos', () => {
 		expect(match.tetriminos.length).toBe(3);
 		game1.drop();
@@ -207,8 +256,10 @@ describe('Game', () => {
 	});
 	it('gameover if the board overflow on handicap', () => {
 		game1.board[0] = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0];
-		game2.board[19] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
+		game2.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
+		game2.board[19] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game2.powerIndex = 1;
+		game2.rotate();
 		expect(() => game2.drop()).toThrow('end');
 	});
 });

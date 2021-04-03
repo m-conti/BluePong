@@ -10,6 +10,8 @@ import RoomRoutes from '../routes/Rooms/Rooms';
 // layout
 import Layout from './Layout/Layout';
 
+// hotreload
+import { hot } from 'react-hot-loader/root';
 
 const app = ( props ) => {
 
@@ -36,4 +38,4 @@ app.propTypes = {
 };
 
 
-export default app;
+export default hot(app);
