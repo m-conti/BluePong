@@ -56,7 +56,7 @@ class Room {
 
 	delete() {
 		sockets.tetris.removeRoom(this._id);
-		this.players.forEach(( player ) => player.leave(this));
+		[...this.players].forEach(( player ) => player.leave(this));
 		this.match.games.forEach((game) => {
 			clearInterval(game.gravityLoop);
 		});
