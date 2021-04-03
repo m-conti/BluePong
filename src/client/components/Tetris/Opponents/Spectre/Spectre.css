@@ -3,7 +3,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-evenly;
 }
 
 .SpectreBoardRow {
@@ -17,10 +16,10 @@
 	display: flex;
 	flex-direction: column;
 	text-overflow: ellipsis;
-	justify-content: space-between;
+	justify-content: center;
 	color: #F7DC6F;
 	font-weight: bolder;
-	min-height: 4vh;
+	min-height: 7vh;
 	align-items: center;
 }
 
@@ -39,7 +38,6 @@
 }
 
 .OpponentLittle {
-	/* margin: 6px; */
 }
 
 .Wrap {
