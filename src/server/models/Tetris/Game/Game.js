@@ -76,7 +76,7 @@ class Game {
 
 	updateSpectre() {
 		this.opponents.forEach((opponent) => {
-			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.spectre));
+			opponent.player.socket.emit('action', updateOpponent(this.serializeAsOpponent()));
 		});
 	}
 
