@@ -1,33 +1,20 @@
 // Redux
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 
 // Middleware
 import thunkMiddleware from 'redux-thunk';
 import socketMiddleware from 'redux-socket.io-middleware';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 import history from '../routes/history';
+import { socket } from './reducers/sockets';
 
 // Reducers
-import userReducer from './reducers/user';
-import tetrisReducer from './reducers/tetris';
-import roomsReducer from './reducers/rooms';
-import notifierReducer from './reducers/notifier';
-import socketReducer, { socket } from './reducers/sockets';
+import { reducers } from './reducers';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const reducers = combineReducers({
-	user: userReducer,
-	tetris: tetrisReducer,
-	rooms: roomsReducer,
-	notifier: notifierReducer,
-	io: socketReducer,
-	router: connectRouter(history),
-});
-
-
-export default createStore(
+const store = createStore(
 	reducers,
 	composeEnhancers(
 		applyMiddleware(
@@ -37,3 +24,11 @@ export default createStore(
 		)
 	)
 );
+
+// if (module.hot) {
+// 	module.hot.accept('./reducers', () => {
+// 		store.replaceReducer(reducers);
+// 	});
+// }
+
+export default store;
