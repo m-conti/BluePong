@@ -21,8 +21,11 @@ const Spectre = ( props ) => {
 
 	return (
 		<div className={opponentClasses.join(' ')}>
-			<div className={classes.Name}>{props.name}</div>
 			<div className={classes.Wrapper}>
+				<div className={classes.OpponentInfos}>
+					<span className={classes.Name}>{props.name}</span>
+					<span className={classes.Score}>{props.score}</span>
+				</div>
 				<div className={classes.Spectre}>
 					{tileArray}
 				</div>

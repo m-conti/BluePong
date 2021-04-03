@@ -1,27 +1,31 @@
 .Opponent {
 	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 .SpectreBoardRow {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+	background-color: #282232;
 }
 
-.Name {
+.OpponentInfos {
 	display: flex;
-	color: #282232;
 	text-overflow: ellipsis;
 	justify-content: center;
-	padding: 5px 0px 3px 0px;
+	/* padding: 5px 0px 3px 0px; */
+	/* margin: 0; */
+	color: #F7DC6F;
+	font-weight: bolder
 }
 
 .Spectre {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid black;
-	border-radius: 6px;
-	background-color: #282232;
-	width: 100%;
 }
 
 .GameOver .Spectre {
@@ -38,10 +42,13 @@
 }
 
 .Wrap {
-	flex: 1;
+	flex-grow: 1;
 }
 
 .Wrapper {
+	/* border-radius: 6px; */
+	
+	width: 100%;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }

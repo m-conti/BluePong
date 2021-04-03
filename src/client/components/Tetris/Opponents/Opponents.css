@@ -1,6 +1,10 @@
 .Opponents {
-	display: flex;
+	background-color: #282232;
 	border-radius: 6px;
 	vertical-align: middle;
 	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
 }

@@ -1,9 +1,12 @@
 .SpectreTile {
-    height: 2.66vh;
+    height: 1.8vh;
+	width: 1.8vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-grow: 1;
+	border-collapse: collapse;
+	border-radius: 3px;
+	margin: 1px;
 }
 
 .LittleTile {
@@ -12,8 +15,8 @@
 }
 
 .Empty {
-	opacity: 0;
-	background-color: #282232;
+	/* opacity: 0; */
+	background-color: #383242;
 }
 
 .Full {

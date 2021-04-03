@@ -3,7 +3,7 @@
 	padding-top: 20px;
 	display: flex;
 	flex-direction: row;
-	align-items: flex-start;
+	align-items: stretch;
 	justify-content: space-evenly;
 	border-radius: 6px;
 	background-color: #FCFCFC;

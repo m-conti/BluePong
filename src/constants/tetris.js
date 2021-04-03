@@ -29,4 +29,4 @@ export const TILE_Z_VALUE = 7;
 export const TILE_BLOCK_VALUE = 8;
 
 
-export const INITIAL_GRAVITY_TIMEOUT = 500;
+export const INITIAL_GRAVITY_TIMEOUT = 500000;
