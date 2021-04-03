@@ -76,7 +76,7 @@ class Game {
 
 	updateSpectre() {
 		this.opponents.forEach((opponent) => {
-			opponent.player.socket.emit('action', updateOpponent(this.serializeAsOpponent()));
+			opponent.player.socket.emit('action', updateOpponentSpectre(this.player._id, this.spectre));
 		});
 	}
 
@@ -192,7 +192,7 @@ class Game {
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
-		this.updateSpectre();
+		this.updateAsOpponent();
 	}
 
 	addHandicapLines(nbLines) {

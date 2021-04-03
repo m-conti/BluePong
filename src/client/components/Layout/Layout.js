@@ -27,9 +27,11 @@ const Layout = ( props ) => {
 		}
 	};
 
+	const isPlaying = props.user.roomId ? props.rooms.find(({ _id }) => _id === props.user.roomId)?.isPlaying : false;
+
 	return (
 		<Fragment>
-			<AppBar drawerToggleClicked={sideDrawerToggleHandler} user={props.user}/>
+			<AppBar drawerToggleClicked={sideDrawerToggleHandler} user={props.user} isPlaying={isPlaying} />
 			<SideDrawer
 				open={state.sideDrawer}
 				toggle={sideDrawerToggleHandler}
@@ -47,6 +49,7 @@ const Layout = ( props ) => {
 
 const mapStateToProps = state => ({
 	user: state.user,
+	rooms: state.rooms.rooms
 });
 
 export default connect(mapStateToProps)(Layout);
