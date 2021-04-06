@@ -32,7 +32,7 @@ export class RegularAddHandicapRandom extends Power {
 
 	use(game, nbLines) {
 		if (!nbLines) { return; }
-		const opponent = sample(game.opponents.filter((o) => o.over));
+		const opponent = sample(game.opponents.filter((o) => !o.over));
 		if (!opponent) { return; }
 		opponent.addHandicapLines(nbLines);
 	}
@@ -48,7 +48,7 @@ export class RegularAddHandicapBest extends Power {
 
 	use(game, nbLines) {
 		if (!nbLines) { return; }
-		const opponent = maxBy(game.opponents.filter((o) => o.over), (o) => o.score);
+		const opponent = maxBy(game.opponents.filter((o) => !o.over), (o) => o.score);
 		if (!opponent) { return; }
 		opponent.addHandicapLines(nbLines);
 	}
@@ -64,7 +64,7 @@ export class RegularAddHandicapWorst extends Power {
 
 	use(game, nbLines) {
 		if (!nbLines) { return; }
-		const opponent = minBy(game.opponents.filter((o) => o.over), (o) => o.score);
+		const opponent = minBy(game.opponents.filter((o) => !o.over), (o) => o.score);
 		if (!opponent) { return; }
 		opponent.addHandicapLines(nbLines);
 	}
