@@ -192,7 +192,7 @@ class Game {
 		this.fetchCurrentPiece();
 		this.player.socket.emit('action', updateScore(this.score));
 		this.player.socket.emit('action', updateBoard(this.playableBoard));
-		this.updateSpectre();
+		this.updateAsOpponent();
 	}
 
 	addHandicapLines(nbLines) {

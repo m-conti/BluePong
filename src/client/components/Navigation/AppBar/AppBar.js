@@ -9,6 +9,8 @@ import { AppBar as MaterialBar, Toolbar, IconButton, Typography } from '@materia
 import { Menu as MenuIcon } from '@material-ui/icons';
 import NavItems from '../NavItems/NavItems';
 
+import Music from '../../Audio/Music';
+
 const appBarStyle = makeStyles({
 	root: {
 		flexGrow: 1,
@@ -38,7 +40,7 @@ const AppBar = ( props ) => {
 					</IconButton>
 				</Media>
 				<Typography className={classes.title} variant='h6'>
-					Tetriminus
+					Tetriminus {props.isPlaying && <Music />}
 				</Typography>
 				<Media query={query.DESKTOP}>
 					<NavItems display={display.DESKTOP} user={props.user}/>
