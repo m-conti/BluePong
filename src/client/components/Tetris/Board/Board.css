@@ -14,3 +14,7 @@
 .Wrap {
 	flex: 1;
 }
+
+.BordWrapper {
+	margin-right: 5px;
+}

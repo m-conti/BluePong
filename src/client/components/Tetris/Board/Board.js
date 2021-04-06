@@ -24,7 +24,7 @@ const Board = ( props ) => {
 
 
 	return (
-		<div>
+		<div className={classes.BordWrapper}>
 			<div className={classes.Board}>
 				{tileArray}
 			</div>
