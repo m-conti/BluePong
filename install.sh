@@ -1,0 +1,1 @@
+npx -p npm@6 npm install

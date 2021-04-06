@@ -6,8 +6,17 @@ This starter kit was made to help students to develop red_tetris project : a Ful
 
 Install [node](https://nodejs.org/en/) first. After that:
 
+if you have npx
+```
+$ sh install.sh
+```
+or if you use npm 6
 ```
 $ npm install
+```
+or if you use npm 7
+```
+$ npm install --legacy-peer-deps
 ```
 
 Edit `params.js` for your needs.
@@ -76,6 +85,7 @@ RIGHT : move the piece right
 SPACE : drop the piece
 Z     : change to left power
 X     : change to right power
+P     : pause
 ```
 the power proc for each line you do.
 
