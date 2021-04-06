@@ -4,9 +4,13 @@ import * as propTypes from 'prop-types';
 import classes from '../Infos.css';
 
 const Power = ( props ) => (
-	<div className={classes.Part}>
-		<p className={classes.Title}>{props.name}</p>
-		<p className={classes.Value}>{props.description}</p>
+	<div className={classes.PowerParts}>
+		<span className={classes.Title}>
+			{props.name}
+		</span>
+		<span>
+			{" (" + props.description + ")"}
+		</span>
 	</div>
 );
 

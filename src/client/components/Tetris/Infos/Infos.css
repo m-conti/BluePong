@@ -20,6 +20,13 @@
 	color: #F7DC6F;
 }
 
-.Part {
-	flex: 1;
+.ScorePart {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+
+.PowerParts {
+	color: #F7DC6F;
 }
