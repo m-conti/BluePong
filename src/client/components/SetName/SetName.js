@@ -19,7 +19,7 @@ const SetName = ( props ) => {
 	};
 
 	const setName = () => {
-		if (!state.name.length) { return; }
+		if (!(state.name && state.name.trim().length)) { return; }
 		setState({
 			...state,
 			loading: true

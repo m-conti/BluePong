@@ -40,6 +40,12 @@ const CreateNewRoom = (props) => {
 		}
 	};
 
+	const createRoom = () => {
+		if (!(state.name && state.name.trim().length)) { return; }
+
+		props.create({name: state.name, playerMax: state.playerMax});
+	};
+
 	return (
 		<div className={classes.CreateNewRoom}>
 			<Button onClick={toggleModalNewRoom} disabled={props.disabled}>Add New Room</Button>
@@ -53,6 +59,9 @@ const CreateNewRoom = (props) => {
 						fullWidth
 						id='name'
 						label='Name of the room'
+						inputProps={{
+							maxLength: 20,
+						}}
 						onChange={changeName}
 						type='text'
 						value={state.name}
@@ -65,7 +74,7 @@ const CreateNewRoom = (props) => {
 				</DialogContent>
 				<DialogActions className={classes.createRoomButtonContainer}>
 					<Button color={'primary'}
-						onClick={() => props.create({name: state.name, playerMax: state.playerMax})}>
+						onClick={createRoom}>
 						Create
 					</Button>
 				</DialogActions>
