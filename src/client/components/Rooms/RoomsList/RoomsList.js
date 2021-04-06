@@ -20,7 +20,7 @@ const roomsList = (props) => {
 			isPlaying={elem.isPlaying}
 			key={elem._id}
 			maxPlayers={elem.maxPlayers}
-			name={elem.name}
+			name={elem.name || `${elem.master.name}'s room`}
 			onDeleteRoom={props.onDeleteRoom}
 			onJoinRoom={props.onJoinRoom}
 			players={elem.players}
