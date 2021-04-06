@@ -12,8 +12,6 @@ import { Delete, PlayArrow } from '@material-ui/icons';
 import Tooltip from '../../../UI/Tooltip/Tooltip';
 import ProgressBar from '../../../UI/ProgressBar/ProgressBar';
 
-
-
 const roomListed = ( props ) => {
 
 	const tryToJoinRoom = () => {
@@ -36,16 +34,16 @@ const roomListed = ( props ) => {
 			<TableCell>{props.name}</TableCell>
 				<Tooltip title={`${props.players.length} / ${props.maxPlayers}`}>
 			<TableCell>
-					<ProgressBar variant="determinate" value={(props.players.length / props.maxPlayers) * 100} />
+				<ProgressBar variant='determinate' value={(props.players.length / props.maxPlayers) * 100} />
 			</TableCell>
 				</Tooltip>
-			<TableCell>{moment(props.creationTime).format("LLL")}</TableCell>
+			<TableCell>{moment(props.creationTime).format('LLL')}</TableCell>
 			<TableCell>{state}</TableCell>
 			<TableCell>
-				{props.isMaster ? <Tooltip title="delete room"><IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
+				{props.isMaster ? <Tooltip title='delete room'><IconButton aria-label='Delete' onClick={() => props.onDeleteRoom(props._id)}>
 					<Delete/>
 				</IconButton></Tooltip> : null}
-				<Tooltip title="join room">
+				<Tooltip title='join room'>
 					<IconButton aria-label='Connect' onClick={tryToJoinRoom}>
 						<PlayArrow />
 					</IconButton>

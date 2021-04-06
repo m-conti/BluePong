@@ -9,7 +9,7 @@ const Power = ( props ) => (
 			{props.name}
 		</span>
 		<span>
-			{" (" + props.description + ")"}
+			{' (${props.description})'}
 		</span>
 	</div>
 );

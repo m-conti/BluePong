@@ -13,8 +13,7 @@ import Tetris from '../../containers/Tetris/Tetris';
 const Room = ( props ) => {
 	const room = props.rooms.find(( room ) => room._id === parseInt(props.match.params.id));
 	let route;
-	
-	if ( !room ) {
+	if (!room) {
 		return <Redirect to={CLIENT_ROOMS}/>;
 	}
 	if ( props.playerRoomId === room._id ) {

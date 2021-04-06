@@ -12,7 +12,7 @@ import { some } from 'lodash';
 const nextPiece = ( props ) => {
 
 	const tileArray = props.piece.map((content, rowNumber) => {
-		if (!(some(content, x => x != 0))) {
+		if (!(some(content, x => x !== 0))) {
 			return null
 		}
 		const rowContent = content.map((x, column) => (
