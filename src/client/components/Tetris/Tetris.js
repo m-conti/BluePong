@@ -50,6 +50,7 @@ const Tetris = ( props ) => {
 				return;
 			case P_KEY :
 				props.pauseGame();
+				return;
 			default :
 				return;
 		}
