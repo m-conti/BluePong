@@ -20,7 +20,7 @@ const buildOpponents = ( opponents ) => {
 	else {
 		return((opponents) ? opponents.map(o => (
 			[
-				<Spectre gameover={o.over} key={o.id} little={opponents.length > 1} name={o.name} spectre={o.spectre} score={o.score}/>,
+				<Spectre gameover={o.over} key={o.id} little={opponents.length > 1} name={o.name} spectre={o.spectre} score={o.score} winner={o.winner}/>,
 			]
 		)) : null);
 	}
