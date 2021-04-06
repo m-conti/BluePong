@@ -8,8 +8,8 @@ const Notifier = ( props ) => {
 
 	useEffect(() => {
 		const newDisplay = [...displayed];
-		for ( const notificationKey in props.notifications ) {
-			const notification = props.notifications[notificationKey];
+		// eslint-disable-next-line no-unused-vars
+		for ( const notification of props.notifications ) {
 			if ( !displayed.find(( elemDisplayed ) => elemDisplayed._id === notification._id) ) {
 				newDisplay.push(notification);
 				props.enqueueSnackbar(notification.message, {
@@ -24,6 +24,7 @@ const Notifier = ( props ) => {
 				});
 			}
 		}
+		// eslint-disable-next-line no-unused-vars
 		for ( const displayedKey in displayed ) {
 			const displayedNotification = displayed[displayedKey];
 			if ( !props.notifications.find(( elem ) => elem._id === displayedNotification._id) ) {

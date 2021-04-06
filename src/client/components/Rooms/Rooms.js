@@ -23,7 +23,7 @@ const Rooms = ( props ) => {
 		<div className={classes.Rooms}>
 			<div className={classes.TitleRooms}><h1>Rooms List</h1></div>
 			{roomList}
-			<CreateNewRoom create={props.createRoom} disabled={!!props.user.roomId} />
+			<CreateNewRoom create={props.createRoom} disabled={Boolean(props.user.roomId)} />
 		</div>
 	);
 };
