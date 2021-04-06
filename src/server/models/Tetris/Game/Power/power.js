@@ -1,4 +1,4 @@
-import { maxBy, minBy } from 'lodash';
+import { maxBy, minBy, sample } from 'lodash';
 import { TILE_BLOCK_VALUE } from '../../../../../constants/tetris';
 import { updateBoard } from '../../../../actions/client/game';
 
@@ -22,6 +22,22 @@ class Power {
 	}
 }
 
+export class RegularAddHandicapRandom extends Power {
+	constructor() {
+		super();
+		this.name = 'Random';
+		this.description = 'add one handicap line to a random opponent';
+		this.mode = 'regular';
+	}
+
+	use(game, nbLines) {
+		if (!nbLines) { return; }
+		const opponent = sample(game.opponents.filter((o) => o.over));
+		if (!opponent) { return; }
+		opponent.addHandicapLines(nbLines);
+	}
+}
+
 export class RegularAddHandicapBest extends Power {
 	constructor() {
 		super();
@@ -32,7 +48,7 @@ export class RegularAddHandicapBest extends Power {
 
 	use(game, nbLines) {
 		if (!nbLines) { return; }
-		const opponent = maxBy(game.opponents, (o) => o.score);
+		const opponent = maxBy(game.opponents.filter((o) => o.over), (o) => o.score);
 		if (!opponent) { return; }
 		opponent.addHandicapLines(nbLines);
 	}
@@ -48,7 +64,7 @@ export class RegularAddHandicapWorst extends Power {
 
 	use(game, nbLines) {
 		if (!nbLines) { return; }
-		const opponent = minBy(game.opponents, (o) => o.score);
+		const opponent = minBy(game.opponents.filter((o) => o.over), (o) => o.score);
 		if (!opponent) { return; }
 		opponent.addHandicapLines(nbLines);
 	}
@@ -75,6 +91,7 @@ export class RegularRemoveHandicapLines extends Power {
 }
 
 export const regularPowers = [
+	new RegularAddHandicapRandom(),
 	new RegularAddHandicapBest(),
 	new RegularAddHandicapWorst(),
 	new RegularRemoveHandicapLines(),
