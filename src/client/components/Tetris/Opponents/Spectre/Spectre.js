@@ -7,7 +7,13 @@ const Spectre = ( props ) => {
 
 	const tileArray = props.spectre.map((content, rowNumber) => {
 		const rowContent = content.map((x, column) => (
-			<SpectreTile content={x} key={`${rowNumber}.${column}`} gameover={props.gameover} little={props.little} winner={props.winner}/>
+			<SpectreTile
+				content={x}
+				key={`${rowNumber}.${column}`}
+				gameover={props.gameover}
+				little={props.little}
+				winner={props.winner}
+			/>
 		));
 		return (
 			<div className={classes.SpectreBoardRow} key={rowNumber}>
