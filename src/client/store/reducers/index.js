@@ -8,8 +8,6 @@ import roomsReducer from './rooms';
 import notifierReducer from './notifier';
 import socketReducer from './sockets';
 
-
-
 export const reducers = combineReducers({
 	user: userReducer,
 	tetris: tetrisReducer,

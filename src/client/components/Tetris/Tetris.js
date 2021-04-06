@@ -10,7 +10,9 @@ import NextPiece from './NextPiece/NextPiece';
 import MatchOver from './MatchOver/MatchOver';
 import PauseGame from './PauseGame/PauseGame';
 
-import { ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN, SPACE_KEY, Z_KEY, X_KEY, P_KEY } from '../../../constants/tetris';
+import {
+	ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN,
+	SPACE_KEY, Z_KEY, X_KEY, P_KEY } from '../../../constants/tetris';
 
 
 const Tetris = ( props ) => {

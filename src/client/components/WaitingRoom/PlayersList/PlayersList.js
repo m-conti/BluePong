@@ -21,7 +21,7 @@ const playersList = ( props ) => {
 		<Table>
 			<TableHead>
 				<TableRow>
-					<TableCell className={classes.LeaderColumn}></TableCell>
+					<TableCell className={classes.LeaderColumn}/>
 					<TableCell>Name</TableCell>
 					<TableCell>Status</TableCell>
 					<TableCell>Actions</TableCell>
