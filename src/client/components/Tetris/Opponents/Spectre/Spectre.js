@@ -7,7 +7,7 @@ const Spectre = ( props ) => {
 
 	const tileArray = props.spectre.map((content, rowNumber) => {
 		const rowContent = content.map((x, column) => (
-			<SpectreTile content={x} key={`${rowNumber}.${column}`} little={props.little}/>
+			<SpectreTile content={x} key={`${rowNumber}.${column}`} gameover={props.gameover} little={props.little} winner={props.winner}/>
 		));
 		return (
 			<div className={classes.SpectreBoardRow} key={rowNumber}>
@@ -17,7 +17,7 @@ const Spectre = ( props ) => {
 	});
 	const opponentClasses = [classes.Opponent];
 	if (props.little) { opponentClasses.push(classes.OpponentLittle); }
-	if (props.gameover) { opponentClasses.push(classes.GameOver); }
+	if (props.gameover && !props.winner) { opponentClasses.push(classes.GameOver); }
 
 	return (
 		<div className={opponentClasses.join(' ')}>

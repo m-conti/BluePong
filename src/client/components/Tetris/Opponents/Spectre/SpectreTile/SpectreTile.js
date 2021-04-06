@@ -10,6 +10,7 @@ const SpectreTile = ( props ) => {
 
 	const tileClasses = [classes.SpectreTile];
 	if (props.little) { tileClasses.push(classes.LittleTile) }
+	if (props.gameover && !props.winner) { tileClasses.push(classes.GameOverTile) }
 	tileClasses.push(props.content ? classes.Full : classes.Empty);
 
 	return (
