@@ -9,19 +9,17 @@ class Location {
 	}
 }
 
-const host = process.env.IP_SERVER || 'localhost'
-
 exports.location = {
 	server: new Location({
-		host,
+		host: '51.178.49.196',
 		port: 3004,
 	}),
 	api: new Location({
-		host,
+		host: '51.178.49.196',
 		port: 3005,
 	}),
 	client: new Location({
-		host,
+		host: '51.178.49.196',
 		port: 8080,
 	})
 };
