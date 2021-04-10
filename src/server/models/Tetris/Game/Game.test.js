@@ -153,7 +153,7 @@ describe('Game', () => {
 	it('perform power: addLaneBest', () => {
 		game1.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game1.board[19] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
-		game1.powerIndex = 0;
+		game1.powerIndex = 1;
 		game1.rotate();
 		game1.drop();
 		expect(game2.board[19]).toEqual(new Array(10).fill(TILE_BLOCK_VALUE));
@@ -161,7 +161,7 @@ describe('Game', () => {
 	it('perform power: addLaneWorst', () => {
 		game1.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game1.board[19] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
-		game1.powerIndex = 1;
+		game1.powerIndex = 2;
 		game1.rotate();
 		game1.drop();
 		expect(game3.board[19]).toEqual(new Array(10).fill(TILE_BLOCK_VALUE));
@@ -171,7 +171,7 @@ describe('Game', () => {
 		game1.board[17] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game1.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game1.board[19] = new Array(10).fill(TILE_BLOCK_VALUE);
-		game1.powerIndex = 2;
+		game1.powerIndex = 3;
 		game1.rotate();
 		game1.drop();
 		expect(game1.board[19]).toEqual([1, 2, 3, 0, 0, 1, 0, 4, 5, 6]);
@@ -179,7 +179,7 @@ describe('Game', () => {
 	it('removeLine: do nothing if the last line isn\'t a handicap line', () => {
 		game1.board[18] = [1, 1, 1, 0, 0, 0, 0, 1, 1, 1];
 		game1.board[19] = [1, 2, 3, 7, 0, 0, 0, 4, 5, 6];
-		game1.powerIndex = 2;
+		game1.powerIndex = 3;
 		game1.drop();
 		expect(game1.board[19]).toEqual([1, 2, 3, 7, 0, 0, 0, 4, 5, 6]);
 	});
@@ -190,11 +190,15 @@ describe('Game', () => {
 		game1.nextPower();
 		expect(game1.powerIndex).toBe(2);
 		game1.nextPower();
+		expect(game1.powerIndex).toBe(3);
+		game1.nextPower();
 		expect(game1.powerIndex).toBe(0);
 		game1.nextPower();
 		expect(game1.powerIndex).toBe(1);
 		game1.previousPower();
 		expect(game1.powerIndex).toBe(0);
+		game1.previousPower();
+		expect(game1.powerIndex).toBe(3);
 		game1.previousPower();
 		expect(game1.powerIndex).toBe(2);
 		game1.previousPower();
@@ -258,7 +262,7 @@ describe('Game', () => {
 		game1.board[0] = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0];
 		game2.board[18] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
 		game2.board[19] = [1, 1, 1, 1, 1, 0, 1, 1, 1, 1];
-		game2.powerIndex = 1;
+		game2.powerIndex = 2;
 		game2.rotate();
 		expect(() => game2.drop()).toThrow('end');
 	});
