@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import * as propTypes from 'prop-types';
 import roomType from '../../propTypes/room/room';
@@ -11,19 +11,23 @@ import Tetris from '../../containers/Tetris/Tetris';
 
 
 const Room = ( props ) => {
-	const room = props.rooms.find(( room ) => room._id === parseInt(props.match.params.id));
-	let route;
+	const room = props.rooms.find(( room ) => room._id === props.id);
+
+	useEffect(() => {
+		if (room && !props.playerRoomId) {
+			props.joinRoom(room._id);
+		}
+	}, []);
+
 	if (!room) {
 		return <Redirect to={CLIENT_ROOMS}/>;
 	}
 	if ( props.playerRoomId === room._id ) {
-		route = room.isPlaying ? <Tetris isMaster={props.playerId === room.master._id} /> : <WaitingRoom room={room}/>;
+		return room.isPlaying ? <Tetris isMaster={props.playerId === room.master._id} /> : <WaitingRoom room={room}/>;
 	}
 	else {
-		route = <Redirect to={CLIENT_ROOMS}/>;
+		return <Redirect to={CLIENT_ROOMS}/>;
 	}
-
-	return route;
 };
 
 Room.propTypes = {

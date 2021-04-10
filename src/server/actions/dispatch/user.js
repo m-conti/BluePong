@@ -5,6 +5,7 @@ import * as actions from '../client/user';
 const setName = ( {meta: {player}, name } ) => {
 	player.setName(name);
 	player.socket.emit('action', actions.updateUser(player));
+	if (player.room) player.room.update();
 };
 
 export default function( action ) {

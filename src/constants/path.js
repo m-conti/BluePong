@@ -1,5 +1,5 @@
 
 // client
-export const CLIENT_ROOMS = '/rooms';
+export const CLIENT_ROOMS = '/tetris';
 
 // server

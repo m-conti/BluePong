@@ -13,7 +13,7 @@ export const generateLinks = () => {
 		if (state.user.roomId) {
 			const roomUser = state.rooms.rooms.find(( room ) => room._id === state.user.roomId);
 			const name = roomUser.name ? roomUser.name : `${roomUser.master.name}'s room`;
-			addToList(name, `${path.CLIENT_ROOMS}/${state.user.roomId}`, true);
+			addToList(name, `${path.CLIENT_ROOMS}#${state.user.roomId}[${state.user.name}]`, true);
 		}
 		addToList('Rooms', path.CLIENT_ROOMS, true);
 	}

@@ -1,16 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { isString } from 'lodash';
+
 import { Dialog, DialogContent, DialogActions, DialogTitle } from '@material-ui/core';
 import Button from '../UI/Button/Button';
 import TextField from '../UI/TextField/TextField';
+
 import classes from './SetName.css';
+
+import { withRouter } from 'react-router-dom';
+import { ROUTE_REGEX, NAME_REGEX } from '../../../constants/regex';
+
+const DEFAULT_STATE = { name: '', loading: false };
+
+const isValidName = (name) => isString(name) && NAME_REGEX.test(name);
 
 const SetName = ( props ) => {
 
-	const [state, setState] = useState({
-		name: '',
-	});
+	const [state, setState] = useState(DEFAULT_STATE);
+
+	const { groups: { playerName = null, roomId = null } = {} } = ROUTE_REGEX.exec(props.location.hash) || {};
+
+	const routeName = isValidName(playerName) && playerName;
+	console.log(routeName, props.name);
+
+	useEffect(() => {
+		if (props.name !== routeName && isValidName(routeName) && !props.roomId) {
+			props.setName(routeName);
+		}
+		else if (props.name && roomId) {
+			props.history.push(`#${roomId}[${props.name}]`);
+		}
+		else if (props.name) {
+			props.history.push(`#[${props.name}]`);
+		}
+		else {
+			props.history.push('#');
+		}
+	}, [props.name, routeName]);
+
 
 	const changeName = (event) => {
+		if (!isValidName(event.target.value) && event.target.value.length) { return; }
 		setState({
 			...state,
 			name: event.target.value,
@@ -19,7 +50,7 @@ const SetName = ( props ) => {
 	};
 
 	const setName = () => {
-		if (!(state.name && state.name.trim().length)) { return; }
+		if (!(isValidName(state.name))) { return; }
 		setState({
 			...state,
 			loading: true
@@ -53,4 +84,4 @@ const SetName = ( props ) => {
 	);
 };
 
-export default SetName;
+export default withRouter(SetName);

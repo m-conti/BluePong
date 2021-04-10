@@ -9,17 +9,19 @@ class Location {
 	}
 }
 
+const host = process.env.NODE_ONLINE_HOST || 'localhost';
+
 exports.location = {
 	server: new Location({
-		host: '51.178.49.196',
+		host,
 		port: 3004,
 	}),
 	api: new Location({
-		host: '51.178.49.196',
+		host,
 		port: 3005,
 	}),
 	client: new Location({
-		host: '51.178.49.196',
+		host,
 		port: 8080,
 	})
 };

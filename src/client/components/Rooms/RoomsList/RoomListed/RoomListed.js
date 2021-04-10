@@ -16,10 +16,10 @@ const roomListed = ( props ) => {
 
 	const tryToJoinRoom = () => {
 		if (props.players.some((player) => player._id === props.user._id)) {
-			props.history.push(`${CLIENT_ROOMS}/${props._id}`);
+			props.history.push(`${CLIENT_ROOMS}#${props._id}[${props.user.name}]`);
 		}
 		else {
-			props.onJoinRoom(props._id)
+			props.onJoinRoom(props._id);
 		}
 	};
 

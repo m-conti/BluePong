@@ -15,7 +15,7 @@ const getRoom = ( {meta: {player}, id} ) => {
 };
 const createRoom = ( {meta: {player}, room} ) => {
 	const {_id} = sockets.tetris.addRoom(room, player);
-	player.socket.emit('action', push(`${CLIENT_ROOMS}/${_id}`));
+	player.socket.emit('action', push(`${CLIENT_ROOMS}#${_id}[${player.name}]`));
 };
 const deleteRoom = ( {meta: {player}, id} ) => {
 	const room = sockets.tetris.getRoom(id);
@@ -26,7 +26,7 @@ const deleteRoom = ( {meta: {player}, id} ) => {
 const joinRoom = ( {meta: {player}, id} ) => {
 	const room = sockets.tetris.getRoom(id);
 	player.join(room);
-	player.socket.emit('action', push(`${CLIENT_ROOMS}/${id}`));
+	player.socket.emit('action', push(`${CLIENT_ROOMS}#${id}[${player.name}]`));
 };
 const leaveRoom = ( {meta: {player}, id} ) => {
 	const playerToKick = sockets.getPlayerById(id);
