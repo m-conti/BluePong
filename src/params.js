@@ -9,7 +9,7 @@ class Location {
 	}
 }
 
-const host = process.env.NODE_ONLINE_HOST || 'localhost';
+const host = 'localhost';
 
 exports.location = {
 	server: new Location({
