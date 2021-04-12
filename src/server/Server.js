@@ -15,7 +15,7 @@ class Server {
 	listen(cb) {
 		this.sockets.listenToEvents(this.http, this.origins.url);
 		this.http.listen(this.location.port, this.location.host, () => {
-			process.stdout.write(`Listening on ${this.location.url}\n`);
+			process.stdout.write(`Server listening on ${this.location.url}\n`);
 			if (cb) cb(this);
 		});
 	}
