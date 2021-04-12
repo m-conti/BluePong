@@ -4,7 +4,7 @@
   "author": "redpelicans",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"npm run api-dev\" \"npm run client-dev\" \"npm run srv-dev\" --kill-others",
+    "start": "concurrently \"npm run client-dev\" \"npm run srv-dev\" --kill-others",
     "eslint": "eslint src",
     "client-dev": "NODE_ENV=development node scripts/start.js",
     "client-dist": "NODE_ENV=production webpack --progress --colors",
