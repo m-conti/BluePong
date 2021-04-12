@@ -18,7 +18,7 @@ exports.location = {
 	}),
 	api: new Location({
 		host,
-		port: 3005,
+		port: 3006,
 	}),
 	client: new Location({
 		host,

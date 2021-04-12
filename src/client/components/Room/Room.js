@@ -25,9 +25,7 @@ const Room = ( props ) => {
 	if ( props.playerRoomId === room._id ) {
 		return room.isPlaying ? <Tetris isMaster={props.playerId === room.master._id} /> : <WaitingRoom room={room}/>;
 	}
-	else {
-		return <Redirect to={CLIENT_ROOMS}/>;
-	}
+	return <Redirect to={CLIENT_ROOMS}/>;
 };
 
 Room.propTypes = {
